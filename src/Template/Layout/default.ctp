@@ -32,6 +32,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?php echo $this->Html->link('Acceuil', '/'); ?>
+    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+    <?php echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight')); ?>
+    <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
+    <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -52,6 +57,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        TD SI-2
+        <p>Dev: Vincent Jacob - Aleksandre Kasara - Fabrice Locqueville- Romain Michau aka le bg   </p>
+        <p> Option: DG </p>
+        
     </footer>
 </body>
 </html>
