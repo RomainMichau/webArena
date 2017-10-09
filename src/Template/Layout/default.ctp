@@ -58,7 +58,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <footer>
         TD SI-2
-        <p>Dev: Vincent Jacob - Aleksandre Kasara - Fabrice Locqueville- Romain Michau aka le bg   </p>
+        <p>Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville- Romain Michau aka le bg   </p>
         <p> Option: DG </p>
         
     </footer>
