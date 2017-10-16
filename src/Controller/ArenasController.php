@@ -19,6 +19,7 @@ class ArenasController  extends AppController
     public function fighter()
     {
         $this->loadModel('Fighters');
+        $this->Fighters->Levelup();     
         $fighter=$this->Fighters->getFighterById(1);
         $this->set('fighter', $fighter);
     }

@@ -22,5 +22,12 @@ class FightersTable extends Table
             return $fighter;
         }
     }
+    
+    public function levelUp(){
+
+        $fighters= $this->find('all')->from("fighters");
+        pr($fighters);
+        
+    }
 
 }
