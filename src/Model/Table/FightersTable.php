@@ -14,5 +14,13 @@ class FightersTable extends Table
         $figterlist = $figterlist->toArray();
         return $figterlist;
     }
+    public function getFighterById($id){
+
+        $fighter = $this->find('all')->from("fighters")->where("id = ".$id);
+        if(sizeof($fighter->toArray()) == 1) {
+            $fighter = $fighter->toArray()[0];
+            return $fighter;
+        }
+    }
 
 }

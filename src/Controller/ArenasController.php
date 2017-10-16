@@ -15,14 +15,12 @@ class ArenasController  extends AppController
     public function login()
     {
         $this->set('titredepage', "login");
-        $this->loadModel('Fighters');
-        $figterlist=$this->Fighters->getBestFighter();
-        $this->set('titredepage', $figterlist[0]->name);
-
     }
     public function fighter()
     {
-         $this->set('titredepage', "fighter");
+        $this->loadModel('Fighters');
+        $fighter=$this->Fighters->getFighterById(1);
+        $this->set('fighter', $fighter);
     }
     public function sight()
     {
