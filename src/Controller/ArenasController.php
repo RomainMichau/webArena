@@ -10,12 +10,10 @@ class ArenasController  extends AppController
 {
     public function index()
     {   
-         $this->set('titredepage', "index");
+        $this->set('titredepage', "index");
         $this->loadModel('Fighters');
         $figterlist=$this->Fighters->getBestFighter();
         //$this->set('myname', $figterlist[0]->name);
-        
-
     }
     public function login()
     {
@@ -25,6 +23,7 @@ class ArenasController  extends AppController
     public function fighter()
     {
          $this->set('titredepage', "fighter");
+        //commentaires
 
     }
     public function sight()
