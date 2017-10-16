@@ -9,22 +9,20 @@ use App\Controller\AppController;
 class ArenasController  extends AppController
 {
     public function index()
-    {   
-        $this->set('titredepage', "index");
-        $this->loadModel('Fighters');
-        $figterlist=$this->Fighters->getBestFighter();
-        //$this->set('myname', $figterlist[0]->name);
+    {
+         $this->set('titredepage', "index");
     }
     public function login()
     {
-         $this->set('titredepage', "login");
+        $this->set('titredepage', "login");
+        $this->loadModel('Fighters');
+        $figterlist=$this->Fighters->getBestFighter();
+        $this->set('titredepage', $figterlist[0]->name);
 
     }
     public function fighter()
     {
          $this->set('titredepage', "fighter");
-        //commentaires
-
     }
     public function sight()
     {
