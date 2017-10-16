@@ -15,12 +15,13 @@ class FightersTable extends Table
         return $figterlist;
     }
     public function getFighterById($id){
-
-        $fighter = $this->find('all')->from("fighters")->where("id = ".$id);
-        if(sizeof($fighter->toArray()) == 1) {
-            $fighter = $fighter->toArray()[0];
-            return $fighter;
-        }
+        $fighter = $this->get($id);
+        return $fighter;
     }
+    public function passerLeNiveau($id){
 
+        $fighter = $this->get($id);
+        $fighter->level = $fighter->level + 1;
+        $this->save($fighter);
+    }
 }
