@@ -16,11 +16,4 @@ $this->assign('title', $titredepage);?>
         </tr>
     <?php } ?>
 </table>
-<?php
-$this->Form->button(
-    'Click me', 
-   
-            array('controller' => 'users','action' => 'sight' )
-         
-    
-);
+ <?php echo $this->Html->link('monter', array('controller' => 'Arenas', 'action' => 'moveFighter')); 

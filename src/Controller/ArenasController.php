@@ -17,6 +17,8 @@ class ArenasController extends AppController {
 
     public function login() {
         $this->set('titredepage', "login");
+        $session = $this->request->session();
+        $session->write('id_player', '2');
     }
 
     public function fighter() {
@@ -53,6 +55,6 @@ class ArenasController extends AppController {
         $this->set('titredepage', "diary");
     }
     
-    public function tst(){pr("oki");}
+    public function moveFighter(){pr("oki");}
 
 }
