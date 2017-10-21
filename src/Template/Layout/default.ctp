@@ -31,6 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
+    <?php echo $this->Html->script('Arenas');?>
     <?= $this->fetch('script') ?>
     <?php echo $this->Html->link('Acceuil', '/'); ?>
     <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
