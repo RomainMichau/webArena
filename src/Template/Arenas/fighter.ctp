@@ -1,7 +1,7 @@
 <?php
     $this->assign('title', $fighter->name);
 ?>
-    <p> id:  <?php echo $fighter->id;  </p> 
+    <p> id:  <?php echo $fighter->id;?>  </p> 
     <p> name: <?php echo $fighter->name ?> </p>
     <p> cordX: <?php echo $fighter->coordinate_x ?> , cordY: <?php echo $fighter->coordinate_y ?> </p>
     <p> level: <?php echo $fighter->level ?> </p>

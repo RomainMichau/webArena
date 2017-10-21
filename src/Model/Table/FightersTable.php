@@ -27,5 +27,11 @@ class FightersTable extends Table {
         $fighter->level = $fighter->level + 1;
         $this->save($fighter);
     }
+    
+      public function getFighterByCoord($x, $y) {
+         // $this->setSource('surroundings');
+        $fighter = $this->find('all')->from("fighters")->where("coordinate_x=" .$x . " and coordinate_y=" . $y);
+        pr($fighter->toArray());
+    }
 
 }

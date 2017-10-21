@@ -28,6 +28,8 @@ class ArenasController  extends AppController
     public function sight()
     {
          $this->set('titredepage', "sight");
+         $this->loadModel('Fighters');
+    $this->Fighters->getFighterByCoord(2,3) ;
 
     }
     public function diary()
