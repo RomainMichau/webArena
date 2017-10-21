@@ -10,11 +10,16 @@ class FightersTable extends Table {
         return "ok";
     }
 
-    public function getBestFighter() {
+    public function getAllFighrers()
+    {
+        $fighters = $this->find('all')->from("fighters")->toArray();
+        return $fighters;
+    }
 
-        $figterlist = $this->find('all')->from("fighters")->where("id = 1");
-        $figterlist = $figterlist->toArray();
-        return $figterlist;
+    public function getAllFighrersByPlayerId($player_id)
+    {
+        $fighters = $this->find('all')->from("fighters")->where(["player_id" => $player_id])->toArray();
+        return $fighters;
     }
 
     public function getFighterById($id) {
