@@ -35,7 +35,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     echo $this->Html->script('http://code.jquery.com/jquery.min.js'); ?>
     <?= $this->fetch('script') ?>
     <?php echo $this->Html->link('Acceuil', '/'); ?>
-    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighters')); ?>
     <?php echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight')); ?>
     <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
     <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
