@@ -38,5 +38,25 @@ class FightersTable extends Table {
         }
         return $fighter->toArray()[0];
     }
-
+    
+    public function goUp($id,$dir) {        //1:bas 2:haut 3:gauche 4:droit
+         // $this->setSource('surroundings');
+       $fighter = $this->get($id);
+        //pr($fighter->toArray());
+       
+        if($fighter->coordinate_x>1){
+            if($dir==1){
+            $fighter->coordinate_x=$fighter->coordinate_x+1;}
+            if($dir==2){
+            $fighter->coordinate_x=$fighter->coordinate_x-1;}
+            if($dir==3){
+            $fighter->coordinate_x=$fighter->coordinate_y-1;}
+            if($dir==4){
+            $fighter->coordinate_x=$fighter->coordinate_y+1;}
+            $this->save($fighter);
+            return NULL;
+        }
+        return NULL;
+    }
+     
 }
