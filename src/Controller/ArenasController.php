@@ -53,7 +53,7 @@ class ArenasController extends AppController {
 
         $newFighter = $this->request->getData();
 
-        if(isset($newFighter['name'])){
+        if(isset($newFighter['name'])&&$newFighter['name']!=''){
             $fighter->name = $newFighter['name'];
             $fighter->player_id = uniqid();
             $fighter->coordinate_x = 1;
