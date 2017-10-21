@@ -63,5 +63,26 @@ class FightersTable extends Table {
         }
         return NULL;
     }
+    public function addFighter($newFighter, $fightersTable){
+        $fighter = $fightersTable->newEntity();
+
+        $fighter->name = $newFighter['name'];
+        $fighter->player_id = uniqid();
+        $fighter->coordinate_x = 1;
+        $fighter->coordinate_y = 1;
+        $fighter->level = 1;
+        $fighter->xp = 1;
+        $fighter->skill_sight = 1;
+        $fighter->skill_strength = 1;
+        $fighter-> skill_health  = 1;
+        $fighter->current_health = 1;
+        $fighter->next_action_time = 1;
+        $fighter->guild_id = 1;
+
+        if ($fightersTable->save($fighter)) {
+            $id = $fighter->id;
+        }
+        return $id;
+    }
      
 }
