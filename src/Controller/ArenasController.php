@@ -27,6 +27,7 @@ class ArenasController extends AppController {
         $fighters = $this->Fighters->getAllFighrers();
         $this->set('fighters', $fighters);
     }
+
     public function fightersByPlayer() {
         $this->loadModel('Fighters');
         $player_id = "545f827c-576c-4dc5-ab6d-27c33186dc3e";
@@ -40,6 +41,7 @@ class ArenasController extends AppController {
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
+
     public function createFighter() {
 
         //$this->Fighters->find("all");
@@ -47,10 +49,10 @@ class ArenasController extends AppController {
 
 
 
-        $this->loadModel('Fighters');
+        $this->loadModel('Figàhters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
-        if(isset($newFighter['name'])){
+        if (isset($newFighter['name'])&&($newFighter['name'])!='') {
             $newId = $this->Fighters->addFighter($newFighter, $fightersTable);
             $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
         }
@@ -87,9 +89,9 @@ class ArenasController extends AppController {
         $this->autoRender = false;
         $session = $this->request->session();
         $this->loadModel('Fighters');
-        $this->Fighters->goUp(1,1);
+        $this->Fighters->goUp(1, 1);
         $this->redirect(
-                ['controller' => 'Arenas', 'action' => 'sight', 2]);
+                ['controller' => 'Arenas', 'action' => 'sight']);
         // return $this->requestAction('sight');
     }
 
