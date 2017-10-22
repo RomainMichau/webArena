@@ -38,7 +38,7 @@ class ArenasController extends AppController {
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->Levelup(1);
+        $this->Fighters->Levelup($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
