@@ -24,7 +24,7 @@ class ArenasController extends AppController {
 
     public function fighters() {
         $this->loadModel('Fighters');
-        $fighters = $this->Fighters->getAllFighrers();
+        $fighters = $this->Fighters->getAllFighters();
         $this->set('fighters', $fighters);
     }
 
@@ -32,7 +32,7 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $user = $this->Auth->user();
         $player_id = $user['id'];
-        $fighters = $this->Fighters->getAllFighrersByPlayerId($player_id);
+        $fighters = $this->Fighters->getAllFightersByPlayerId($player_id);
         $this->set('fighters', $fighters);
     }
 
