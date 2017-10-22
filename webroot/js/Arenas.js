@@ -4,7 +4,7 @@
 $(document).ready(function () {
 
     
-    function move() {
+    function move(dir) {
                               
 
 
@@ -16,15 +16,15 @@ $(document).ready(function () {
 
         // Requete ajax pour recuperer les sites ayant le serveur_id idServeur
         $.ajax({
-            url: '/webArena/arenas/testAjax',
+            url: '/webArena/arenas/moveFighter/'+dir,
             type: 'GET',
             dataType: 'JSON',
             // En cas de succes, affichage des sites 
             
             success: function (response) {
                 // RÃ©cuperation du site
-              
-              alert(response.sites);
+
+             // alert(response.success);
                 // Si aucun site  n'est recupÃ©rÃ©
              
 
@@ -39,7 +39,16 @@ $(document).ready(function () {
     }
 
     $('#up').click(function () {
-        move();
+        move(2);
+    });
+    $('#down').click(function () {
+        move(1);
+    });
+    $('#left').click(function () {
+        move(3);
+    });
+    $('#right').click(function () {
+        move(4);
     });
 
 });

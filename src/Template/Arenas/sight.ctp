@@ -19,3 +19,6 @@ $this->assign('title', $titredepage);?>
 
  <?php
     echo $this->Form->button('monter', ['type' => 'button','id'=>'up']);
+     echo $this->Form->button('descendre', ['type' => 'button','id'=>'down']);
+      echo $this->Form->button('gauche', ['type' => 'button','id'=>'left']);
+       echo $this->Form->button('droite', ['type' => 'button','id'=>'right']);

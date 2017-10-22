@@ -46,7 +46,7 @@ class ArenasController extends AppController {
 
         //$this->Fighters->find("all");
 
-        $this->loadModel('Figàhters');
+        $this->loadModel('FigÃ hters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
         if(!empty($newFighter)){
@@ -93,24 +93,26 @@ class ArenasController extends AppController {
         $this->set('titredepage', "diary");
     }
 
-    public function moveFighter() {
-        $this->autoRender = false;
-        $session = $this->request->session();
+    public function moveFighter($dir) {
+       $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+         $this->viewBuilder()->layout('ajax');
+       //$this->autoRender = false;
+       
         $this->loadModel('Fighters');
-        $this->Fighters->goUp(1, 1);
-        $this->redirect(
-                ['controller' => 'Arenas', 'action' => 'sight']);
+        $this->Fighters->moveFighter(1, $dir);
+         $this->set('success',$dir);
         // return $this->requestAction('sight');
     }
     public function  testAjax(){
-             // Force le controller à rendre une réponse JSON.
+             // Force le controller Ã  rendre une rÃ©ponse JSON.
          $this->RequestHandler->renderAs($this, 'json');
-         // Définit le type de réponse de la requete AJAX
+         // DÃ©finit le type de rÃ©ponse de la requete AJAX
          $this->response->type('application/json');
          
          // Chargement du layout AJAX
          $this->viewBuilder()->layout('ajax');
-         // Créer un contexte sites à renvoyer 
+         // CrÃ©er un contexte sites Ã  renvoyer 
          $this->set('sites',2);
 
     }
