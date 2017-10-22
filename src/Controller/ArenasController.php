@@ -90,7 +90,7 @@ class ArenasController extends AppController {
             }
         }
         $this->set('tab', $tab);
-        $this->set('fid', $this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id);
+        $this->set('fid', $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id);
         //   $this->tst();
     }
 
@@ -106,7 +106,7 @@ class ArenasController extends AppController {
        
         $this->loadModel('Fighters');
         //$id=$this->Fighters->currentFighter()->id;
-        $id=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id;
+        $id=$this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
         $this->Fighters->moveFighter($id, $dir);
          $this->set('success',$id);
         // return $this->requestAction('sight');
