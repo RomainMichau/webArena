@@ -10,13 +10,13 @@ class FightersTable extends Table {
         return "ok";
     }
 
-    public function getAllFighrers()
+    public function getAllFighters()
     {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
     }
 
-    public function getAllFighrersByPlayerId($player_id)
+    public function getAllFightersByPlayerId($player_id)
     {
         $fighters = $this->find('all')->from("fighters")->where(["player_id" => $player_id])->toArray();
         return $fighters;

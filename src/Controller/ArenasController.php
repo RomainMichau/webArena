@@ -24,7 +24,7 @@ class ArenasController extends AppController {
 
     public function fighters() {
         $this->loadModel('Fighters');
-        $fighters = $this->Fighters->getAllFighrers();
+        $fighters = $this->Fighters->getAllFighters();
         $this->set('fighters', $fighters);
     }
 
@@ -32,13 +32,13 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $user = $this->Auth->user();
         $player_id = $user['id'];
-        $fighters = $this->Fighters->getAllFighrersByPlayerId($player_id);
+        $fighters = $this->Fighters->getAllFightersByPlayerId($player_id);
         $this->set('fighters', $fighters);
     }
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->Levelup(1);
+        $this->Fighters->Levelup($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
@@ -50,31 +50,28 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
-        if(!empty($newFighter)){
+        if (!empty($newFighter)) {
             $player_id = $this->Auth->user()['id'];
             $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id);
             $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
             $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
             $playerId = $this->Auth->user()['id'];
-            if(!empty($newFighter['avatar_file']['tmp_name']) and
-                in_array($extention, array('jpg', 'jpeg', 'png')))
-            {
+            if (!empty($newFighter['avatar_file']['tmp_name']) and
+                    in_array($extention, array('jpg', 'jpeg', 'png'))) {
                 move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
             }
-        }
-        else
-        {
+        } else {
             //$this->Session->setFlash("vous ne pouvez pas envoyer ce type de fichier");
         }
     }
 
     public function sight() {
-      pr($this->Auth->user());
-       $this->loadModel('Fighters');
-     $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
+        pr($this->Auth->user());
+        $this->loadModel('Fighters');
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $this->set('titredepage', "sight");
-       
-       // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
+
+        // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         $session = $this->request->session();
         // pr();
@@ -91,9 +88,11 @@ class ArenasController extends AppController {
             }
         }
         $this->set('tab', $tab);
+
         $this->set('fid', $fighter->id);
         $this->set('x', $fighter->coordinate_x);
         $this->set('y', $fighter->coordinate_y);
+
         //   $this->tst();
     }
 
@@ -102,24 +101,21 @@ class ArenasController extends AppController {
     }
 
     public function moveFighter($dir) {
-       $this->RequestHandler->renderAs($this, 'json');
+        $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
-         $this->viewBuilder()->layout('ajax');
-       //$this->autoRender = false;
-       
+        $this->viewBuilder()->layout('ajax');
+        //$this->autoRender = false;
         $this->loadModel('Fighters');
         //$id=$this->Fighters->currentFighter()->id;
-        $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
-         $id=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id;
-         
-         
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $id = $this->Fighters->getAllFightrersByPlayerId($this->Auth->user()['id'])[0]->id;
         $this->Fighters->moveFighter($id, $dir);
-         $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
-         $x=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->coordinate_x;
-          $y=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->coordinate_y;
-         $this->set('x',$x);
-          $this->set('y',$y);
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $x = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->coordinate_x;
+        $y = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->coordinate_y;
+        $this->set('x', $x);
+        $this->set('y', $y);
         // return $this->requestAction('sight');
     }
-  
+
 }
