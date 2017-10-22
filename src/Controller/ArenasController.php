@@ -70,8 +70,10 @@ class ArenasController extends AppController {
 
     public function sight() {
       pr($this->Auth->user());
+     
         $this->set('titredepage', "sight");
         $this->loadModel('Fighters');
+       // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         $session = $this->request->session();
         // pr();
@@ -88,6 +90,7 @@ class ArenasController extends AppController {
             }
         }
         $this->set('tab', $tab);
+        $this->set('fid', $this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id);
         //   $this->tst();
     }
 
@@ -102,8 +105,8 @@ class ArenasController extends AppController {
        //$this->autoRender = false;
        
         $this->loadModel('Fighters');
-        //$id=$thid->Fighters->currentFighter()->id;
-        $id=2;
+        //$id=$this->Fighters->currentFighter()->id;
+        $id=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id;
         $this->Fighters->moveFighter($id, $dir);
          $this->set('success',$id);
         // return $this->requestAction('sight');
