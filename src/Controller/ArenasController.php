@@ -70,9 +70,10 @@ class ArenasController extends AppController {
 
     public function sight() {
       pr($this->Auth->user());
-     
+       $this->loadModel('Fighters');
+     $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
         $this->set('titredepage', "sight");
-        $this->loadModel('Fighters');
+       
        // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         $session = $this->request->session();
@@ -90,7 +91,9 @@ class ArenasController extends AppController {
             }
         }
         $this->set('tab', $tab);
-        $this->set('fid', $this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id);
+        $this->set('fid', $fighter->id);
+        $this->set('x', $fighter->coordinate_x);
+        $this->set('y', $fighter->coordinate_y);
         //   $this->tst();
     }
 
@@ -106,9 +109,16 @@ class ArenasController extends AppController {
        
         $this->loadModel('Fighters');
         //$id=$this->Fighters->currentFighter()->id;
-        $id=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id;
+        $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
+         $id=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->id;
+         
+         
         $this->Fighters->moveFighter($id, $dir);
-         $this->set('success',$id);
+         $fighter=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0];
+         $x=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->coordinate_x;
+          $y=$this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]->coordinate_y;
+         $this->set('x',$x);
+          $this->set('y',$y);
         // return $this->requestAction('sight');
     }
   
