@@ -1,8 +1,7 @@
 <?php
-    $this->assign('title', $fighter->name);?>
-
-    <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
-
+    $this->assign('title', "All fighter");
+?>
+<?php foreach( $fighters as $fighter ): ?>
     <p> id:  <?php echo $fighter->id;?>  </p> 
     <p> name: <?php echo $fighter->name ?> </p>
     <p> cordX: <?php echo $fighter->coordinate_x ?> , cordY: <?php echo $fighter->coordinate_y ?> </p>
@@ -12,3 +11,5 @@
     <p> skill_strength: <?php echo $fighter->skill_strength ?> </p>
     <p> skill_health: <?php echo $fighter->skill_health ?> </p>
     <p> current_health: <?php echo $fighter->current_health ?> </p>
+    <br>
+<?php endforeach; ?>
