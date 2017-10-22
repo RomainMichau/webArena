@@ -101,7 +101,7 @@ class ArenasController extends AppController {
     }
 
     public function moveFighter($dir) {
-     
+        
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
@@ -110,10 +110,11 @@ class ArenasController extends AppController {
         //$id=$this->Fighters->currentFighter()->id;
         $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
-        $this->Fighters->moveFighter($id, $dir);
+        $success=$this->Fighters->moveFighter($id, $dir);
         $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
+        $this->set('success', $success);
         $this->set('x', $x);
         $this->set('y', $y);
         // return $this->requestAction('sight');
