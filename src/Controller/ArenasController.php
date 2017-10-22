@@ -70,7 +70,7 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-
+       // pr(APP."Arenas");
         $this->set('titredepage', "sight");
         $this->loadModel('Fighters');
         $this->loadModel('Surroundings');

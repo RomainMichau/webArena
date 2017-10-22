@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     
     function move() {
-                            
+                              
 
 
         // RÃ©cuperation de l'idServeur selectionnÃ©
@@ -16,26 +16,26 @@ $(document).ready(function () {
 
         // Requete ajax pour recuperer les sites ayant le serveur_id idServeur
         $.ajax({
-            url: "<?php echo $this->webroot . $this->params[Arenas]; ?>/testAjax",
-           
+            url: '/webArena/arenas/testAjax',
             type: 'GET',
             dataType: 'JSON',
             // En cas de succes, affichage des sites 
+            
             success: function (response) {
                 // RÃ©cuperation du site
-                jConfirm('Can you confirm this?', 'Confirmation Dialog', function (r) {
-                    jAlert('Confirmed: ' + response, 'Confirmation Results');
-                });
+              
+              alert(response.sites);
                 // Si aucun site  n'est recupÃ©rÃ©
              
 
             },
             // En cas d'erreur, afficher le statut et l'erreur
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus);
+               
                 alert(errorThrown);
             }
         });
+         
     }
 
     $('#up').click(function () {
