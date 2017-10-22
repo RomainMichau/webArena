@@ -1,4 +1,5 @@
-<?= $this->Form->create('Fighters');?>
+<?php
+ $this->Form->create('Fighters');?>
 
     <?= $this->Form->input('name', array('label' => 'Nom'));?>
 
