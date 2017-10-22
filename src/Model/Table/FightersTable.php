@@ -51,15 +51,17 @@ class FightersTable extends Table {
         //pr('oki');
         
             if($dir==1&&$fighter->coordinate_x<15){
-            $fighter->coordinate_x=$fighter->coordinate_x+1;}
-            if($dir==2&&$fighter->coordinate_x>1){
-            $fighter->coordinate_x=$fighter->coordinate_x-1;}
-            if($dir==3&&$fighter->coordinate_y>1){
-            $fighter->coordinate_y=$fighter->coordinate_y-1;}
-            if($dir==4&&$fighter->coordinate_y<10){
-            $fighter->coordinate_y=$fighter->coordinate_y+1;}
-            $this->save($fighter);
-            return NULL;
+            $fighter->coordinate_x=$fighter->coordinate_x+1;  $this->save($fighter); return 1;}
+         else if($dir==2&&$fighter->coordinate_x>1){
+            $fighter->coordinate_x=$fighter->coordinate_x-1;  $this->save($fighter); return 1;}
+         else   if($dir==3&&$fighter->coordinate_y>1){
+            $fighter->coordinate_y=$fighter->coordinate_y-1; $this->save($fighter);  return 1;}
+        else    if($dir==4&&$fighter->coordinate_y<10){
+            $fighter->coordinate_y=$fighter->coordinate_y+1; $this->save($fighter);
+            return 1;
+            }
+           
+            return 0;
         
      
     }

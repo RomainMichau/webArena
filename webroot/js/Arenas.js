@@ -25,21 +25,23 @@ $(document).ready(function () {
              // var a= " <?php echo $x; ?> "; 
            //  alert(response.x);
             // alert(response.y);
+            console.log(response.success);
+            if(response.success==1){
             var a="#cid"+((response.x-1)*10+response.y);
-            if(dir==1)
+            if(dir===1)
             var b="#cid"+((response.x-2)*10+response.y );
-         if(dir==2)
+         if(dir===2)
             var b="#cid"+((response.x)*10+response.y );
-         if(dir==3)
+         if(dir===3)
             var b=("#cid"+((response.x-1)*10+(response.y+1) ));
-         if(dir==4)
+         if(dir===4)
             var b="#cid"+((response.x-1)*10+(response.y-1) );
         var c=$(a).html();
             console.log("a:"+b+"  b:"+a);
            $(a).html($(b).html());
            $(b).html(c);
             
-          
+            }
         //   alert("oki");
             
             },
