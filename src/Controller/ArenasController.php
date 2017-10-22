@@ -46,9 +46,6 @@ class ArenasController extends AppController {
 
         //$this->Fighters->find("all");
 
-
-
-
         $this->loadModel('Figàhters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
@@ -116,5 +113,5 @@ class ArenasController extends AppController {
          // Créer un contexte sites à renvoyer 
          $this->set('sites',2);
 
-}
+    }
 }
