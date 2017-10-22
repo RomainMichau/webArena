@@ -42,6 +42,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login')); ?>
     <?php echo $this->Html->link('add', array('controller' => 'Players', 'action' => 'add')); ?>
     <?php echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout')); ?>
+    
+    <?php echo $user_email; ?>   
+    
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">

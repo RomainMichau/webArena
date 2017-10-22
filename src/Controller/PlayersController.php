@@ -65,6 +65,7 @@ class PlayersController  extends AppController
 
             if ($user) {
                 $this->Auth->setUser($user); //Si on trouve, alors on défini la session
+                
                 return $this->redirect($this->Auth->redirectUrl()); //Ensuite on redirige vers l'url par défaut défini dans AppController.php
             }
             

@@ -1,7 +1,8 @@
 <?php
     $this->assign('title', "All my fighters");?>
     <p>  <?= $this->Html->link('ajouter fighter', array('controller' => 'Arenas', 'action' => 'createFighter')); ?> </p>
-
+ 
+    
 <?php foreach( $fighters as $fighter ): ?>
     <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
     <p> id:  <?php echo $fighter->id;?>  </p> 
