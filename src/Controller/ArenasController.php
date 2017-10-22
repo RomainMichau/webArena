@@ -13,15 +13,26 @@ class ArenasController  extends AppController
          $this->set('titredepage', "index");
         $this->loadModel('Fighters');
         $figterlist=$this->Fighters->getBestFighter();
-        //$this->set('myname', $figterlist[0]->name);
-        
+        pr($figterlist);
 
     }
-    public function login()
-    {
+    
+    /*public function login()
+    {        
          $this->set('titredepage', "login");
-
-    }
+         
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect(['action' => 'figther']);
+            } else {
+                $this->Flash->error(__('Username or password is incorrect'));
+                $this->redirect(['action' => 'index']);
+            }
+        }  
+    }    */
+    
     public function fighter()
     {
          $this->set('titredepage', "fighter");
@@ -37,4 +48,5 @@ class ArenasController  extends AppController
          $this->set('titredepage', "diary");
 
     }
+    
 }

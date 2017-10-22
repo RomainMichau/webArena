@@ -1,8 +1,12 @@
 <?php $this->assign('title', $titredepage);?>
 
-<html>
-    <div class='log'>
-        login: <input id="case1"></input>
-        mdp: <input></input>
-    </div>
-</html>
+<div class="users form">
+<?= $this->Form->create($user) ?>
+    <fieldset>
+        <legend><?= __('Add User') ?></legend>
+        <?= $this->Form->control('username') ?>
+        <?= $this->Form->control('password') ?>
+   </fieldset>
+<?= $this->Form->button(__('Submit')); ?>
+<?= $this->Form->end() ?>
+</div>

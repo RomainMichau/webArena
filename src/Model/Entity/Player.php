@@ -14,11 +14,12 @@ class Player extends Entity
     ];
 
     // ...
-
+    
+    //Va hasher le mot de passe avant de l'enregistrer dans la BDD
     protected function _setPassword($password)
     {
         if (strlen($password) > 0) {
-            return (new DefaultPasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password); //Hashage simple
         }
     }
 
