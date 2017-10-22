@@ -101,18 +101,19 @@ class ArenasController extends AppController {
     }
 
     public function moveFighter($dir) {
+     
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         //$this->autoRender = false;
         $this->loadModel('Fighters');
         //$id=$this->Fighters->currentFighter()->id;
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $id = $this->Fighters->getAllFightrersByPlayerId($this->Auth->user()['id'])[0]->id;
+        $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $id = $fighter->id;
         $this->Fighters->moveFighter($id, $dir);
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $x = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->coordinate_x;
-        $y = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->coordinate_y;
+        $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $x = $fighter->coordinate_x;
+        $y = $fighter->coordinate_y;
         $this->set('x', $x);
         $this->set('y', $y);
         // return $this->requestAction('sight');
