@@ -15,6 +15,13 @@ class FightersTable extends Table {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
     }
+    
+    public function setHealth($id,$health)
+    {
+        $fighter = $this->get($id);
+        $fighter->current_health = $health;
+        $this->save($fighter);
+    }
 
     public function getAllFightersByPlayerId($player_id)
     {

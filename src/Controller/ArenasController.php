@@ -132,7 +132,7 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
           $this->loadModel('Fighters');
-         
+        $this->set('success',0);
        $myfighter=$this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         // $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);
               if($dir==1)
@@ -148,15 +148,25 @@ class ArenasController extends AppController {
         if($dir==3)
         {
            $ennemy= $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y-1);
+           
         }
         if($dir==4)
         {
             $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y+1);
         }
-             if($ennemy!=null){
-             $this->set('en',$ennemy->id);}
-             else{ $this->set('en','i');}
-       //$this->set('en',2);
+             if(isset($ennemy)){
+                         $this->Fighters->setHealth($ennemy->id,$ennemy->current_health-1);
+                         $this->set('success',1);
+                           $this->set('eid',$ennemy->id);
+       $this->set('x',$ennemy->coordinate_x);
+       $this->set('y',$ennemy->coordinate_y);
+        $this->set('health',$ennemy->current_health);
+                
+        }
+        
+       
+       $this->set('id',$this->Auth->user()['id']);
+       
     }
     
 

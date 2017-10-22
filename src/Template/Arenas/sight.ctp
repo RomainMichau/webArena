@@ -19,7 +19,10 @@ $this->assign('title', $titredepage);?>
             <?php } ?>
         </tr>
     <?php } ?>
-</table> </div>
+</table> 
+    <div id='info'></div>
+
+</div>
 
  <?php
  

@@ -47,8 +47,9 @@ $(document).ready(function () {
             
 
             success: function (response) {
-            
-               alert(response.en);
+                alert(response.success);
+                if(response.success==1){
+            $('#info').html('l attaque est un succes, vie restante'+response.health); }        //      alert(response.en);
                       },           
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
