@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 </header>
 
 
-<?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+<?php echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login')); ?>
 <!--<div class="row">
     <div class="columns large-12">
         <div class="ctp-warning alert text-center">

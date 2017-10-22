@@ -85,5 +85,5 @@ class FightersTable extends Table {
             return $id;
         }
     }
-     
+ 
 }

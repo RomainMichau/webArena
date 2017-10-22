@@ -3,13 +3,15 @@ use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
 <table class='damier'> 
-    <?php foreach ($tab as $value1) { ?>
+    <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
+     foreach ($tab as $value1) { ?>
         <tr> 
             <?php foreach ($value1 as $value2) { ?>     
             <td class='case'>
                 <?php 
-                 
-                            echo $this->Html->image($value2.'.png', ['alt' => 'imgNotFound','width'=>'42','height'=>'42']);
+                               if($value2!='vide'){
+                               echo $this->Html->image($value2.'.png', ['alt' => 'imgNotFound','width'=>'42','height'=>'42']);}
+                               else{ ?> <div class='vide'></div> <?php }
                     ?>
             </td>           
             <?php } ?>
