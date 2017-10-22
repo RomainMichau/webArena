@@ -1,7 +1,7 @@
 <?php
     $this->assign('title', $fighter->name);?>
 
-    <?= $this->Html->image('f' . $fighter->player_id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
+    <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
 
     <p> id:  <?php echo $fighter->id;?>  </p> 
     <p> name: <?php echo $fighter->name ?> </p>
