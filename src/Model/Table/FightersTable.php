@@ -84,5 +84,8 @@ class FightersTable extends Table {
         }
         return $id;
     }
-     
+ public function currentFighter(){
+      $fighter = $this->find('all')->from("fighters")->where("player_id = ".$this->Auth->user()['id']);
+      return $fighter->toArray[0];
+ }    
 }

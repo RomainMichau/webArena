@@ -67,7 +67,7 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-   //    pr($this->Auth->user());
+      pr($this->Auth->user());
         $this->set('titredepage', "sight");
         $this->loadModel('Fighters');
         $this->loadModel('Surroundings');
@@ -100,20 +100,11 @@ class ArenasController extends AppController {
        //$this->autoRender = false;
        
         $this->loadModel('Fighters');
-        $this->Fighters->moveFighter(1, $dir);
-         $this->set('success',$dir);
+        //$id=$thid->Fighters->currentFighter()->id;
+        $id=2;
+        $this->Fighters->moveFighter($id, $dir);
+         $this->set('success',$id);
         // return $this->requestAction('sight');
     }
-    public function  testAjax(){
-             // Force le controller Ã  rendre une rÃ©ponse JSON.
-         $this->RequestHandler->renderAs($this, 'json');
-         // DÃ©finit le type de rÃ©ponse de la requete AJAX
-         $this->response->type('application/json');
-         
-         // Chargement du layout AJAX
-         $this->viewBuilder()->layout('ajax');
-         // CrÃ©er un contexte sites Ã  renvoyer 
-         $this->set('sites',2);
-
-    }
+  
 }
