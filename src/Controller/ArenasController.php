@@ -50,9 +50,20 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
-        if(isset($newFighter['name'])){
+        if(!empty($newFighter)){
+            $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+            $playerId = 3;
+            if(!empty($newFighter['avatar_file']['tmp_name']) and
+                in_array($extention, array('jpg', 'jpeg', 'png')))
+            {
+                move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $playerId . ".png");
+            }
             $newId = $this->Fighters->addFighter($newFighter, $fightersTable);
             $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
+        }
+        else
+        {
+            //$this->Session->setFlash("vous ne pouvez pas envoyer ce type de fichier");
         }
     }
 

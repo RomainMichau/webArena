@@ -1,6 +1,8 @@
 <?php
-    $this->assign('title', $fighter->name);
-?>
+    $this->assign('title', $fighter->name);?>
+
+    <?= $this->Html->image('f' . 2 . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
+
     <p> id:  <?php echo $fighter->id;?>  </p> 
     <p> name: <?php echo $fighter->name ?> </p>
     <p> cordX: <?php echo $fighter->coordinate_x ?> , cordY: <?php echo $fighter->coordinate_y ?> </p>
