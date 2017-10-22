@@ -63,11 +63,12 @@ class FightersTable extends Table {
         
      
     }
-    public function addFighter($newFighter, $fightersTable,$pid){
+
+    public function addFighter($newFighter, $fightersTable, $player_id){
         $fighter = $fightersTable->newEntity();
 
         $fighter->name = $newFighter['name'];
-        $fighter->player_id = $pid;
+        $fighter->player_id = $player_id;
         $fighter->coordinate_x = 1;
         $fighter->coordinate_y = 1;
         $fighter->level = 1;
@@ -81,8 +82,8 @@ class FightersTable extends Table {
 
         if ($fightersTable->save($fighter)) {
             $id = $fighter->id;
+            return $id;
         }
-        return $id;
     }
  public function currentFighter(){
       $fighter = $this->find('all')->from("fighters")->where("player_id = ".$this->Auth->user()['id']);

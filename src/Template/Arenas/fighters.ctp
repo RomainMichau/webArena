@@ -1,9 +1,9 @@
 <?php
     $this->assign('title', "Tous les figters");?>
-    <p> <?php echo $this->Html->link('ajouter fighter', array('controller' => 'Arenas', 'action' => 'createFighter')); ?> </p>
 
 
 <?php foreach( $fighters as $fighter ): ?>
+    <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
     <p> id:  <?php echo $fighter->id;?>  </p> 
     <p> name: <?php echo $this->Html->link($fighter->name, array('controller' => 'Arenas', 'action' => 'fighter', $fighter->id)); ?> </p>
     <p> cordX: <?php echo $fighter->coordinate_x ?> , cordY: <?php echo $fighter->coordinate_y ?> </p>
@@ -16,5 +16,4 @@
     <br>
 <?php endforeach; ?>
 
-<?php $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter', $fighter->id ));?>
 

@@ -30,7 +30,8 @@ class ArenasController extends AppController {
 
     public function fightersByPlayer() {
         $this->loadModel('Fighters');
-        $player_id = "545f827c-576c-4dc5-ab6d-27c33186dc3e";
+        $user = $this->Auth->user();
+        $player_id = $user['id'];
         $fighters = $this->Fighters->getAllFighrersByPlayerId($player_id);
         $this->set('fighters', $fighters);
     }
@@ -50,15 +51,16 @@ class ArenasController extends AppController {
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
         if(!empty($newFighter)){
+            $player_id = $this->Auth->user()['id'];
+            $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id);
+            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
             $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
             $playerId = $this->Auth->user()['id'];
             if(!empty($newFighter['avatar_file']['tmp_name']) and
                 in_array($extention, array('jpg', 'jpeg', 'png')))
             {
-                move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $playerId . ".png");
+                move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
             }
-            $newId = $this->Fighters->addFighter($newFighter, $fightersTable,$playerId);
-            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
         }
         else
         {
