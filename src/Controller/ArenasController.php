@@ -72,15 +72,12 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-        if($this->Auth->user()==null){
-          //  pr("oki");
-           return $this->redirect(
-        ['controller' => 'Players', 'action' => 'login']
-    );
-        }
+      
      //  pr($this->Auth->user());
         $this->loadModel('Fighters');
+      
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
 
         // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
@@ -116,10 +113,8 @@ class ArenasController extends AppController {
         
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
-        $this->viewBuilder()->layout('ajax');
-        //$this->autoRender = false;
+        $this->viewBuilder()->layout('ajax');      
         $this->loadModel('Fighters');
-        //$id=$this->Fighters->currentFighter()->id;
         $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
         $success=$this->Fighters->moveFighter($id, $dir);
@@ -131,5 +126,38 @@ class ArenasController extends AppController {
         $this->set('y', $y);
         // return $this->requestAction('sight');
     }
+    
+    public function attack($dir){
+         $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+          $this->loadModel('Fighters');
+         
+       $myfighter=$this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        // $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);
+              if($dir==1)
+        {
+        
+        
+            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);   
+        }
+      if($dir==2)
+        {
+            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x-1, $myfighter->coordinate_y);
+        }
+        if($dir==3)
+        {
+           $ennemy= $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y-1);
+        }
+        if($dir==4)
+        {
+            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y+1);
+        }
+             if($ennemy!=null){
+             $this->set('en',$ennemy->id);}
+             else{ $this->set('en','i');}
+       //$this->set('en',2);
+    }
+    
 
 }

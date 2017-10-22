@@ -15,16 +15,23 @@ and open the template in the editor.
 footer{
     font-size:10px;
 }
+.damier{
+    display: inline;
+}
 .case{
       border: 1px solid black;
 }
 
 .case_fighter{
       border: 1px solid black ;
-      border-color:red;
+    
 }
 
 
 .vide {
-    padding:21px;
+    padding-top:17px;
+      padding-bottom:17px;
+      padding-left: 21px;
+      padding-right: 21px;
+      
 }
