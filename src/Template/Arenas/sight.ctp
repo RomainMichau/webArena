@@ -18,4 +18,4 @@ $this->assign('title', $titredepage);?>
 </table>
 
  <?php
-    echo $this->Form->button('monter', ['type' => 'button','onClick'=>'goUp()']);
+    echo $this->Form->button('monter', ['type' => 'button','id'=>'up']);

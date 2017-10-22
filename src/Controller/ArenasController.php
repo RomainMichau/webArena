@@ -105,5 +105,16 @@ class ArenasController extends AppController {
                 ['controller' => 'Arenas', 'action' => 'sight']);
         // return $this->requestAction('sight');
     }
+    public function  testAjax(){
+             // Force le controller à rendre une réponse JSON.
+         $this->RequestHandler->renderAs($this, 'json');
+         // Définit le type de réponse de la requete AJAX
+         $this->response->type('application/json');
+         
+         // Chargement du layout AJAX
+         $this->viewBuilder()->layout('ajax');
+         // Créer un contexte sites à renvoyer 
+         $this->set('sites',2);
 
+}
 }
