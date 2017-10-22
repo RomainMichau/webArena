@@ -38,7 +38,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighters')); ?>
     <?php echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight')); ?>
     <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-    <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+    <?php echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login')); ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
