@@ -1,8 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Controller\AppController;
-use Cake\Validation\Validation;
-
+use Cake\Event\Event;
 
 /**
  * Personal Controller
@@ -13,6 +12,10 @@ class PlayersController  extends AppController
 {
       
 
+    function beforeFilter(Event $event){
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'index', 'login', 'logout']);
+    }
     
     public function index()
     {   
@@ -36,13 +39,13 @@ class PlayersController  extends AppController
              *  A CHANGER (pas propre)
              */
             $user->id = uniqid(); //Donne un ID manuellement 
-            $user->email = $this->request->getData("username"); //Récupère le username
+            $user->email = $this->request->getData("email"); //Récupère le username
             $user->password = $this->request->getData("password"); //Récupère le password
             
             
             if ($this->Players->save($user)) { //Si on arrive a sauvegarder
                 $this->Flash->success(__('The user has been saved.')); //Succès
-                return $this->redirect(['action' => 'add']); //Redirige l'utilisateur vers la page players/add (A CHANGER)
+                return $this->redirect(['action' => 'login']); //Redirige l'utilisateur vers la page players/add (A CHANGER)
             }
             $this->Flash->error(__('Unable to add the user.')); //Erreur
         }
@@ -54,32 +57,9 @@ class PlayersController  extends AppController
     {
         
          $this->set('titredepage', "login2");
-
-         
-        /*if ($this->request->is('post')) {
-            //$user = $this->Auth->identify();
-            $user = $this->Players->identify($this->request->data);
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect(['action' => 'add']);
-            } else {
-                $this->Flash->error(__('Username or password is incorrect'));
-            }
-        }*/
          
          //Dès qu'on submit le formulaire
          if ($this->request->is('post')) {
-
-            if (Validation::email($this->request->data['username'])) { //Si c'est un email valide
-                $this->Auth->config('authenticate', [
-                    'Form' => [
-                        'fields' => ['username' => 'email'] //Par défaut, Auth check le couple (username/password), mais on veut (email/password)
-                    ]
-                ]);
-                $this->Auth->constructAuthenticate(); //je sais pas
-                $this->request->data['email'] = $this->request->data['username']; //Change la data qu'on récup
-                unset($this->request->data['username']);
-            }
 
             $user = $this->Auth->identify(); //Fonction identify de Auth par défaut, qui va checker (email/password) maintenant
 

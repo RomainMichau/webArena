@@ -40,6 +40,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight')); ?>
     <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
     <?php echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login')); ?>
+    <?php echo $this->Html->link('add', array('controller' => 'Players', 'action' => 'add')); ?>
+    <?php echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout')); ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">

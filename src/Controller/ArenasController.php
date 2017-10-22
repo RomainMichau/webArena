@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Personal Controller
@@ -11,6 +12,11 @@ use App\Controller\AppController;
  */
 class ArenasController extends AppController {
 
+    function beforeFilter(Event $event){
+        parent::beforeFilter($event);
+        $this->Auth->allow(['sight', 'index', 'fighters']);
+    }
+    
     public function index() {
         $this->set('titredepage', "index");
     }

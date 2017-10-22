@@ -53,18 +53,35 @@ class AppController extends Controller
             ]
         ,
             'storage' => 'Session'
+        ,
+            'loginRedirect' => [
+                'controller' => 'Arenas',
+                'action' => 'fighters_by_player'
+            ]
+        ,
+            'logoutRedirect' => [
+                'controller' => 'Arenas',
+                'action' => 'index'
+            ]
+        ,
+            'loginAction' => [
+                'controller' => 'Arenas',
+                'action' => 'index'
+            ]
         ]
           
         );
-           
-        $this->Auth->allow();
-        
+                   
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+    }
+    
+    function beforeFilter(Event $event){
+        
     }
 
     /**
