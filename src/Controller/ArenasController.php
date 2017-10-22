@@ -72,7 +72,13 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-        pr($this->Auth->user());
+        if($this->Auth->user()==null){
+          //  pr("oki");
+           return $this->redirect(
+        ['controller' => 'Players', 'action' => 'login']
+    );
+        }
+     //  pr($this->Auth->user());
         $this->loadModel('Fighters');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $this->set('titredepage', "sight");

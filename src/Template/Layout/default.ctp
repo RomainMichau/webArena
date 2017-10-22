@@ -34,6 +34,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php
     echo $this->Html->script('http://code.jquery.com/jquery.min.js'); 
     echo $this->Html->script('Arenas');?>
+  
     <?php echo $this->Html->link('Acceuil', '/'); ?>
     <?php echo $this->Html->link('fighterByPlayer', array('controller' => 'Arenas', 'action' => 'fightersByPlayer')); ?>
     <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighters')); ?>
