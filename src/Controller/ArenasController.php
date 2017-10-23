@@ -169,12 +169,15 @@ class ArenasController extends AppController {
             
             $r=rand(1,20);
             if($r>10+$ennemy->level-$myfighter->level){
-                
                 $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
+                $ennemy=$this->Fighters->getFighterById($ennemy->id);
                 $this->set('success', 1);
                 $this->set('r', $r);
                 $this->Fighters->xpUp($myfighter->id,1);
-                  $this->set('health', $ennemy->current_health-1);
+                if($ennemy->current_health<=0){
+                     $this->Fighters->xpUp($myfighter->id,$ennemy->level);
+                }
+                  $this->set('health', $ennemy->current_health);
                 $this->set('f', 10+$ennemy->level-$myfighter->level);
             }
         }
