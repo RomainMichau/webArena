@@ -49,7 +49,7 @@ class PlayersController  extends AppController
             }
             $this->Flash->error(__('Unable to add the user.')); //Erreur
         }
-        $this->set('user', $user); // je sais pas ce que ça fait
+        //$this->set('user', $user); // je sais pas ce que ça fait
     }
     
     //Login un utilisateur a partir d'un email (username) et un password

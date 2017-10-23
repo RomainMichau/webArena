@@ -27,13 +27,13 @@ $this->assign('title', $titredepage);?>
 
  <?php
  
-    echo $this->Form->button('monter', ['type' => 'button','id'=>'up']);
-     echo $this->Form->button('descendre', ['type' => 'button','id'=>'down']);
-      echo $this->Form->button('gauche', ['type' => 'button','id'=>'left']);
-      echo $this->Form->button('droite', ['type' => 'button','id'=>'right']);  
+    echo $this->Form->button('monter', ['id'=>'up', 'class' => 'button']);
+    echo $this->Form->button('descendre', ['id'=>'down', 'class' => 'button']);
+    echo $this->Form->button('gauche', ['id'=>'left', 'class' => 'button']);
+    echo $this->Form->button('droite', ['id'=>'right', 'class' => 'button']);  
      
- echo $this->Form->button('attaque haut', ['type' => 'button','id'=>'aup']);
-     echo $this->Form->button('attaque bas', ['type' => 'button','id'=>'adown']);
-      echo $this->Form->button('attaque gauche', ['type' => 'button','id'=>'aleft']);
-      echo $this->Form->button('attaque droit', ['type' => 'button','id'=>'aright']); 
+    echo $this->Form->button('attaque haut', ['id'=>'aup', 'class' => 'button']);
+    echo $this->Form->button('attaque bas', ['id'=>'adown', 'class' => 'button']);
+    echo $this->Form->button('attaque gauche', ['id'=>'aleft', 'class' => 'button']);
+    echo $this->Form->button('attaque droit', ['id'=>'aright', 'class' => 'button']); 
 

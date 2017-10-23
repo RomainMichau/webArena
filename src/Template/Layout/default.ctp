@@ -62,6 +62,7 @@
             echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login'));
             echo " ";
             echo $this->Html->link('add', array('controller' => 'Players', 'action' => 'add'));
+
         }
     ?>
 
