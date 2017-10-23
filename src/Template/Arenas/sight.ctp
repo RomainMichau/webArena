@@ -21,6 +21,7 @@ $this->assign('title', $titredepage);?>
     <?php } ?>
 </table> 
     <div id='info'></div>
+     <div id='info2'></div>
 
 </div>
 

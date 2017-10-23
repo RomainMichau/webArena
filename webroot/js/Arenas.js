@@ -10,13 +10,13 @@ $(document).ready(function () {
             url: '/webArena/arenas/moveFighter/' + dir,
             type: 'GET',
             dataType: 'JSON',
-            
 
             success: function (response) {
-            
+
+
                 console.log(response.success);
                 if (response.success == 1) {
-              //      alert("oki");
+                    //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
                     if (dir === 1)
                         var b = "#cid" + ((response.x - 2) * 10 + response.y);
@@ -31,60 +31,62 @@ $(document).ready(function () {
                     $(a).html($(b).html());
                     $(b).html(c);
                 }
-                      },           
+            },
             error: function (jqXHR, textStatus, errorThrown) {
-               // alert(errorThrown);
+                // alert(errorThrown);
             }
         });
 
     }
-    
-     function attack(dir) {
+
+    function attack(dir) {
+
 
         $.ajax({
             url: '/webArena/arenas/attack/' + dir,
             type: 'GET',
             dataType: 'JSON',
-            
 
             success: function (response) {
-             //  alert("oki");
-                if(response.success==1){
-            $('#info').html('l attaque est un succes, vie restante'+response.health); }        //      alert(response.en);
-                      },           
+                //  alert("oki");
+                if (response.success == 1) {
+                    $('#info').html('l attaque est un succes, vie restante' + response.health);
+                }        //      alert(response.en);
+            },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
             }
         });
 
     }
-    
-    function detect(coord){
-        var x=parseInt(coord) % 10;
-        if(x==0)
-            x=10;
-        var y=parseInt(coord)/10;
-        y=Math.trunc(y)+1;
+
+    function detect(coord) {
+        var x = parseInt(coord) % 10;
+        if (x == 0)
+            x = 10;
+        var y = parseInt(coord) / 10;
+        y = Math.trunc(y) + 1;
         // console.log('x'+x+'y'+y);
         $.ajax({
             url: '/webArena/arenas/detect/' + coord,
             type: 'GET',
             dataType: 'JSON',
-            
 
             success: function (response) {
-            console.log('x:'+response.x+'y'+response.y+' cx:'+response.cx+' cy'+response.cy+'success'+response.success);
-               // console.log(response.success);
-              /* if(response.success==1){
-              console.log('coord:'+response.coord);}
-                   */ }                      ,          
+                if (response.success == 1 && response.type == 1) {
+                    console.log("oki");
+                    $('#info2').html('nom:' + response.obj.name + ' level:' + response.obj.level + ' xp:' + response.obj.xp);
+                }
+
+
+            },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
             }
         });
-    
+
     }
-    
+
 
     $('#up').click(function () {
         move(2);
@@ -110,14 +112,15 @@ $(document).ready(function () {
     $('#aright').click(function () {
         attack(4);
     });
-        $('.case').hover(function () {            
-        a=this.id;
-        a=a.replace('cid','');
-       b=$('#'+this.id).html();
-        b=b.replace(/\n|\r|(\n\r)/g,'');
-       if(b!='                 <div class="vide"></div>             '){
-           
+    $('.case').hover(function () {
+        a = this.id;
+        a = a.replace('cid', '');
+        b = $('#' + this.id).html();
+        b = b.replace(/\n|\r|(\n\r)/g, '');
+        if (b != '                 <div class="vide"></div>             ') {
+
             detect(a);
         }
+        
     });
-    });
+});

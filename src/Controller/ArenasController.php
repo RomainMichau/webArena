@@ -198,6 +198,7 @@ class ArenasController extends AppController {
                 $this->set('cx', $sur->coordinate_x);
         $this->set('cy', $sur->coordinate_y);
         $this->set('type', 2);   //type2 : objet
+        $this->set('obj',$sur);
             }
                 
                     }
@@ -206,6 +207,7 @@ class ArenasController extends AppController {
              $this->set('cx', $ennemy->coordinate_x);
         $this->set('cy', $ennemy->coordinate_y);
         $this->set('type', 1);   //type1 : fighter
+        $this->set('obj',$ennemy);
         }
        $this->set('success',$success);
      
