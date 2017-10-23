@@ -21,13 +21,6 @@ class ArenasController extends AppController {
         $this->set('titredepage', "index");
     }
 
-    public function login() {
-        $this->set('titredepage', "login");
-        $session = $this->request->session();
-
-        $session->write('id_player', '2');
-    }
-
     public function fighters() {
         $this->loadModel('Fighters');
         $fighters = $this->Fighters->getAllFighters();
