@@ -71,12 +71,10 @@ class AppController extends Controller
         ]
           
         );
-           
-        if($this->Auth->user()){
-            $this->set('user_email', 'Logged in as ' . $this->Auth->user()['email']);
-        }else{
-            $this->set('user_email', 'Not logged in');
-        }
+
+        $user = $this->Auth->user();
+        $this->set('user', $user);
+
         
         /*
          * Enable the following components for recommended CakePHP security settings.
