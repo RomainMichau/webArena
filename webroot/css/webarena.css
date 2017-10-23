@@ -40,3 +40,8 @@ footer{
     width: 70%;
     margin: auto;
 }
+
+.card-image{
+    height: 225px;
+    overflow-y: hidden;
+}
