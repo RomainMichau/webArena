@@ -11,7 +11,7 @@
             <div class="medium-9 cell"><?= $this->Form->control('password', ['label' => false]) ?></div>
         </div>
 
-        <div class="button"><?= $this->Form->button(__('Submit'), ['class' => 'button']); ?></div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'button']); ?>
         <?= $this->Form->end() ?>
     </fieldset>
 </form>
