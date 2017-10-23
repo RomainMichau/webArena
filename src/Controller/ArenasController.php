@@ -37,7 +37,6 @@ class ArenasController extends AppController {
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->xpUp($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
@@ -174,6 +173,7 @@ class ArenasController extends AppController {
                 $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
                 $this->set('success', 1);
                 $this->set('r', $r);
+                $this->Fighters->xpUp($myfighter->id,1);
                   $this->set('health', $ennemy->current_health-1);
                 $this->set('f', 10+$ennemy->level-$myfighter->level);
             }
