@@ -2,8 +2,8 @@
 
 
 $(document).ready(function () {
-
-
+var a;
+    
     function move(dir) {
 
         $.ajax({
@@ -14,7 +14,7 @@ $(document).ready(function () {
             success: function (response) {
 
 
-                console.log(response.success);
+              //   console.log(response.success);
                 if (response.success == 1) {
                     //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
@@ -93,11 +93,13 @@ $(document).ready(function () {
                     $('#info2').html('nom:' + response.obj.name + ' level:' + response.obj.level + ' xp:' + response.obj.xp);
                 }
 
-                if (response.success == 1 && response.type == 2) {
+               else if (response.success == 1 && response.type == 2) {
                     console.log("oki");
                     $('#info2').html('nom:' + response.obj.type);
                 }
-
+                      else{
+                           $('#info2').html('');
+                      }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -167,31 +169,36 @@ function supssi() {
     }
     
 
-    $('#up').click(function () {
-        move(2);
+    $('#up').click(function () {  if(a==1){
+        
+      
+        a=0;
+        //console.log(a);
+        move(2);}
     });
-    $('#down').click(function () {
-        move(1);
+    $('#down').click(function () {  if(a==1){
+        move(1);  a=0;}
     });
-    $('#left').click(function () {
-        move(3);
+    $('#left').click(function () {  if(a==1){
+        move(3);  a=0;}
     });
-    $('#right').click(function () {
-        move(4);
+    $('#right').click(function () {  if(a==1){
+        move(4);  a=0;}
     });
-    $('#aup').click(function () {
+    $('#aup').click(function () {  if(a==1){
         attack(2);
+        a=0;}
     });
-    $('#adown').click(function () {
-        attack(1);
+    $('#adown').click(function () {  if(a==1){
+        attack(1);  a=0;}
     });
-    $('#aleft').click(function () {
-        attack(3);
+    $('#aleft').click(function () {  if(a==1){
+        attack(3);  a=0;}
     });
-    $('#aright').click(function () {
-        attack(4);
+    $('#aright').click(function () {  if(a==1){
+        attack(4);  a=0;}
     });
-    $('.case').click(function () {
+    $('.case').click(function ()   {
         a = this.id;
         a = a.replace('cid', '');
         b = $('#' + this.id).html();
@@ -204,19 +211,21 @@ function supssi() {
                 $('#info2').html('');
             }
         }
-
+        
     });
     
     $('#sh').click(function () {
         supsh();
     });
     
-     $('#ssi').click(function () {
+     $('#ssi').click(function () {  
         supssi();
     });
      $('#sst').click(function () {
+        
         supsst();
     });
     
+    setInterval(function(){a=1},600);
     
 });
