@@ -252,7 +252,7 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
            
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $this->set('name',$fighter);
+        //$this->set('name',$fighter);
         
         $this->Fighters->skillHealthUp($fighter->id);
     }
