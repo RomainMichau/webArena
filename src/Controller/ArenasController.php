@@ -37,7 +37,6 @@ class ArenasController extends AppController {
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->xpUp($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
@@ -162,15 +161,25 @@ class ArenasController extends AppController {
             $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y + 1);
         }
         if (isset($ennemy)) {
-            $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - 1);
-            $this->set('success', 1);
+            //$this->set('success', 1);
             $this->set('eid', $ennemy->id);
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
-            $this->set('health', $ennemy->current_health);
+            
+            $r=rand(1,20);
+            if($r>10+$ennemy->level-$myfighter->level){
+                $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
+                $ennemy=$this->Fighters->getFighterById($ennemy->id);
+                $this->set('success', 1);
+                $this->set('r', $r);
+                $this->Fighters->xpUp($myfighter->id,1);
+                if($ennemy->current_health<=0){
+                     $this->Fighters->xpUp($myfighter->id,$ennemy->level);
+                }
+                $this->set('health', $ennemy->current_health);
+                $this->set('f', 10+$ennemy->level-$myfighter->level);
+            }
         }
-
-
         $this->set('id', $this->Auth->user()['id']);
     }
 
@@ -182,7 +191,7 @@ class ArenasController extends AppController {
         $this->loadModel('Surroundings');
         $success=0;
         $y = $coord % 10;
-        if ($y == 0) {
+        if($y == 0){
             $y = 10;
         }
         $x = floor($coord / 10) + 1;
@@ -190,27 +199,61 @@ class ArenasController extends AppController {
        
         
         if(!isset($ennemy)){
-            
             $sur=$this->Surroundings->getSurroundingByCoord($x, $y);
-            
             if(isset($sur)){
                 $success=1;
                 $this->set('cx', $sur->coordinate_x);
-        $this->set('cy', $sur->coordinate_y);
-        $this->set('type', 2);   //type2 : objet
-        $this->set('obj',$sur);
+                $this->set('cy', $sur->coordinate_y);
+                $this->set('type', 2);   //type2 : objet
+                $this->set('obj',$sur);
             }
                 
-                    }
-        else{
-            $success=1;
-             $this->set('cx', $ennemy->coordinate_x);
-        $this->set('cy', $ennemy->coordinate_y);
-        $this->set('type', 1);   //type1 : fighter
-        $this->set('obj',$ennemy);
         }
-       $this->set('success',$success);
+        else{
+                $success=1;
+                $this->set('cx', $ennemy->coordinate_x);
+                $this->set('cy', $ennemy->coordinate_y);
+                $this->set('type', 1);   //type1 : fighter
+                $this->set('obj',$ennemy);
+        }
+        $this->set('success',$success);
      
     }
+    public function skillSightUp()
+    {
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+
+        $this->loadModel('Fighters');
+
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->Fighters->skillSightUp($fighter->id);
+    }
+
+    public function skillStrengthUp()
+    {
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+
+        $this->loadModel('Fighters');
+
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->Fighters->skillStrengthUp($fighter->id);
+    }
+
+    public function skillHealthUp()
+    {
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+
+        $this->loadModel('Fighters');
+
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->Fighters->skillHealthUp($fighter->id);
+    }
+
 
 }
