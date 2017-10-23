@@ -16,6 +16,7 @@ $(document).ready(function () {
             
                 console.log(response.success);
                 if (response.success == 1) {
+              //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
                     if (dir === 1)
                         var b = "#cid" + ((response.x - 2) * 10 + response.y);
@@ -47,7 +48,7 @@ $(document).ready(function () {
             
 
             success: function (response) {
-                alert(response.success);
+             //  alert("oki");
                 if(response.success==1){
             $('#info').html('l attaque est un succes, vie restante'+response.health); }        //      alert(response.en);
                       },           
@@ -58,6 +59,12 @@ $(document).ready(function () {
 
     }
     
+    function detect(coord){
+        var x=parseInt(coord) % 10;
+        if(x==0)
+            x=10;
+        alert('coord: '+coord+'mod: '+x);
+    }
     
 
     $('#up').click(function () {
@@ -84,5 +91,11 @@ $(document).ready(function () {
     $('#aright').click(function () {
         attack(4);
     });
-
-});
+        $('.case').hover(function () {
+            
+        a=this.id;
+        a=a.replace('cid','');
+     //   alert((parseInt(a)+1) );
+        detect((parseInt(a)));
+    });
+    });
