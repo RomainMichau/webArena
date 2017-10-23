@@ -13,7 +13,6 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,23 +20,22 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
    
-    <?= $this->Html->css('webarena.css') ?>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+    <?= $this->Html->css('webarena.css') ?>
 
+    <?= $this->Html->script('http://code.jquery.com/jquery.min.js') ?>
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js') ?>
+    <?=  $this->Html->script('Arenas') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?php
-    echo $this->Html->script('http://code.jquery.com/jquery.min.js'); 
-    echo $this->Html->script('Arenas');?>
+</head>
+<body>
 
     <?php if($user)
         {
@@ -68,8 +66,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         }
     ?>
 
-</head>
-<body>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
