@@ -9,7 +9,9 @@
                     <div class="card-divider">
                         name: <?php echo $this->Html->link($fighter->name, array('controller' => 'Arenas', 'action' => 'fighter', $fighter->id)); ?>
                     </div>
-                        <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound', 'height' => '300']) ?>
+                    <div class="card-image">
+                        <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound']) ?>
+                    </div>
                     <div class="card-section">
                         <p> id:  <?php echo $fighter->id;?>  </p>
                         <p> cordX: <?php echo $fighter->coordinate_x ?> , cordY: <?php echo $fighter->coordinate_y ?> </p>
