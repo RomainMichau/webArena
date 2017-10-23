@@ -250,8 +250,10 @@ class ArenasController extends AppController {
         $this->viewBuilder()->layout('ajax');
 
         $this->loadModel('Fighters');
-
+           
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->set('name',$fighter);
+        
         $this->Fighters->skillHealthUp($fighter->id);
     }
 

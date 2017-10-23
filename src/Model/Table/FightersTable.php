@@ -106,14 +106,17 @@ class FightersTable extends Table {
     public function skillSightUp($id){
         $fighter = $this->get($id);
         $fighter->skill_sight = $fighter->skill_sight + 1;
+         $this->save($fighter);
     }
     public function skillStrengthUp($id){
         $fighter = $this->get($id);
         $fighter->skill_strength = $fighter->skill_strength + 1;
+         $this->save($fighter);
     }
     public function skillHealthUp($id){
         $fighter = $this->get($id);
         $fighter->skill_health = $fighter->skill_health + 1;
+         $this->save($fighter);
     }
 
 }

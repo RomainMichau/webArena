@@ -110,7 +110,7 @@ $(document).ready(function () {
 function supsst() {
        
         $.ajax({
-            url: '/webArena/arenas/skillSightUp/',
+            url: '/webArena/arenas/skillStrengthUp/',
             type: 'GET',
             dataType: 'JSON',
 
@@ -143,12 +143,12 @@ function supssi() {
     function supsh() {
        
         $.ajax({
-            url: '/webArena/arenas/skillSightUp/',
+            url: '/webArena/arenas/skillHealthUp/',
             type: 'GET',
             dataType: 'JSON',
 
             success: function (response) {
-              
+              console.log(response.name)
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
