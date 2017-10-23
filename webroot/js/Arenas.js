@@ -59,6 +59,12 @@ $(document).ready(function () {
 
     }
     
+    function detect(coord){
+        var x=parseInt(coord) % 10;
+        if(x==0)
+            x=10;
+        alert('coord: '+coord+'mod: '+x);
+    }
     
 
     $('#up').click(function () {
@@ -85,5 +91,11 @@ $(document).ready(function () {
     $('#aright').click(function () {
         attack(4);
     });
-
-});
+        $('.case').hover(function () {
+            
+        a=this.id;
+        a=a.replace('cid','');
+     //   alert((parseInt(a)+1) );
+        detect((parseInt(a)));
+    });
+    });
