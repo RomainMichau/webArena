@@ -11,9 +11,11 @@ $this->assign('title', $titredepage);?>
             <?php foreach ($value1 as $value2) { ?>     
             <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                 <?php          
-                               if($value2!='vide'){
-                               echo $this->Html->image($value2.'.png', ['alt' => 'imgNotFound','width'=>'42','height'=>'35']);}
-                               else{ ?> <div class='vide'></div> <?php }
+                        if($value2!='vide'){
+                            echo $this->Html->image($value2.'.png', ['alt' => 'ImgNotFound']);
+                        }else{
+                            echo $this->Html->image('case_vide.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
+                        }
                     ?>
             </td>           
             <?php } ?>

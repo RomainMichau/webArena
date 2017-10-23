@@ -19,11 +19,14 @@ footer{
     display: inline;
 }
 .case{
-      border: 1px solid black;
+    
+}
+.case>img{
+    width: 60px;
+    height: 50px;
 }
 
 .case_fighter{
-      border: 1px solid black ;
     
 }
 
@@ -44,4 +47,15 @@ footer{
 .card-image{
     height: 225px;
     overflow-y: hidden;
+}
+
+td{
+    padding: 0 !important;
+}
+tr{
+    padding: 0;
+}
+table{
+    width: auto;
+    margin: auto;
 }
