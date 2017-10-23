@@ -16,6 +16,7 @@ $(document).ready(function () {
             
                 console.log(response.success);
                 if (response.success == 1) {
+              //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
                     if (dir === 1)
                         var b = "#cid" + ((response.x - 2) * 10 + response.y);
@@ -47,7 +48,7 @@ $(document).ready(function () {
             
 
             success: function (response) {
-                alert(response.success);
+             //  alert("oki");
                 if(response.success==1){
             $('#info').html('l attaque est un succes, vie restante'+response.health); }        //      alert(response.en);
                       },           

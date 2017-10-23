@@ -12,11 +12,11 @@ use Cake\Event\Event;
  */
 class ArenasController extends AppController {
 
-    function beforeFilter(Event $event){
+    function beforeFilter(Event $event) {
         parent::beforeFilter($event);
         $this->Auth->allow(['sight', 'index', 'fighters']);
     }
-    
+
     public function index() {
         $this->set('titredepage', "index");
     }
@@ -72,10 +72,10 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-      
-     //  pr($this->Auth->user());
+
+        //  pr($this->Auth->user());
         $this->loadModel('Fighters');
-      
+
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
@@ -110,64 +110,74 @@ class ArenasController extends AppController {
     }
 
     public function moveFighter($dir) {
-        
+
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
-        $this->viewBuilder()->layout('ajax');      
+        $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
-        $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $success=0;
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
-        $success=$this->Fighters->moveFighter($id, $dir);
-        $fighter = $this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
+           if ($dir == 1) {
+            $ennemy = $this->Fighters->getFighterByCoord($x+1, $y);
+        }
+        if ($dir == 2) {
+            $ennemy = $this->Fighters->getFighterByCoord($x- 1, $y);
+        }
+        if ($dir == 3) {
+            $ennemy = $this->Fighters->getFighterByCoord($x, $y-1);
+        }
+        if ($dir == 4) {
+            $ennemy = $this->Fighters->getFighterByCoord($x, $y+1);
+        }
+        if($ennemy==NULL){
+        $success = $this->Fighters->moveFighter($id, $dir);}
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        
+        $x = $fighter->coordinate_x;
+        $y = $fighter->coordinate_y;
+        
         $this->set('success', $success);
         $this->set('x', $x);
         $this->set('y', $y);
         // return $this->requestAction('sight');
     }
-    
-    public function attack($dir){
-         $this->RequestHandler->renderAs($this, 'json');
+
+    public function attack($dir) {
+        $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
-          $this->loadModel('Fighters');
-        $this->set('success',0);
-       $myfighter=$this->Fighters-> getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->loadModel('Fighters');
+        $this->set('success', 0);
+        $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         // $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);
-              if($dir==1)
-        {
-        
-        
-            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);   
+        if ($dir == 1) {
+
+
+            $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x + 1, $myfighter->coordinate_y);
         }
-      if($dir==2)
-        {
-            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x-1, $myfighter->coordinate_y);
+        if ($dir == 2) {
+            $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x - 1, $myfighter->coordinate_y);
         }
-        if($dir==3)
-        {
-           $ennemy= $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y-1);
-           
+        if ($dir == 3) {
+            $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y - 1);
         }
-        if($dir==4)
-        {
-            $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y+1);
+        if ($dir == 4) {
+            $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y + 1);
         }
-             if(isset($ennemy)){
-                         $this->Fighters->setHealth($ennemy->id,$ennemy->current_health-1);
-                         $this->set('success',1);
-                           $this->set('eid',$ennemy->id);
-       $this->set('x',$ennemy->coordinate_x);
-       $this->set('y',$ennemy->coordinate_y);
-        $this->set('health',$ennemy->current_health);
-                
+        if (isset($ennemy)) {
+            $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - 1);
+            $this->set('success', 1);
+            $this->set('eid', $ennemy->id);
+            $this->set('x', $ennemy->coordinate_x);
+            $this->set('y', $ennemy->coordinate_y);
+            $this->set('health', $ennemy->current_health);
         }
-        
-       
-       $this->set('id',$this->Auth->user()['id']);
-       
+
+
+        $this->set('id', $this->Auth->user()['id']);
     }
-    
 
 }
