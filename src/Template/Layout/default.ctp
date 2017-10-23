@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css" />
     <?= $this->Html->css('webarena.css') ?>
 
-    <?= $this->Html->script('http://code.jquery.com/jquery.min.js') ?>
+    <?= $this->Html->script('jquery') ?>
     <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js') ?>
     <?=  $this->Html->script('Arenas') ?>
 

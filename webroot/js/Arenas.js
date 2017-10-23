@@ -5,6 +5,7 @@ $(document).ready(function () {
 var a;
     
     function move(dir) {
+        
 
         $.ajax({
             url: '/webArena/arenas/moveFighter/' + dir,
@@ -217,7 +218,7 @@ function supssi() {
     $('#sh').click(function () {
         supsh();
     });
-    
+     
      $('#ssi').click(function () {  
         supssi();
     });
