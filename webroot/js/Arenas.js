@@ -107,6 +107,56 @@ $(document).ready(function () {
 
     }
 
+function supsst() {
+       
+        $.ajax({
+            url: '/webArena/arenas/skillSightUp/',
+            type: 'GET',
+            dataType: 'JSON',
+
+            success: function (response) {
+              
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+    }
+function supssi() {
+       
+        $.ajax({
+            url: '/webArena/arenas/skillSightUp/',
+            type: 'GET',
+            dataType: 'JSON',
+
+            success: function (response) {
+              
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+    }
+    
+    function supsh() {
+       
+        $.ajax({
+            url: '/webArena/arenas/skillSightUp/',
+            type: 'GET',
+            dataType: 'JSON',
+
+            success: function (response) {
+              
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+    }
+    
 
     $('#up').click(function () {
         move(2);
@@ -147,4 +197,17 @@ $(document).ready(function () {
         }
 
     });
+    
+    $('#sh').click(function () {
+        supsh();
+    });
+    
+     $('#ssi').click(function () {
+        supssi();
+    });
+     $('#sst').click(function () {
+        supsst();
+    });
+    
+    
 });
