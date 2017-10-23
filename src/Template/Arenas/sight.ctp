@@ -9,7 +9,7 @@ $this->assign('title', $titredepage);?>
      foreach ($tab as $value1) { ?>
         <tr>    
             <?php foreach ($value1 as $value2) { ?>     
-            <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>' >
+            <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                 <?php          
                                if($value2!='vide'){
                                echo $this->Html->image($value2.'.png', ['alt' => 'imgNotFound','width'=>'42','height'=>'35']);}

@@ -108,30 +108,31 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
-        $success=0;
+        $success = 0;
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
         if ($dir == 1) {
-            $ennemy = $this->Fighters->getFighterByCoord($x+1, $y);
+            $ennemy = $this->Fighters->getFighterByCoord($x + 1, $y);
         }
         if ($dir == 2) {
-            $ennemy = $this->Fighters->getFighterByCoord($x- 1, $y);
+            $ennemy = $this->Fighters->getFighterByCoord($x - 1, $y);
         }
         if ($dir == 3) {
-            $ennemy = $this->Fighters->getFighterByCoord($x, $y-1);
+            $ennemy = $this->Fighters->getFighterByCoord($x, $y - 1);
         }
         if ($dir == 4) {
-            $ennemy = $this->Fighters->getFighterByCoord($x, $y+1);
+            $ennemy = $this->Fighters->getFighterByCoord($x, $y + 1);
         }
-        if($ennemy==NULL){
-        $success = $this->Fighters->moveFighter($id, $dir);}
+        if ($ennemy == NULL) {
+            $success = $this->Fighters->moveFighter($id, $dir);
+        }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        
+
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
-        
+
         $this->set('success', $success);
         $this->set('x', $x);
         $this->set('y', $y);
@@ -171,6 +172,43 @@ class ArenasController extends AppController {
 
 
         $this->set('id', $this->Auth->user()['id']);
+    }
+
+    public function detect($coord) {
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+        $this->loadModel('Fighters');
+        $this->loadModel('Surroundings');
+        $success=0;
+        $y = $coord % 10;
+        if ($y == 0) {
+            $y = 10;
+        }
+        $x = floor($coord / 10) + 1;
+        $ennemy = $this->Fighters->getFighterByCoord($x,$y);
+       
+        
+        if(!isset($ennemy)){
+            
+            $sur=$this->Surroundings->getSurroundingByCoord($x, $y);
+            
+            if(isset($sur)){
+                $success=1;
+                $this->set('cx', $sur->coordinate_x);
+        $this->set('cy', $sur->coordinate_y);
+        $this->set('type', 2);   //type2 : objet
+            }
+                
+                    }
+        else{
+            $success=1;
+             $this->set('cx', $ennemy->coordinate_x);
+        $this->set('cy', $ennemy->coordinate_y);
+        $this->set('type', 1);   //type1 : fighter
+        }
+       $this->set('success',$success);
+     
     }
 
 }

@@ -63,7 +63,26 @@ $(document).ready(function () {
         var x=parseInt(coord) % 10;
         if(x==0)
             x=10;
-        alert('coord: '+coord+'mod: '+x);
+        var y=parseInt(coord)/10;
+        y=Math.trunc(y)+1;
+        // console.log('x'+x+'y'+y);
+        $.ajax({
+            url: '/webArena/arenas/detect/' + coord,
+            type: 'GET',
+            dataType: 'JSON',
+            
+
+            success: function (response) {
+            console.log('x:'+response.x+'y'+response.y+' cx:'+response.cx+' cy'+response.cy+'success'+response.success);
+               // console.log(response.success);
+              /* if(response.success==1){
+              console.log('coord:'+response.coord);}
+                   */ }                      ,          
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    
     }
     
 
@@ -91,11 +110,14 @@ $(document).ready(function () {
     $('#aright').click(function () {
         attack(4);
     });
-        $('.case').hover(function () {
-            
+        $('.case').hover(function () {            
         a=this.id;
         a=a.replace('cid','');
-     //   alert((parseInt(a)+1) );
-        detect((parseInt(a)));
+       b=$('#'+this.id).html();
+        b=b.replace(/\n|\r|(\n\r)/g,'');
+       if(b!='                 <div class="vide"></div>             '){
+           
+            detect(a);
+        }
     });
     });
