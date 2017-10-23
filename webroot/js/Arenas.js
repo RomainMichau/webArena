@@ -49,9 +49,24 @@ $(document).ready(function () {
 
             success: function (response) {
                 //  alert("oki");
+                //    console.log("r:"+response.r+" f:"+response.f);
                 if (response.success == 1) {
-                    $('#info').html('l attaque est un succes, vie restante' + response.health);
+                    $('#info').html('l attaque est un succes, vie restante de l\'ennemi' + response.health);
+                    var a = 'cid' + (response.y + (response.x - 1) * 10);
+                    // console.log(a);
+                    var save = $('#' + a).html();
+                    $('#' + a).html(' <img src="/webArena/img/attack.png" alt="Not found" width="42" height="35"> ');
+                    var i;
+                    
+                    setTimeout(function () {
+                        $('#' + a).html(save);
+
+                    }, 900);
+
                 }        //      alert(response.en);
+                else {
+                    $('#info').html('l\'attaque est un echec');
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -76,6 +91,11 @@ $(document).ready(function () {
                 if (response.success == 1 && response.type == 1) {
                     console.log("oki");
                     $('#info2').html('nom:' + response.obj.name + ' level:' + response.obj.level + ' xp:' + response.obj.xp);
+                }
+
+                if (response.success == 1 && response.type == 2) {
+                    console.log("oki");
+                    $('#info2').html('nom:' + response.obj.type);
                 }
 
 
@@ -117,10 +137,14 @@ $(document).ready(function () {
         a = a.replace('cid', '');
         b = $('#' + this.id).html();
         b = b.replace(/\n|\r|(\n\r)/g, '');
-        if (b != '                 <div class="vide"></div>             ') {
+        if (b !== '                 <div class="vide"></div>             ') {
 
             detect(a);
+        } else {
+            if ($('#info2').html !== '') {
+                $('#info2').html('');
+            }
         }
-        
+
     });
 });

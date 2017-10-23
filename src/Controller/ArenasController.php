@@ -37,7 +37,6 @@ class ArenasController extends AppController {
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->xpUp($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
@@ -162,12 +161,22 @@ class ArenasController extends AppController {
             $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y + 1);
         }
         if (isset($ennemy)) {
-            $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - 1);
-            $this->set('success', 1);
+            
+          //  $this->set('success', 1);
             $this->set('eid', $ennemy->id);
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
-            $this->set('health', $ennemy->current_health);
+            
+            $r=rand(1,20);
+            if($r>10+$ennemy->level-$myfighter->level){
+                
+                $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
+                $this->set('success', 1);
+                $this->set('r', $r);
+                $this->Fighters->xpUp($myfighter->id,1);
+                  $this->set('health', $ennemy->current_health-1);
+                $this->set('f', 10+$ennemy->level-$myfighter->level);
+            }
         }
 
 

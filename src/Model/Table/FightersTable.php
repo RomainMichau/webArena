@@ -10,21 +10,18 @@ class FightersTable extends Table {
         return "ok";
     }
 
-    public function getAllFighters()
-    {
+    public function getAllFighters() {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
     }
-    
-    public function setHealth($id,$health)
-    {
+
+    public function setHealth($id, $health) {
         $fighter = $this->get($id);
         $fighter->current_health = $health;
         $this->save($fighter);
     }
 
-    public function getAllFightersByPlayerId($player_id)
-    {
+    public function getAllFightersByPlayerId($player_id) {
         $fighters = $this->find('all')->from("fighters")->where(["player_id" => $player_id])->toArray();
         return $fighters;
     }
@@ -33,54 +30,59 @@ class FightersTable extends Table {
         $fighter = $this->get($id);
         return $fighter;
     }
-    public function xpUp($id)
-    {
+
+    public function xpUp($id, $nb) {
+
         $fighter = $this->get($id);
-        $fighter->xp = $fighter->xp + 1;
+        $fighter->xp = $fighter->xp + $nb;
         $this->save($fighter);
-        if($fighter->xp%4 == 0)
-            $this->levelUp($id);
     }
+
     public function levelUp($id) {
         $fighter = $this->get($id);
         $fighter->level = $fighter->level + 1;
         $this->save($fighter);
     }
-    
-      public function getFighterByCoord($x, $y) {
-         // $this->setSource('surroundings');
-        $fighter = $this->find('all')->from("fighters")->where("coordinate_x=" .$x . " and coordinate_y=" . $y);
+
+    public function getFighterByCoord($x, $y) {
+        // $this->setSource('surroundings');
+        $fighter = $this->find('all')->from("fighters")->where("coordinate_x=" . $x . " and coordinate_y=" . $y);
         //pr($fighter->toArray());
-        if(sizeof($fighter->toArray())==0){
-            
+        if (sizeof($fighter->toArray()) == 0) {
+
             return NULL;
         }
         return $fighter->toArray()[0];
     }
-    
-    public function moveFighter($id,$dir) {        //1:bas 2:haut 3:gauche 4:droit
-         // $this->setSource('surroundings');
-       $fighter = $this->get($id);
+
+    public function moveFighter($id, $dir) {        //1:bas 2:haut 3:gauche 4:droit
+        // $this->setSource('surroundings');
+        $fighter = $this->get($id);
         //pr($fighter->toArray());
         //pr('oki');
-        
-            if($dir==1&&$fighter->coordinate_x<15){
-            $fighter->coordinate_x=$fighter->coordinate_x+1;  $this->save($fighter); return 1;}
-         else if($dir==2&&$fighter->coordinate_x>1){
-            $fighter->coordinate_x=$fighter->coordinate_x-1;  $this->save($fighter); return 1;}
-         else   if($dir==3&&$fighter->coordinate_y>1){
-            $fighter->coordinate_y=$fighter->coordinate_y-1; $this->save($fighter);  return 1;}
-        else    if($dir==4&&$fighter->coordinate_y<10){
-            $fighter->coordinate_y=$fighter->coordinate_y+1; $this->save($fighter);
+
+        if ($dir == 1 && $fighter->coordinate_x < 15) {
+            $fighter->coordinate_x = $fighter->coordinate_x + 1;
+            $this->save($fighter);
             return 1;
-            }
-           
-            return 0;
-        
-     
+        } else if ($dir == 2 && $fighter->coordinate_x > 1) {
+            $fighter->coordinate_x = $fighter->coordinate_x - 1;
+            $this->save($fighter);
+            return 1;
+        } else if ($dir == 3 && $fighter->coordinate_y > 1) {
+            $fighter->coordinate_y = $fighter->coordinate_y - 1;
+            $this->save($fighter);
+            return 1;
+        } else if ($dir == 4 && $fighter->coordinate_y < 10) {
+            $fighter->coordinate_y = $fighter->coordinate_y + 1;
+            $this->save($fighter);
+            return 1;
+        }
+
+        return 0;
     }
 
-    public function addFighter($newFighter, $fightersTable, $player_id){
+    public function addFighter($newFighter, $fightersTable, $player_id) {
         $fighter = $fightersTable->newEntity();
 
         $fighter->name = $newFighter['name'];
@@ -91,7 +93,7 @@ class FightersTable extends Table {
         $fighter->xp = 1;
         $fighter->skill_sight = 1;
         $fighter->skill_strength = 1;
-        $fighter-> skill_health  = 1;
+        $fighter->skill_health = 1;
         $fighter->current_health = 1;
         $fighter->next_action_time = 1;
         $fighter->guild_id = 1;
@@ -101,5 +103,5 @@ class FightersTable extends Table {
             return $id;
         }
     }
- 
+
 }
