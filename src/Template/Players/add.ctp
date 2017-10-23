@@ -1,13 +1,17 @@
 <?php $this->assign('title', $titredepage);?>
 
-<div class="users form">
- <?= $this->Form->create($user) ?>
- <form>
-     <fieldset class="fieldset">
-          <legend><?= __('Add User') ?></legend>
-         <?= $this->Form->control('email') ?>
-         <?= $this->Form->control('password') ?>
+<?= $this->Form->create($user) ?>
+<form>
+    <fieldset class="fieldset">
+        <legend><?= __('Add User') ?></legend>
+        <div class="grid-x">
+            <div class="medium-3 cell"><label class="text-right middle">Email</label></div>
+            <div class="medium-9 cell"><?= $this->Form->control('email', ['label' => false]) ?></div>
+            <div class="medium-3 cell"><label class="text-right middle">Mot de passe</label></div>
+            <div class="medium-9 cell"><?= $this->Form->control('password', ['label' => false]) ?></div>
+        </div>
+
+        <div class="button"><?= $this->Form->button(__('Submit'), ['class' => 'button']); ?></div>
+        <?= $this->Form->end() ?>
     </fieldset>
- <?= $this->Form->button(__('Submit')); ?>
- <?= $this->Form->end() ?>
- </div> 
+</form>
