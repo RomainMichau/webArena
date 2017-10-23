@@ -191,7 +191,7 @@ function supssi() {
     $('#aright').click(function () {
         attack(4);
     });
-    $('.case').hover(function () {
+    $('.case').click(function () {
         a = this.id;
         a = a.replace('cid', '');
         b = $('#' + this.id).html();
