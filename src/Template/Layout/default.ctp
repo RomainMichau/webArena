@@ -28,6 +28,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
    
     <?= $this->Html->css('webarena.css') ?>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -62,7 +66,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div class="container clearfix row">
         <?= $this->fetch('content') ?>
     </div>
     <footer>

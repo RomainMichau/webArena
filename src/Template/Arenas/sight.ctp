@@ -2,8 +2,8 @@
 use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
-<div class='damier'>
-<table> 
+<div>
+<table class="unstriped"> 
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;
      foreach ($tab as $value1) { ?>

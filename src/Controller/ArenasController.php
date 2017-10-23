@@ -14,7 +14,7 @@ class ArenasController extends AppController {
 
     function beforeFilter(Event $event){
         parent::beforeFilter($event);
-        $this->Auth->allow(['sight', 'index', 'fighters']);
+        $this->Auth->allow(['index', 'fighters']);
     }
     
     public function index() {

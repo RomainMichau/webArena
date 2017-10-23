@@ -29,9 +29,14 @@ footer{
 
 
 .vide {
-    padding-top:17px;
+      padding-top:17px;
       padding-bottom:17px;
       padding-left: 21px;
       padding-right: 21px;
       
+}
+
+.row{
+    width: 70%;
+    margin: auto;
 }
