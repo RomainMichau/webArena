@@ -34,18 +34,35 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php
     echo $this->Html->script('http://code.jquery.com/jquery.min.js'); 
     echo $this->Html->script('Arenas');?>
-  
-    <?php echo $this->Html->link('Acceuil', '/'); ?>
-    <?php echo $this->Html->link('fighterByPlayer', array('controller' => 'Arenas', 'action' => 'fightersByPlayer')); ?>
-    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighters')); ?>
-    <?php echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight')); ?>
-    <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-    <?php echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login')); ?>
-    <?php echo $this->Html->link('add', array('controller' => 'Players', 'action' => 'add')); ?>
-    <?php echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout')); ?>
-    
-    <?php echo $user_email; ?>   
-    
+
+    <?php if($user)
+        {
+            echo $this->Html->link('Acceuil', '/');
+            echo " ";
+            echo $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));
+            echo " ";
+            echo $this->Html->link('fighterByPlayer', array('controller' => 'Arenas', 'action' => 'fightersByPlayer'));
+            echo " ";
+            echo $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight'));
+            echo " ";
+            echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary'));
+            echo " ";
+            echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout'));
+            echo " ";
+            echo $user['email'];
+        }
+        else
+        {
+            echo $this->Html->link('Acceuil', '/');
+            echo " ";
+            echo $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));
+            echo " ";
+            echo $this->Html->link('login', array('controller' => 'Players', 'action' => 'login'));
+            echo " ";
+            echo $this->Html->link('add', array('controller' => 'Players', 'action' => 'add'));
+        }
+    ?>
+
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">

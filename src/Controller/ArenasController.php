@@ -37,7 +37,7 @@ class ArenasController extends AppController {
 
     public function fighter($id) {
         $this->loadModel('Fighters');
-        $this->Fighters->Levelup($id);
+        $this->Fighters->xpUp($id);
         $fighter = $this->Fighters->getFighterById($id);
         $this->set('fighter', $fighter);
     }
@@ -113,7 +113,7 @@ class ArenasController extends AppController {
         $id = $fighter->id;
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
-           if ($dir == 1) {
+        if ($dir == 1) {
             $ennemy = $this->Fighters->getFighterByCoord($x+1, $y);
         }
         if ($dir == 2) {

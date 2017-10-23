@@ -33,7 +33,14 @@ class FightersTable extends Table {
         $fighter = $this->get($id);
         return $fighter;
     }
-
+    public function xpUp($id)
+    {
+        $fighter = $this->get($id);
+        $fighter->xp = $fighter->xp + 1;
+        $this->save($fighter);
+        if($fighter->xp%4 == 0)
+            $this->levelUp($id);
+    }
     public function levelUp($id) {
         $fighter = $this->get($id);
         $fighter->level = $fighter->level + 1;
