@@ -103,20 +103,28 @@ class FightersTable extends Table {
             return $id;
         }
     }
-    public function skillSightUp($id){
+
+    public function skillSightUp($id) {
         $fighter = $this->get($id);
         $fighter->skill_sight = $fighter->skill_sight + 1;
-         $this->save($fighter);
+        $fighter->level = $fighter->level + 1;
+
+        $this->save($fighter);
     }
-    public function skillStrengthUp($id){
+
+    public function skillStrengthUp($id) {
         $fighter = $this->get($id);
+        $fighter->level = $fighter->level + 1;
+
         $fighter->skill_strength = $fighter->skill_strength + 1;
-         $this->save($fighter);
+        $this->save($fighter);
     }
-    public function skillHealthUp($id){
+
+    public function skillHealthUp($id) {
         $fighter = $this->get($id);
         $fighter->skill_health = $fighter->skill_health + 1;
-         $this->save($fighter);
+        $fighter->level = $fighter->level + 1;
+        $this->save($fighter);
     }
 
 }

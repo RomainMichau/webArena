@@ -115,7 +115,8 @@ function supsst() {
             dataType: 'JSON',
 
             success: function (response) {
-              
+              $('#psst').text(parseInt($('#psst').text())+1);
+              $('#skil').text(parseInt($('#skil').text())-1);$(lvl).text(parseInt($('#lvl').text())+1);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -131,7 +132,13 @@ function supssi() {
             dataType: 'JSON',
 
             success: function (response) {
-              
+              $(pssi).text(parseInt($('#pssi').text())+1); $('#lvl').text(parseInt($('#lvl').text())+1);
+                            $('#skil').text(parseInt($('#skil').text())-1);
+                 if( $('#skil').text()=='0'){
+                     $('#sh').html('');
+                     console.log("oki");
+                 }
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -148,7 +155,9 @@ function supssi() {
             dataType: 'JSON',
 
             success: function (response) {
-              console.log(response.name)
+              $('#psh').text(parseInt($('#psh').text())+1);$('#lvl').text(parseInt($('#lvl').text())+1);
+                            $('#skil').text(parseInt($('#skil').text())-1);
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
