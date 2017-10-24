@@ -3,7 +3,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
-App\Model\Table;
+
 
 /**
  * Description of EventsTable
@@ -12,6 +12,9 @@ App\Model\Table;
  */
 class EventsTable extends Table {
     //put your code here
+    public function tst(){
+    return("oki");
+    }
     public  function addEvent($name,$x,$y){
        $event= $this->newEntity();
         $d=date('Y-m-d H:i:s');
