@@ -58,6 +58,7 @@ class FightersTable extends Table {
     public function moveFighter($id, $dir) {        //1:bas 2:haut 3:gauche 4:droit
         // $this->setSource('surroundings');
         $fighter = $this->get($id);
+        
         //pr($fighter->toArray());
         //pr('oki');
 
