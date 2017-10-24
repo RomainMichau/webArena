@@ -3,6 +3,7 @@
 $this->assign('title', $fighter->name);?>
 
     <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
+    <?= $this->Html->link('edit profil', array('controller' => 'Arenas', 'action' => 'editFighter', $fighter->id), ['class' => 'button', 'target' => '_blank']); ?>
 
 <p> id:  <?php echo $fighter->id;?>  </p> 
 <p> name: <?php echo $fighter->name ?> </p>
