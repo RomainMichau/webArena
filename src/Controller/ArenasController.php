@@ -170,11 +170,10 @@ class ArenasController extends AppController {
                     }
                 }
             }
-           
         }
 
-        
-                if ($success == 1 && $dir == 2) {
+
+        if ($success == 1 && $dir == 2) {
             for ($i = 1; $i <= $v + 1; $i++) {
                 $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
                 if (isset($res1)) {
@@ -198,10 +197,9 @@ class ArenasController extends AppController {
                     }
                 }
             }
-           
         }
-        
-  if ($success == 1 && $dir == 2) {
+
+        if ($success == 1 && $dir == 2) {
             for ($i = 1; $i <= $v + 1; $i++) {
                 $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
                 if (isset($res1)) {
@@ -225,65 +223,62 @@ class ArenasController extends AppController {
                     }
                 }
             }
-           
         }
-        
-  if ($success == 1 && $dir == 3) {
+
+        if ($success == 1 && $dir == 3) {
             for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1,$y - $i );
+                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y - $i);
                 if (isset($res1)) {
-                    array_push($tab, array($x - $v + $i - 1,$y - $i, 'f' . $res1->id));
+                    array_push($tab, array($x - $v + $i - 1, $y - $i, 'f' . $res1->id));
                 } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1,$y - $i);
+                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y - $i);
 
                     if (isset($res12)) {
-                        array_push($tab, array($x - $v + $i - 1,$y - $i, 's' . $res12->id));
+                        array_push($tab, array($x - $v + $i - 1, $y - $i, 's' . $res12->id));
                     }
                 }
 
-                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1,$y - $i);
+                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y - $i);
                 if (isset($res2)) {
-                    array_push($tab, array($x + $v - $i + 1,$y - $i, 'f' . $res2->id));
+                    array_push($tab, array($x + $v - $i + 1, $y - $i, 'f' . $res2->id));
                 } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1,$y - $i);
+                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y - $i);
 
                     if (isset($res22)) {
-                        array_push($tab, array($x + $v - $i + 1,$y - $i, 's' . $res22->id));
+                        array_push($tab, array($x + $v - $i + 1, $y - $i, 's' . $res22->id));
                     }
                 }
             }
-           
         }
-        
-  if ($success == 1 && $dir == 4    ) {
+
+        if ($success == 1 && $dir == 4) {
             for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1,$y +$i );
+                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y + $i);
                 if (isset($res1)) {
-                    array_push($tab, array($x - $v + $i - 1,$y + $i, 'f' . $res1->id));
+                    array_push($tab, array($x - $v + $i - 1, $y + $i, 'f' . $res1->id));
                 } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1,$y +$i);
+                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y + $i);
 
                     if (isset($res12)) {
-                        array_push($tab, array($x - $v + $i -1,$y + $i, 's' . $res12->id));
+                        array_push($tab, array($x - $v + $i - 1, $y + $i, 's' . $res12->id));
                     }
                 }
 
-                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1,$y + $i);
+                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y + $i);
                 if (isset($res2)) {
-                    array_push($tab, array($x + $v - $i + 1,$y + $i, 'f' . $res2->id));
+                    array_push($tab, array($x + $v - $i + 1, $y + $i, 'f' . $res2->id));
                 } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1,$y +$i);
+                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y + $i);
 
                     if (isset($res22)) {
-                        array_push($tab, array($x + $v - $i + 1,$y + $i, 's' . $res22->id));
+                        array_push($tab, array($x + $v - $i + 1, $y + $i, 's' . $res22->id));
                     }
                 }
             }
-           
         }
 
 
-$this->set('tab', $tab);
+        $this->set('tab', $tab);
         $this->set('vue', $v);
         $this->set('success', $success);
         $this->set('nx', $nx);
@@ -299,6 +294,7 @@ $this->set('tab', $tab);
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
         $this->set('success', 0);
+        $this->set('death', 0);
         $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         // $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);
         if ($dir == 1) {
@@ -315,8 +311,11 @@ $this->set('tab', $tab);
         if ($dir == 4) {
             $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y + 1);
         }
-        if (isset($ennemy)) {
-            //$this->set('success', 1);
+        $this->set('ennemy',0);
+        if (isset($ennemy))
+            {
+            $this->set('ennemy',1);
+            $this->set('name',$ennemy->name);
             $this->set('eid', $ennemy->id);
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
@@ -326,10 +325,11 @@ $this->set('tab', $tab);
                 $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
                 $ennemy = $this->Fighters->getFighterById($ennemy->id);
                 $this->set('success', 1);
-                $this->set('r', $r);
                 $this->Fighters->xpUp($myfighter->id, 1);
                 if ($ennemy->current_health <= 0) {
                     $this->Fighters->xpUp($myfighter->id, $ennemy->level);
+                    $this->set('death', 1);   
+                    $this->Fighters->deleteFighter($ennemy->id);
                 }
                 $this->set('health', $ennemy->current_health);
                 $this->set('f', 10 + $ennemy->level - $myfighter->level);

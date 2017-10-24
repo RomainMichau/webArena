@@ -84,7 +84,7 @@
         <footer>
             TD SI-2
             <p>Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville- Romain Michau aka le bg   </p>
-            <p> Option: DG </p>
+            <p> Option: BG </p>
 
         </footer>
     </body>

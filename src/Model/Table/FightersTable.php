@@ -92,10 +92,10 @@ class FightersTable extends Table {
         $fighter->coordinate_y = 1;
         $fighter->level = 1;
         $fighter->xp = 1;
-        $fighter->skill_sight = 1;
+        $fighter->skill_sight = 2;
         $fighter->skill_strength = 1;
-        $fighter->skill_health = 1;
-        $fighter->current_health = 1;
+        $fighter->skill_health = 5;
+        $fighter->current_health = 5;
         $fighter->next_action_time = 1;
         $fighter->guild_id = 1;
 
@@ -125,7 +125,13 @@ class FightersTable extends Table {
         $fighter = $this->get($id);
         $fighter->skill_health = $fighter->skill_health + 1;
         $fighter->level = $fighter->level + 1;
+        $fighter->current_health=$fighter->skill_health ;
         $this->save($fighter);
+    }
+    
+    public function deleteFighter($id){
+        $entity = $this->get($id);
+        $this->delete($entity);
     }
 
 }

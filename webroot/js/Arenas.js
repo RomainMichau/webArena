@@ -6,21 +6,21 @@ $(document).ready(function () {
 
 
     function tocoor(x, y) {
-        if(y>15)
-            return null; 
-        
-      else  if(x<=0)
-            return null; 
-       else if(x>10)
-            return null; 
-        else if(y<=0)
-            return null; 
+        if (y > 15)
+            return null;
+
+        else if (x <= 0)
+            return null;
+        else if (x > 10)
+            return null;
+        else if (y <= 0)
+            return null;
         var a = (y - 1) * 10 + x;
         return a;
     }
 
     function tox(coor) {
-        
+
         var x = coor % 10;
         if (x == 0)
             x = 10;
@@ -54,10 +54,10 @@ $(document).ready(function () {
                     rv = response.vue;
                     rny = response.ny;
                     rnx = response.nx;
-                    a = "#cid" + tocoor(rny,rnx);
-                    b = "#cid" + tocoor(ry,rx);
+                    a = "#cid" + tocoor(rny, rnx);
+                    b = "#cid" + tocoor(ry, rx);
                     if (dir === 1) {  ///DOWN                            
-                      
+
                         for (i = 1; i <= rv + 1; i++) {
                             vy1 = rx + i;   ///PARTIE CASE QUI APPARAISSE
                             vy2 = vy1;
@@ -77,12 +77,12 @@ $(document).ready(function () {
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                        
+
 
 
                     }
                     if (dir === 2)  ///UP
-                       for (i = 1; i <= rv + 1; i++) {
+                        for (i = 1; i <= rv + 1; i++) {
                             vy1 = rnx + i;   ///PARTIE CASE QUI APPARAISSE
                             vy2 = vy1;
                             vx1 = ry - rv + i - 1;
@@ -102,7 +102,7 @@ $(document).ready(function () {
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
                     if (dir === 3)
-                      for (i = 1; i <= rv + 1; i++) {
+                        for (i = 1; i <= rv + 1; i++) {
                             vx1 = rny + i;   ///PARTIE CASE QUI APPARAISSE
                             vx2 = vx1;
                             vy1 = rx - rv + i - 1;
@@ -141,16 +141,16 @@ $(document).ready(function () {
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                  //  console.log(response.tab.length);
-                    
-                    for(i=0;i<response.tab.length;i++){
-                        coor1=tocoor(response.tab[i][1],response.tab[i][0]);
-                         $('#cid' + coor1).html(' <img src="/webArena/img/'+response.tab[i][2]+'.png" alt="Not found" width="42" height="35"> '); 
-                         console.log(response.tab[i][2]);
-                    
+                    //  console.log(response.tab.length);
+
+                    for (i = 0; i < response.tab.length; i++) {
+                        coor1 = tocoor(response.tab[i][1], response.tab[i][0]);
+                        $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
+                        console.log(response.tab[i][2]);
+
                     }
-                    
-                    
+
+
                     c = $(a).html();
                     //  console.log("a:" + b + "  b:" + a);
                     $(a).html($(b).html());
@@ -167,7 +167,8 @@ $(document).ready(function () {
 
     function attack(dir) {
 
-
+        var save;
+        var a;
         $.ajax({
             url: '/webArena/arenas/attack/' + dir,
             type: 'GET',
@@ -176,22 +177,33 @@ $(document).ready(function () {
             success: function (response) {
                 //  alert("oki");
                 //    console.log("r:"+response.r+" f:"+response.f);
-                if (response.success == 1) {
-                    $('#info').html('l attaque est un succes, vie restante de l\'ennemi' + response.health);
-                    var a = 'cid' + (response.y + (response.x - 1) * 10);
-                    // console.log(a);
-                    var save = $('#' + a).html();
-                    $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
-                    var i;
+                if (response.success === 1) {
 
-                    setTimeout(function () {
-                        $('#' + a).html(save);
+                    a = 'cid' + tocoor(response.y, response.x);
+                    if (response.death === 0) {
+                        
+                        $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
+                        save = $('#' + a).html();
+                        $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
 
-                    }, 900);
 
-                }        //      alert(response.en);
-                else {
-                    $('#info').html('l\'attaque est un echec');
+                        setTimeout(function () {
+                            $('#' + a).html(save);
+                        }, 900);
+                    } else if (response.death === 1) {
+                        $('#info').html('l attaque est un succes, et tue' + response.name);
+                        save = ' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
+                        $('#' + a).html(' <img src="/webArena/img/mort.gif" alt="Not found" width="42" height="35"> ');
+
+
+                        setTimeout(function () {
+                            $('#' + a).html(save);
+
+                        }, 1500);
+                    }
+
+                } else if (response.ennemy === 1) {
+                    $('#info').html(response.name + ' esquive le coup, il est CHOOOOOO');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -293,6 +305,7 @@ $(document).ready(function () {
                 $('#psh').text(parseInt($('#psh').text()) + 1);
                 $('#lvl').text(parseInt($('#lvl').text()) + 1);
                 $('#skil').text(parseInt($('#skil').text()) - 1);
+                $('#vie').text(parseInt($('#psh').text()));
                 if ($('#skil').text() == '0') {
                     $('#bsh').html('');
                     $('#bssi').html('');

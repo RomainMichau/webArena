@@ -34,4 +34,4 @@ $this->assign('title', $fighter->name);?>
             </span> <?php
         }
         ?></p>
-<p> current_health: <?php echo $fighter->current_health ?> </p>
+<p> current_health: <span id='vie'> <?php echo $fighter->current_health ?> </span> </p>
