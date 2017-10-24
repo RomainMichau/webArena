@@ -6,10 +6,11 @@
  else{ ?> Creer votre permier fighter ;)    
         
 
+
     <?php } ?>
     <?= $this->Form->input('name', array('label' => 'Nom'));?>
     <?= $this->Form->input('avatar_file',array('label'=>'Avatar', 'type' => 'file')); ?>
 
 
-<?= $this->Form->button(__('Submit')) ?>
+<?= $this->Form->button(__('Create')) ?>
 <?= $this->Form->end() ?>
