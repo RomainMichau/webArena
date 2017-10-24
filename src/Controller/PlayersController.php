@@ -14,7 +14,7 @@ class PlayersController  extends AppController
 
     function beforeFilter(Event $event){
         parent::beforeFilter($event);
-        $this->Auth->allow(['add', 'index', 'login', 'logout']);
+        $this->Auth->allow(['add', 'index', 'login', 'logout', 'forgotPassword']);
     }
     
     public function index()
@@ -45,7 +45,11 @@ class PlayersController  extends AppController
             
             if ($this->Players->save($user)) { //Si on arrive a sauvegarder
                 $this->Flash->success(__('The user has been saved.')); //Succès
-                return $this->redirect(['action' => 'login']); //Redirige l'utilisateur vers la page players/add (A CHANGER)
+                
+                $user = $this->Auth->identify();
+                $this->Auth->setUser($user);
+                
+                return $this->redirect($this->Auth->redirectUrl()); //Redirige l'utilisateur vers l'url par défaut
             }
             $this->Flash->error(__('Unable to add the user.')); //Erreur
         }
@@ -71,7 +75,16 @@ class PlayersController  extends AppController
             
             $this->Flash->error(__('Invalid username or password, try again'));
         }
-    }    
+    }  
+    
+    public function forgotPassword(){
+        $this->set('titredepage', "forgotPassword2");
+        $this->loadModel('Players');
+        
+        if ($this->request->is('post')){
+            $this->Players->resetPassword($this->request->getData("email"));
+        }
+    }
     
     public function logout()
     {

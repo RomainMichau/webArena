@@ -21,7 +21,7 @@ footer{
 .case{
     
 }
-.case>img{
+.case>*{
     width: 60px;
     height: 50px;
 }

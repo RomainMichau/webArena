@@ -1,10 +1,13 @@
 <?php
 namespace App\Model\Table;
-
 use Cake\ORM\Table;
-//use Cake\Validation\Validator;
 
 class PlayersTable extends Table
 {
-
+    public function resetPassword($email){
+        $query = $this->find('all')->where(['email' => $email]);
+        $player = $query->first();
+        $player->password = "admin";
+        $this->save($player);
+    }
 }
