@@ -2,7 +2,7 @@
 
 
 $(document).ready(function () {
-    var a;
+    var a,b;
 
 
     function tocoor(x, y) {
@@ -181,7 +181,7 @@ $(document).ready(function () {
 
                     a = 'cid' + tocoor(response.y, response.x);
                     if (response.death === 0) {
-                        
+
                         $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
                         save = $('#' + a).html();
                         $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
@@ -203,15 +203,16 @@ $(document).ready(function () {
                     }
 
                 } else if (response.ennemy === 1) {
-                    $('#info').html(response.name + ' esquive le coup, il est CHOOOOOO');
-                    save = ' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
-                        $('#' + a).html(' <img src="/webArena/img/stop.png" alt="Not found" width="42" height="35"> ');
+                     a = 'cid' + tocoor(response.y, response.x);
+                    $('#info').html(response.name + ' esquive le coup, il est CHOOO');
+                    save = $('#' + a).html();
+                    $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
+                  // console.log($('#' + a).html());
+                    setTimeout(function () {
+                  //      console.log("oki");
+                        $('#' + a).html(save);
 
-
-                        setTimeout(function () {
-                            $('#' + a).html(save);
-
-                        }, 900);
+                    }, 900);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -351,33 +352,35 @@ $(document).ready(function () {
         }
     });
     $('#right').click(function () {
-        if (a == 1) {
+       if (b == 1) {
+            b=0;
             move(4);
             a = 0;
         }
     });
     $('#aup').click(function () {
-        if (a == 1) {
+       if (b == 1) {
+            b=0;
             attack(2);
-            a = 0;
         }
     });
     $('#adown').click(function () {
-        if (a == 1) {
+      if (b == 1) {
+            b=0;
             attack(1);
-            a = 0;
         }
     });
     $('#aleft').click(function () {
-        if (a == 1) {
+      if (b == 1) {
+            b=0;
             attack(3);
-            a = 0;
         }
     });
     $('#aright').click(function () {
-        if (a == 1) {
+        if (b == 1) {
+            b=0;
             attack(4);
-            a = 0;
+           
         }
     });
     $('.case').click(function () {
@@ -412,5 +415,9 @@ $(document).ready(function () {
     setInterval(function () {
         a = 1
     }, 600);
+    
+     setInterval(function () {
+        b = 1
+    }, 1000);
 
 });

@@ -70,14 +70,18 @@ class ArenasController extends AppController {
             //$this->Session->setFlash("vous ne pouvez pas envoyer ce type de fichier");
         }
     }
-
+//Y-M-D H:i:s
     public function sight() {
-        $session = $this->request->session();
+                $session = $this->request->session();
         $session->write('c', 5);
         // pr(self::$pri);
         //  pr($this->Auth->user());
         $this->loadModel('Fighters');
-
+$this->loadModel('Events');
+     $name=$myfighter->name+" attaque "+$ennemy>name;
+            $x=$myfighter->x;
+            $y=$myfighter->y;
+            $this->Events->addEvent($name,$x,$y);
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
@@ -293,6 +297,7 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
+        $this->loadModel('Events');
         $this->set('success', 0);
         $this->set('death', 0);
         $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
@@ -313,12 +318,15 @@ class ArenasController extends AppController {
         }
         $this->set('ennemy',0);
         if (isset($ennemy))
-            {
-            $this->set('ennemy',1);
-            $this->set('name',$ennemy->name);
+            {       $this->set('name',$ennemy->name);
             $this->set('eid', $ennemy->id);
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
+            $this->set('ennemy',1);
+            $name=$myfighter->name+" attaque "+$ennemy>name;
+            $x=$myfighter->x;
+            $y=$myfighter->y;
+            $this->Events->addEvent($name,$x,$y);
 
             $r = rand(1, 20);
             if ($r > 10 + $ennemy->level - $myfighter->level) {
