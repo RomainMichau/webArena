@@ -12,11 +12,14 @@ $this->assign('title', $titredepage);?>
             <?php foreach ($value1 as $value2) { ?>     
             <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                 <?php        
-                $y = $i% 10;
-                if($y == 0){
-                     $y = 10;
+                $x = $i% 10;
+                if($x == 0){
+                     $x = 10;
                 }
-                $x = floor($i / 10) + 1;
+                $y = ($i-$x)/10 +1;
+                if($y)
+                
+                
                 $dist= abs($y-$jy)+abs($x-$jx);
                 
                         if($value2!='vide'&&$dist<=2){
