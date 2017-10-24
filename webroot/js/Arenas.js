@@ -56,7 +56,7 @@ var a;
                     var a = 'cid' + (response.y + (response.x - 1) * 10);
                     // console.log(a);
                     var save = $('#' + a).html();
-                    $('#' + a).html(' <img src="/webArena/img/attack.png" alt="Not found" width="42" height="35"> ');
+                    $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
                     var i;
                     
                     setTimeout(function () {
