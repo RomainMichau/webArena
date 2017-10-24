@@ -1,6 +1,3 @@
-
-
-
 <?= $this->Form->create('Fighter', array('type' => 'file'));?>
 
 
@@ -8,5 +5,5 @@
     <?= $this->Form->input('avatar_file',array('label'=>'Avatar', 'type' => 'file')); ?>
 
 
-<?= $this->Form->button(__('Submit')) ?>
+<?= $this->Form->button(__('Create')) ?>
 <?= $this->Form->end() ?>

@@ -38,31 +38,54 @@ class ArenasController extends AppController {
 
     public function createFighter() {
 
-        //$this->Fighters->find("all");
-
         $this->loadModel('Fighters');
         $fightersTable = $this->Fighters;
         $newFighter = $this->request->getData();
         if (!empty($newFighter)) {
-            if (!$newFighter['avatar_file']['tmp_name']) {
-                
-            }
-            $player_id = $this->Auth->user()['id'];
-            $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id);
-            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
             $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-            if (!empty($newFighter['avatar_file']['tmp_name']) and
-                    in_array($extention, array('jpg', 'jpeg', 'png'))) {
-                move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
-            } else {
-                copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
+            if ($newFighter['name']) {
+                $player_id = $this->Auth->user()['id'];
+                $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id);
+                if($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
+                {
+                    move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
+                }
+                else
+                {
+                    copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
+                }
+                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
             }
-        } else {
-            //$this->Session->setFlash("vous ne pouvez pas envoyer ce type de fichier");
         }
     }
 
-//Y-M-D H:i:s
+    public function editFighter($id)
+    {
+        $this->loadModel('Fighters');
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $fightersTable = $this->Fighters;
+
+        $this->set('fighter', $fighter);
+
+        $updateFighter = $this->request->getData();
+
+        if (!empty($updateFighter)) {
+            $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+            if ($updateFighter['name']) {
+                $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
+                if($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
+                {
+                    move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
+                }
+                else
+                {
+                    copy('img/' . 'img_not_found.png', 'img/' . 'f' . $id . ".png");
+                }
+                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
+            }
+        }
+    }
+
     public function sight() {
         $session = $this->request->session();
         $session->write('c', 5);

@@ -104,6 +104,16 @@ class FightersTable extends Table {
             return $id;
         }
     }
+    public function updateFighter($updateFighter, $fightersTable, $idFighter) {
+        $fighter = $this->get($idFighter);
+
+        $fighter->name = $updateFighter['name'];
+
+        if ($fightersTable->save($fighter)) {
+            return true;
+        }
+        return false;
+    }
 
     public function skillSightUp($id) {
         $fighter = $this->get($id);
