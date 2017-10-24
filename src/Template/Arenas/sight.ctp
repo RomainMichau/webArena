@@ -1,9 +1,10 @@
 <?php
+
 use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
 <div>
-<table class="unstriped" id="tab"> 
+    <table class="unstriped" id="tab"> 
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;
     
@@ -17,7 +18,7 @@ $this->assign('title', $titredepage);?>
                      $x = 10;
                 }
                 $y = ($i-$x)/10 +1;
-                if($y)
+             
                 
                 
                 $dist= abs($y-$jy)+abs($x-$jx);
@@ -35,9 +36,9 @@ $this->assign('title', $titredepage);?>
             <?php } ?>
         </tr>
     <?php } ?>
-</table> 
+    </table> 
     <div id='info'></div>
-     <div id='info2'></div>
+    <div id='info2'></div>
 
 </div>
 
