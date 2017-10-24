@@ -13,22 +13,25 @@ $this->assign('title', $fighter->name);?>
 <p> skill_sight: <span id='pssi'><?php echo $fighter->skill_sight; ?> </span>
         <?php
         if($fighter->xp/$fighter->level>=4)
-        {
-            echo $this->Form->button('Upgrade skill_sight', ['id'=>'ssi','class' => 'button']);
+        { ?> <span id='bssi'> <?php
+            echo $this->Form->button('Upgrade skill_sight', ['id'=>'ssi','class' => 'button']);?>
+            </span> <?php
         }
         ?> </p>
 <p> skill_strength:<span id='psst'> <?php echo $fighter->skill_strength ?> </span>
         <?php
         if($fighter->xp/$fighter->level>=4)
-        {
-            echo $this->Form->button('Upgrade skill_strength', ['id'=>'sst','class' => 'button']); 
+        { ?> <span id='bsst'> <?php
+            echo $this->Form->button('Upgrade skill_strength', ['id'=>'sst','class' => 'button']);?>
+            </span> <?php
         }
         ?></p>
 <p>  skill_health: <span id='psh'> <?php echo $fighter->skill_health ?></span>
         <?php
         if($fighter->xp/$fighter->level>=4)
-        {
-            echo $this->Form->button('Upgrade skill_health', ['id'=>'sh','class' => 'button']);
+        {  ?> <span id='bsh'> <?php
+            echo $this->Form->button('Upgrade skill_health', ['id'=>'sh','class' => 'button']); ?>
+            </span> <?php
         }
         ?></p>
 <p> current_health: <?php echo $fighter->current_health ?> </p>

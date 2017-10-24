@@ -35,9 +35,13 @@ class ArenasController extends AppController {
         $this->set('fighters', $fighters);
     }
 
-    public function fighter($id) {
+    public function fighter($id) { 
+      
         $this->loadModel('Fighters');
         $fighter = $this->Fighters->getFighterById($id);
+    if($this->Auth->user()['id']!=$fighter->player_id){
+          $this->redirect(['controller' => 'Arenas', 'action' => 'fighters']);
+      }
         $this->set('fighter', $fighter);
     }
 
@@ -94,8 +98,8 @@ class ArenasController extends AppController {
         $this->set('tab', $tab);
 
         $this->set('fid', $fighter->id);
-        $this->set('x', $fighter->coordinate_x);
-        $this->set('y', $fighter->coordinate_y);
+        $this->set('jx', $fighter->coordinate_x);
+        $this->set('jy', $fighter->coordinate_y);
 
         //   $this->tst();
     }
@@ -110,6 +114,7 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
+                $this->loadModel('Surroundings');
         $success = 0;
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
@@ -131,7 +136,8 @@ class ArenasController extends AppController {
             $success = $this->Fighters->moveFighter($id, $dir);
         }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
+   
+         
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
 

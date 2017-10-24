@@ -13,14 +13,16 @@ var a;
             dataType: 'JSON',
 
             success: function (response) {
-
+                var ix = '<?php echo $x; ?>';
+                console.log(ix);
 
               //   console.log(response.success);
                 if (response.success == 1) {
                     //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
-                    if (dir === 1)
+                    if (dir === 1)  {
                         var b = "#cid" + ((response.x - 2) * 10 + response.y);
+                        }
                     if (dir === 2)
                         var b = "#cid" + ((response.x) * 10 + response.y);
                     if (dir === 3)
@@ -31,6 +33,7 @@ var a;
                     console.log("a:" + b + "  b:" + a);
                     $(a).html($(b).html());
                     $(b).html(c);
+                 ;
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -56,7 +59,7 @@ var a;
                     var a = 'cid' + (response.y + (response.x - 1) * 10);
                     // console.log(a);
                     var save = $('#' + a).html();
-                    $('#' + a).html(' <img src="/webArena/img/attack.png" alt="Not found" width="42" height="35"> ');
+                    $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
                     var i;
                     
                     setTimeout(function () {
@@ -120,6 +123,13 @@ function supsst() {
             success: function (response) {
               $('#psst').text(parseInt($('#psst').text())+1);
               $('#skil').text(parseInt($('#skil').text())-1);$(lvl).text(parseInt($('#lvl').text())+1);
+               if( $('#skil').text()=='0'){
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
+                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -138,8 +148,11 @@ function supssi() {
               $(pssi).text(parseInt($('#pssi').text())+1); $('#lvl').text(parseInt($('#lvl').text())+1);
                             $('#skil').text(parseInt($('#skil').text())-1);
                  if( $('#skil').text()=='0'){
-                     $('#sh').html('');
-                     console.log("oki");
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
                  }
 
             },
@@ -160,6 +173,13 @@ function supssi() {
             success: function (response) {
               $('#psh').text(parseInt($('#psh').text())+1);$('#lvl').text(parseInt($('#lvl').text())+1);
                             $('#skil').text(parseInt($('#skil').text())-1);
+                             if( $('#skil').text()=='0'){
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
+                 }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
