@@ -204,6 +204,14 @@ $(document).ready(function () {
 
                 } else if (response.ennemy === 1) {
                     $('#info').html(response.name + ' esquive le coup, il est CHOOOOOO');
+                    save = ' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
+                        $('#' + a).html(' <img src="/webArena/img/stop.png" alt="Not found" width="42" height="35"> ');
+
+
+                        setTimeout(function () {
+                            $('#' + a).html(save);
+
+                        }, 900);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
