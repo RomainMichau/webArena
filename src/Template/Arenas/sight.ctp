@@ -1,10 +1,9 @@
 <?php
-
 use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
 <div>
-    <table class="unstriped" id="tab"> 
+<table class="unstriped" id="tab"> 
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;
     
@@ -13,12 +12,12 @@ $this->assign('title', $titredepage);?>
             <?php foreach ($value1 as $value2) { ?>     
             <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                 <?php        
-                $x = $i% 10;
-                if($x == 0){
-                     $x = 10;
+                $y = $i% 10;
+                if($y == 0){
+                     $y = 10;
                 }
-                $y = ($i-$x)/10 +1;
-             
+                $x = ($i-$y)/10 +1;
+                
                 
                 
                 $dist= abs($y-$jy)+abs($x-$jx);
@@ -36,9 +35,9 @@ $this->assign('title', $titredepage);?>
             <?php } ?>
         </tr>
     <?php } ?>
-    </table> 
+</table> 
     <div id='info'></div>
-    <div id='info2'></div>
+     <div id='info2'></div>
 
 </div>
 

@@ -354,6 +354,7 @@ class ArenasController extends AppController {
                     
                     $this->Fighters->xpUp($myfighter->id, $ennemy->level);
                     $this->set('death', 1);
+                     $name = $myfighter->name . " a tué " . $ennemy->name;
                     $this->Fighters->deleteFighter($ennemy->id);
                 }
                 $this->set('health', $ennemy->current_health);

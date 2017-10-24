@@ -16,6 +16,7 @@ class EventsTable extends Table {
     return("oki");
     }
     public  function addEvent($name,$x,$y){
+        date_default_timezone_set('Europe/Paris');
        $event= $this->newEntity();
         $d=date('Y-m-d H:i:s');
         $event->name=$name;
