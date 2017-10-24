@@ -7,7 +7,7 @@
             <div class="cell">
                 <div class="card" style="width: 300px;">
                     <div class="card-divider">
-                        name: <?php echo $this->Html->link($fighter->name, array('controller' => 'Arenas', 'action' => 'fighter', $fighter->id)); ?>
+                        name: <?php echo $fighter->name; ?>
                     </div>
                     <div class="card-image">
                         <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound']) ?>

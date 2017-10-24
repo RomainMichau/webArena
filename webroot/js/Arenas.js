@@ -120,6 +120,13 @@ function supsst() {
             success: function (response) {
               $('#psst').text(parseInt($('#psst').text())+1);
               $('#skil').text(parseInt($('#skil').text())-1);$(lvl).text(parseInt($('#lvl').text())+1);
+               if( $('#skil').text()=='0'){
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
+                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -138,8 +145,11 @@ function supssi() {
               $(pssi).text(parseInt($('#pssi').text())+1); $('#lvl').text(parseInt($('#lvl').text())+1);
                             $('#skil').text(parseInt($('#skil').text())-1);
                  if( $('#skil').text()=='0'){
-                     $('#sh').html('');
-                     console.log("oki");
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
                  }
 
             },
@@ -160,6 +170,13 @@ function supssi() {
             success: function (response) {
               $('#psh').text(parseInt($('#psh').text())+1);$('#lvl').text(parseInt($('#lvl').text())+1);
                             $('#skil').text(parseInt($('#skil').text())-1);
+                             if( $('#skil').text()=='0'){
+                //   console.log($('#bsh').html());
+                    $('#bsh').html('');
+                    $('#bssi').html('');
+                    $('#bsst').html('');
+                    
+                 }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {

@@ -35,9 +35,13 @@ class ArenasController extends AppController {
         $this->set('fighters', $fighters);
     }
 
-    public function fighter($id) {
+    public function fighter($id) { 
+      
         $this->loadModel('Fighters');
         $fighter = $this->Fighters->getFighterById($id);
+    if($this->Auth->user()['id']!=$fighter->player_id){
+          $this->redirect(['controller' => 'Arenas', 'action' => 'fighters']);
+      }
         $this->set('fighter', $fighter);
     }
 
