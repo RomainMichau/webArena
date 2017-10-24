@@ -95,8 +95,8 @@ class ArenasController extends AppController {
         $this->set('tab', $tab);
 
         $this->set('fid', $fighter->id);
-        $this->set('x', $fighter->coordinate_x);
-        $this->set('y', $fighter->coordinate_y);
+        $this->set('jx', $fighter->coordinate_x);
+        $this->set('jy', $fighter->coordinate_y);
 
         //   $this->tst();
     }
@@ -111,6 +111,7 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
+                $this->loadModel('Surroundings');
         $success = 0;
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $id = $fighter->id;
@@ -132,7 +133,21 @@ class ArenasController extends AppController {
             $success = $this->Fighters->moveFighter($id, $dir);
         }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
+         if($success==1){
+              for ($i = 1; $i <= 15; $i++) {
+            for ($j = 1; $j <= 10; $j++) {
+                if ($this->Fighters->getFighterByCoord($i, $j) != NULL) {
+                    $tab[$i][$j] = 'f' . $this->Fighters->getFighterByCoord($i, $j)->id;
+                    //  pr($tab[$i][$j]);
+                } elseif ($this->Surroundings->getSurroundingByCoord($i, $j) != NULL) {
+                    $tab[$i][$j] = 's' . $this->Surroundings->getSurroundingByCoord($i, $j)->id;
+                } else {
+                    $tab[$i][$j] = 'vide';
+                }
+            }
+        }
+        $this->set('tab', $tab);
+         }
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
 

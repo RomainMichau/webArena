@@ -3,18 +3,29 @@ use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
 <div>
-<table class="unstriped"> 
+<table class="unstriped" id="tab"> 
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;
+    
      foreach ($tab as $value1) { ?>
         <tr>    
             <?php foreach ($value1 as $value2) { ?>     
             <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
-                <?php          
-                        if($value2!='vide'){
+                <?php        
+                $y = $i% 10;
+                if($y == 0){
+                     $y = 10;
+                }
+                $x = floor($i / 10) + 1;
+                $dist= abs($y-$jy)+abs($x-$jx);
+                
+                        if($value2!='vide'&&$dist<=2){
                             echo $this->Html->image($value2.'.png', ['alt' => 'ImgNotFound']);
-                        }else{
-                            echo $this->Html->image('case_vide.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
+                        }else if($dist<=2) {
+                            echo $this->Html->image('case_vide_v.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
+                        }
+                        else if($dist>2) {
+                            echo $this->Html->image('case_vide_i.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
                         }
                     ?>
             </td>           

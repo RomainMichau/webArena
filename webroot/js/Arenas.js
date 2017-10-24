@@ -13,14 +13,15 @@ var a;
             dataType: 'JSON',
 
             success: function (response) {
-
+                console.log($($x));
 
               //   console.log(response.success);
                 if (response.success == 1) {
                     //      alert("oki");
                     var a = "#cid" + ((response.x - 1) * 10 + response.y);
-                    if (dir === 1)
+                    if (dir === 1)  {
                         var b = "#cid" + ((response.x - 2) * 10 + response.y);
+                        }
                     if (dir === 2)
                         var b = "#cid" + ((response.x) * 10 + response.y);
                     if (dir === 3)
@@ -31,6 +32,7 @@ var a;
                     console.log("a:" + b + "  b:" + a);
                     $(a).html($(b).html());
                     $(b).html(c);
+                 ;
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
