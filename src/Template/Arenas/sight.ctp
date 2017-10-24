@@ -48,5 +48,4 @@ $this->assign('title', $titredepage);?>
     echo $this->Form->button('attaque haut', ['id'=>'aup', 'class' => 'button']);
     echo $this->Form->button('attaque bas', ['id'=>'adown', 'class' => 'button']);
     echo $this->Form->button('attaque gauche', ['id'=>'aleft', 'class' => 'button']);
-    echo $this->Form->button('attaque droit', ['id'=>'aright', 'class' => 'button']); 
-
+    echo $this->Form->button('attaque droit', ['id'=>'aright', 'class' => 'button']);  ?>

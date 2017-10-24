@@ -133,21 +133,8 @@ class ArenasController extends AppController {
             $success = $this->Fighters->moveFighter($id, $dir);
         }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-         if($success==1){
-              for ($i = 1; $i <= 15; $i++) {
-            for ($j = 1; $j <= 10; $j++) {
-                if ($this->Fighters->getFighterByCoord($i, $j) != NULL) {
-                    $tab[$i][$j] = 'f' . $this->Fighters->getFighterByCoord($i, $j)->id;
-                    //  pr($tab[$i][$j]);
-                } elseif ($this->Surroundings->getSurroundingByCoord($i, $j) != NULL) {
-                    $tab[$i][$j] = 's' . $this->Surroundings->getSurroundingByCoord($i, $j)->id;
-                } else {
-                    $tab[$i][$j] = 'vide';
-                }
-            }
-        }
-        $this->set('tab', $tab);
-         }
+   
+         
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
 

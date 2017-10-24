@@ -13,7 +13,8 @@ var a;
             dataType: 'JSON',
 
             success: function (response) {
-                console.log($($x));
+                var ix = '<?php echo $x; ?>';
+                console.log(ix);
 
               //   console.log(response.success);
                 if (response.success == 1) {
