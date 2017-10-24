@@ -15,7 +15,7 @@ class ArenasController extends AppController {
     public function hasAFighter(){
      $this->loadModel('Fighters');
         $fighters  = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id']);
-        pr($fighters);
+     //   pr($fighters);
         if($fighters==NULL){
           //  pr('zsdertdefrg');
         $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 1]);
