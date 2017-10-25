@@ -456,6 +456,23 @@ class ArenasController extends AppController {
 
         $this->Fighters->skillHealthUp($fighter->id);
     }
+    public function cri($m) {
+        
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+     
+        $this->loadModel('Events');
+        $this->loadModel('Fighters');
+          $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+          $x=$fighter->coordinate_x;
+          $y=$fighter->coordinate_y;
+             $m=$fighter->name." cri \"".$m."\"";
+      $this->Events->addEvent($m,$x,$y);
+      
+        //$this->set('name',$fighter);
+
+    }
     
 }
 
