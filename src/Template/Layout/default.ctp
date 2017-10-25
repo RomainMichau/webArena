@@ -44,7 +44,7 @@
             <li> <?= $this->Html->link('Acceuil', '/');?> </li>
             <li> <?= $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));?> </li>
             <li> <?= $this->Html->link('fighterByPlayer', array('controller' => 'Arenas', 'action' => 'fighter'));?> </li>
-             <li> <?= $this->Html->link('creer fighter (temporaire)', array('controller' => 'Arenas', 'action' => 'createFighter'));?> </li>
+             <li> <?= $this->Html->link('creer fighter (temporaire)', array('controller' => 'Arenas', 'action' => 'createFighter/1'));?> </li>
             <li> <?= $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight'));?> </li>
             <li> <?= $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary'));?> </li>
             <li> <?= $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout'));?> </li>

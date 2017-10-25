@@ -11,6 +11,20 @@ use Cake\Event\Event;
  *
  */
 class ArenasController extends AppController {
+    
+    public function hasAFighter(){
+     $this->loadModel('Fighters');
+        $fighters  = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id']);
+     //   pr($fighters);
+        if($fighters==NULL){
+          //  pr('zsdertdefrg');
+        $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 1]);
+            return false;}
+        
+        else{
+        return true;}
+}
+
 
     function beforeFilter(Event $event) {
         parent::beforeFilter($event);
@@ -22,6 +36,7 @@ class ArenasController extends AppController {
     }
 
     public function fighters() {
+        
         $this->loadModel('Fighters');
         $fighters = $this->Fighters->getAllFighters();
         $this->set('fighters', $fighters);
@@ -29,14 +44,19 @@ class ArenasController extends AppController {
 
 
     public function fighter() {
-
+       $this->hasAFighter();
         $this->loadModel('Fighters');
+        
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
        
         $this->set('fighter', $fighter);
     }
 
-    public function createFighter() {
+    public function createFighter($d) {
+
+
+        //$this->Fighters->find("all");
+           $this->set('dead',$d);
 
         $this->loadModel('Fighters');
         $fightersTable = $this->Fighters;
@@ -84,8 +104,10 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-        $session = $this->request->session();
-        $session->write('c', 5);
+        
+       if(!$this->hasAFighter()){
+       return null;}
+           
         // pr(self::$pri);
         //  pr($this->Auth->user());
         $this->loadModel('Fighters');
@@ -123,10 +145,12 @@ class ArenasController extends AppController {
     }
 
     public function diary() {
+        $this->hasAFighter();
         $this->set('titredepage', "diary");
     }
 
     public function moveFighter($dir) {
+        
         $session = $this->request->session();
         $session->write('c', 5);
         $this->RequestHandler->renderAs($this, 'json');
@@ -432,5 +456,6 @@ class ArenasController extends AppController {
 
         $this->Fighters->skillHealthUp($fighter->id);
     }
-
+    
 }
+
