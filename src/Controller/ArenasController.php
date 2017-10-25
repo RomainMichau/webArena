@@ -89,20 +89,17 @@ class ArenasController extends AppController {
 
         $updateFighter = $this->request->getData();
 
+
         if (!empty($updateFighter)) {
             $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+            $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
             if ($updateFighter['name']) {
-                $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
                 if($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
                 {
                     move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
                 }
-                else
-                {
-                    copy('img/' . 'img_not_found.png', 'img/' . 'f' . $id . ".png");
-                }
-                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
             }
+            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
         }
     }
 
@@ -468,6 +465,23 @@ class ArenasController extends AppController {
         //$this->set('name',$fighter);
 
         $this->Fighters->skillHealthUp($fighter->id);
+    }
+    public function cri($m) {
+        
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+     
+        $this->loadModel('Events');
+        $this->loadModel('Fighters');
+          $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+          $x=$fighter->coordinate_x;
+          $y=$fighter->coordinate_y;
+             $m=$fighter->name." cri \"".$m."\"";
+      $this->Events->addEvent($m,$x,$y);
+      
+        //$this->set('name',$fighter);
+
     }
     
 }

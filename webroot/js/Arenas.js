@@ -31,6 +31,28 @@ $(document).ready(function () {
         var y = ((coor - (tox(coor))) / 10) + 1;
         return y;
     }
+    
+    
+    function cri() {
+        var y="";
+        while(y==""){
+        y = prompt("entrer votre message");}
+        console.log(y);  
+    if(y!=null){
+     $.ajax({
+            url: '/webArena/arenas/cri/' + y,
+            type: 'GET',
+            dataType: 'JSON',
+
+            success: function (response) {
+               $('#info').html('votre cri à etait entendu');
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });}
+}
 
 
     function move(dir) {
@@ -380,6 +402,13 @@ $(document).ready(function () {
         if (b == 1) {
             b=0;
             attack(4);
+           
+        }
+    });
+    $('#cri').click(function () {
+        if (b == 1) {
+            b=0;
+            cri();
            
         }
     });
