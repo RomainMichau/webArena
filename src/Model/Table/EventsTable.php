@@ -51,7 +51,7 @@ class EventsTable extends Table {
         // Query
         $query = $this->find();
         $query->select(['date', 'x' => 'coordinate_x', 'y' => 'coordinate_y', 'name'])
-        ->where(function ($exp, $q) use ($start_date, $end_date) { return $exp->between('date', $start_date, $end_date); })
+        ->where(function ($exp, $q) use ($start_date, $end_date) { return $exp->between('date', $start_date, $end_date); });
 
         /*
         ->andWhere(function ($exp, $q) use ($fighter_x, $fighter_y, $sight_skill) { 
