@@ -6,10 +6,6 @@ use Cake\ORM\Table;
 
 class FightersTable extends Table {
 
-    public function test() {
-        return "ok";
-    }
-
     public function getAllFighters() {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
