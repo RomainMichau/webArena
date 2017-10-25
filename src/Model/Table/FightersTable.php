@@ -83,13 +83,13 @@ class FightersTable extends Table {
         return 0;
     }
 
-    public function addFighter($newFighter, $fightersTable, $player_id) {
+    public function addFighter($newFighter, $fightersTable, $player_id,$x,$y) {
         $fighter = $fightersTable->newEntity();
-
+       
         $fighter->name = $newFighter['name'];
         $fighter->player_id = $player_id;
-        $fighter->coordinate_x = 1;
-        $fighter->coordinate_y = 1;
+        $fighter->coordinate_x = $x;
+        $fighter->coordinate_y = $y;
         $fighter->level = 1;
         $fighter->xp = 1;
         $fighter->skill_sight = 2;

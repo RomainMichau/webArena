@@ -11,20 +11,19 @@ use Cake\Event\Event;
  *
  */
 class ArenasController extends AppController {
-    
-    public function hasAFighter(){
-     $this->loadModel('Fighters');
-        $fighters  = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id']);
-     //   pr($fighters);
-        if($fighters==NULL){
-          //  pr('zsdertdefrg');
-        $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 1]);
-            return false;}
-        
-        else{
-        return true;}
-}
 
+    public function hasAFighter() {
+        $this->loadModel('Fighters');
+        $fighters = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id']);
+        //   pr($fighters);
+        if ($fighters == NULL) {
+            //  pr('zsdertdefrg');
+            $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 1]);
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     function beforeFilter(Event $event) {
         parent::beforeFilter($event);
@@ -36,19 +35,18 @@ class ArenasController extends AppController {
     }
 
     public function fighters() {
-        
+
         $this->loadModel('Fighters');
         $fighters = $this->Fighters->getAllFighters();
         $this->set('fighters', $fighters);
     }
 
-
     public function fighter() {
-       $this->hasAFighter();
+        $this->hasAFighter();
         $this->loadModel('Fighters');
-        
+
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-       
+
         $this->set('fighter', $fighter);
     }
 
@@ -56,22 +54,32 @@ class ArenasController extends AppController {
 
 
         //$this->Fighters->find("all");
-           $this->set('dead',$d);
+        $this->set('dead', $d);
 
         $this->loadModel('Fighters');
+        $this->loadModel('Surroundings');
         $fightersTable = $this->Fighters;
+
+
+        do {
+            $x = rand(1, 15);
+            $y = rand(1, 10);
+        } while (
+        null!=($this->Fighters->getFighterByCoord($x, $y)) || null!= $this->Surroundings->getSurroundingByCoord($x, $y));
+
+
+
+
+
         $newFighter = $this->request->getData();
         if (!empty($newFighter)) {
             $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
             if ($newFighter['name']) {
                 $player_id = $this->Auth->user()['id'];
-                $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id);
-                if($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
-                {
+                $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id,$x,$y);
+                if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
                     move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
-                }
-                else
-                {
+                } else {
                     copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
                 }
                 $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
@@ -79,8 +87,7 @@ class ArenasController extends AppController {
         }
     }
 
-    public function editFighter($id)
-    {
+    public function editFighter($id) {
         $this->loadModel('Fighters');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $fightersTable = $this->Fighters;
@@ -94,8 +101,7 @@ class ArenasController extends AppController {
             $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
             $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
             if ($updateFighter['name']) {
-                if($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
-                {
+                if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
                     move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
                 }
             }
@@ -104,10 +110,11 @@ class ArenasController extends AppController {
     }
 
     public function sight() {
-        
-       if(!$this->hasAFighter()){
-       return null;}
-           
+
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+
         // pr(self::$pri);
         //  pr($this->Auth->user());
         $this->loadModel('Fighters');
@@ -135,7 +142,7 @@ class ArenasController extends AppController {
                 }
             }
         }
-   //     pr($tab);
+        //     pr($tab);
         $this->set('tab', $tab);
         $this->set('vue', $fighter->skill_sight);
         $this->set('fid', $fighter->id);
@@ -146,7 +153,7 @@ class ArenasController extends AppController {
     }
 
     public function diary() {
-        
+
         // Checks if fighter is dead
         $this->hasAFighter();
 
@@ -161,7 +168,7 @@ class ArenasController extends AppController {
     }
 
     public function moveFighter($dir) {
-        
+
         $session = $this->request->session();
         $session->write('c', 5);
         $this->RequestHandler->renderAs($this, 'json');
@@ -177,22 +184,21 @@ class ArenasController extends AppController {
         $y = $fighter->coordinate_y;
         if ($dir == 1) {
             $ennemy = $this->Fighters->getFighterByCoord($x + 1, $y);
-             $sur = $this->Surroundings->getSurroundingByCoord($x+1,$y);
-            
-        }   
+            $sur = $this->Surroundings->getSurroundingByCoord($x + 1, $y);
+        }
         if ($dir == 2) {
             $ennemy = $this->Fighters->getFighterByCoord($x - 1, $y);
-             $sur = $this->Surroundings->getSurroundingByCoord($x-1,$y);
+            $sur = $this->Surroundings->getSurroundingByCoord($x - 1, $y);
         }
         if ($dir == 3) {
             $ennemy = $this->Fighters->getFighterByCoord($x, $y - 1);
-             $sur = $this->Surroundings->getSurroundingByCoord($x,$y-1);
+            $sur = $this->Surroundings->getSurroundingByCoord($x, $y - 1);
         }
         if ($dir == 4) {
             $ennemy = $this->Fighters->getFighterByCoord($x, $y + 1);
-             $sur = $this->Surroundings->getSurroundingByCoord($x,$y+1);
+            $sur = $this->Surroundings->getSurroundingByCoord($x, $y + 1);
         }
-        if ($ennemy == NULL && $sur ==NULL) {
+        if ($ennemy == NULL && $sur == NULL) {
             $success = $this->Fighters->moveFighter($id, $dir);
         }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
@@ -375,31 +381,31 @@ class ArenasController extends AppController {
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
             $this->set('ennemy', 1);
-           
+
             $x = $myfighter->coordinate_x;
             $y = $myfighter->coordinate_y;
-               
+
 
             $r = rand(1, 20);
             if ($r > 10 + $ennemy->level - $myfighter->level) {
-                 $name = $myfighter->name . " attaque " . $ennemy->name;
+                $name = $myfighter->name . " attaque " . $ennemy->name;
                 $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength);
                 $ennemy = $this->Fighters->getFighterById($ennemy->id);
                 $this->set('success', 1);
                 $this->Fighters->xpUp($myfighter->id, 1);
                 if ($ennemy->current_health <= 0) {
-                    
+
                     $this->Fighters->xpUp($myfighter->id, $ennemy->level);
                     $this->set('death', 1);
-                     $name = $myfighter->name . " a tué " . $ennemy->name;
+                    $name = $myfighter->name . " a tué " . $ennemy->name;
                     $this->Fighters->deleteFighter($ennemy->id);
                 }
                 $this->set('health', $ennemy->current_health);
                 $this->set('f', 10 + $ennemy->level - $myfighter->level);
-            }else{
-                 $name = $ennemy->name.' esquive un coup de '. $myfighter->name;
+            } else {
+                $name = $ennemy->name . ' esquive un coup de ' . $myfighter->name;
             }
-             $this->Events->addEvent($name, $x, $y);
+            $this->Events->addEvent($name, $x, $y);
         }
         $this->set('id', $this->Auth->user()['id']);
     }
@@ -472,23 +478,22 @@ class ArenasController extends AppController {
 
         $this->Fighters->skillHealthUp($fighter->id);
     }
+
     public function cri($m) {
-        
+
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
-     
+
         $this->loadModel('Events');
         $this->loadModel('Fighters');
-          $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-          $x=$fighter->coordinate_x;
-          $y=$fighter->coordinate_y;
-             $m=$fighter->name." cri \"".$m."\"";
-      $this->Events->addEvent($m,$x,$y);
-      
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $x = $fighter->coordinate_x;
+        $y = $fighter->coordinate_y;
+        $m = $fighter->name . " cri \"" . $m . "\"";
+        $this->Events->addEvent($m, $x, $y);
+
         //$this->set('name',$fighter);
-
     }
-    
-}
 
+}
