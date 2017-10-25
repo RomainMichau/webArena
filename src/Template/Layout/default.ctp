@@ -18,24 +18,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <?= $this->Html->charset() ?>
+        <?= $this->Html->charset() ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-        <?= $this->fetch('title') ?>
-        </title>
-    <?= $this->Html->meta('icon') ?>
-
-
+        <title> <?= $this->fetch('title') ?> </title>
+        <?= $this->Html->meta('icon') ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css" />
-    <?= $this->Html->css('webarena.css') ?>
+        <?= $this->Html->css('webarena.css') ?>
+        <?= $this->Html->script('jquery') ?>
+        <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js') ?>
+        <?=  $this->Html->script('Arenas') ?>
 
-    <?= $this->Html->script('jquery') ?>
-    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js') ?>
-    <?=  $this->Html->script('Arenas') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
+        <?= $this->fetch('meta') ?>
+        <?= $this->fetch('css') ?>
     </head>
+
     <body>
 
     <?php if($user)
@@ -79,16 +75,17 @@
                 </ul>
             </div>
         </nav>
-    <?= $this->Flash->render() ?>
+        <?= $this->Flash->render() ?>
+
         <div class="container clearfix row">
-        <?= $this->fetch('content') ?>
+            <?= $this->fetch('content') ?>
         </div>
+
         <footer>
             TD SI-2
-            <p>Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville- Romain Michau aka le bg   </p>
+            <p> Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville - Romain Michau aka le bg </p>
             <p> Option: BG </p>
-               <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?> <
-      
+            <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?>
         </footer>
     </body>
 </html>

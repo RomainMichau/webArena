@@ -4,7 +4,6 @@ namespace App\Model\Table;
 
 use Cake\ORM\Table;
 
-
 /**
  * Description of EventsTable
  *

@@ -182,7 +182,7 @@ class ArenasController extends AppController {
         $this->set('titredepage', "diary");
 
         // Gets fighter of player
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+    $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
         // Gets all visible latest events for that fighter
         $this->set('events', $this->Events->getVisibleLatestEvents($fighter->coordinate_x, $fighter->coordinate_y, $fighter->skill_sight));
