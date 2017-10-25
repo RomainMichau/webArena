@@ -179,10 +179,13 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $this->loadModel('Events');
 
-
-
         $this->set('titredepage', "diary");
-        $this->set('events', $this->Events->getVisibleLatestEvents(3, 3, 3));
+
+        // Gets fighter of player
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+        // Gets all visible latest events for that fighter
+        $this->set('events', $this->Events->getVisibleLatestEvents($fighter->coordinate_x, $fighter->coordinate_y, $fighter->skill_sight));
     }
 
     public function moveFighter($dir) {

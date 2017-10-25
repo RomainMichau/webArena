@@ -53,6 +53,9 @@ class EventsTable extends Table {
         $query->select(['date', 'x' => 'coordinate_x', 'y' => 'coordinate_y', 'name'])
         ->where(function ($exp, $q) use ($start_date, $end_date) { return $exp->between('date', $start_date, $end_date); });
 
+        $man_dist = $query->newExpr('ABS(' . $fighter_x . '-coordinate_x) + ABS(' . $fighter_y . '-coordinate_y)');
+        $query->andWhere([$sight_skill . ' >=' => $man_dist]);
+
         /*
         ->andWhere(function ($exp, $q) use ($fighter_x, $fighter_y, $sight_skill) { 
             $dist_x = abs($fighter_x - coordinate_x);
@@ -63,9 +66,9 @@ class EventsTable extends Table {
         //->andWhere('' => $sight_skill);
         
         // Execution of query and return of result
-        $query->hydrate(false);
-        $result = $query->toList();
-
-        return $result;
+        //$query->hydrate(false);
+        //$result = $query->toList();
+        
+        return ($query->isEmpty()) ? null : $query->toArray();
     }
 }
