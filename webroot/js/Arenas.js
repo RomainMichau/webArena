@@ -197,11 +197,12 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
+                     a = 'cid' + tocoor(response.x, response.y);
                 //  alert("oki");
                 //    console.log("r:"+response.r+" f:"+response.f);
                 if (response.success === 1) {
 
-                    a = 'cid' + tocoor(response.y, response.x);
+               
                     if (response.death === 0) {
 
                         $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
@@ -225,7 +226,7 @@ $(document).ready(function () {
                     }
 
                 } else if (response.ennemy === 1) {
-                     a = 'cid' + tocoor(response.y, response.x);
+                    
                     $('#info').html(response.name + ' esquive le coup, il est CHOOO');
                     save = $('#' + a).html();
                     $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
