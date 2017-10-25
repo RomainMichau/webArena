@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Validation\Validator;
+
 
 /**
  * Personal Controller
@@ -55,6 +57,8 @@ class ArenasController extends AppController {
 
         //$this->Fighters->find("all");
         $this->set('dead', $d);
+        $validator = new Validator();
+
 
         $this->loadModel('Fighters');
         $this->loadModel('Surroundings');
@@ -72,23 +76,31 @@ class ArenasController extends AppController {
 
 
         $newFighter = $this->request->getData();
+
+
         if (!empty($newFighter)) {
-            $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-            if ($newFighter['name']) {
-                $player_id = $this->Auth->user()['id'];
-                $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id,$x,$y);
-                if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
-                    move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
-                } else {
-                    copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
+            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
+            $errors = $validator->errors($this->request->getData());
+            if(!$errors) {
+                $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+                if ($newFighter['name']) {
+                    $player_id = $this->Auth->user()['id'];
+                    $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id, $x, $y);
+                    if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
+                        move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
+                    } else {
+                        copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
+                    }
+                    $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
                 }
-                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
             }
         }
     }
 
     public function editFighter($id) {
         $this->loadModel('Fighters');
+        $validator = new Validator();
+
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $fightersTable = $this->Fighters;
 
@@ -97,16 +109,22 @@ class ArenasController extends AppController {
         $updateFighter = $this->request->getData();
 
 
+
         if (!empty($updateFighter)) {
-            $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-            $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
-            if ($updateFighter['name']) {
+            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
+            $errors = $validator->errors($this->request->getData());
+            if(!$errors)
+            {
+                $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+                $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
                 if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
                     move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
                 }
+                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
             }
-            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
         }
+
+
     }
 
     public function sight() {
