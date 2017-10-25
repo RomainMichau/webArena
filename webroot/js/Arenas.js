@@ -6,29 +6,29 @@ $(document).ready(function () {
 
 
     function tocoor(x, y) {
-        if (y > 15)
+        if (x > 15)
             return null;
 
         else if (x <= 0)
             return null;
-        else if (x > 10)
+        else if (y > 10)
             return null;
         else if (y <= 0)
             return null;
-        var a = (y - 1) * 10 + x;
+        var a = (y - 1) * 15 + x;
         return a;
     }
 
     function tox(coor) {
 
-        var x = coor % 10;
-        if (x == 0)
-            x = 10;
+        var x = coor % 15;
+        if (x === 0)
+            x = 15;
         return x;
     }
 
     function toy(coor) {
-        var y = ((coor - (tox(coor))) / 10) + 1;
+        var y = ((coor - (tox(coor))) / 15) + 1;
         return y;
     }
     
@@ -76,24 +76,24 @@ $(document).ready(function () {
                     rv = response.vue;
                     rny = response.ny;
                     rnx = response.nx;
-                    a = "#cid" + tocoor(rny, rnx);
-                    b = "#cid" + tocoor(ry, rx);
-                    if (dir === 1) {  ///DOWN                            
+                    a = "#cid" + tocoor(rnx, rny);
+                    b = "#cid" + tocoor(rx, ry);
+                    if (dir === 1) {  ///RIGHT                   
 
                         for (i = 1; i <= rv + 1; i++) {
-                            vy1 = rx + i;   ///PARTIE CASE QUI APPARAISSE
-                            vy2 = vy1;
-                            vx1 = ry - rv + i - 1;
-                            vx2 = ry + rv - i + 1;
+                            vx1 = rx + i;   ///PARTIE CASE QUI APPARAISSE
+                            vx2 = vx1;
+                            vy1 = ry - rv + i - 1;
+                            vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
 
-                            vy1 = rnx - i;   ///PARTIE CASE QUI disparaisse
-                            vy2 = vy1;
-                            vx1 = ry - rv + i - 1;
-                            vx2 = ry + rv - i + 1;
+                            vx1 = rnx - i;   ///PARTIE CASE QUI disparaisse
+                            vx2 = vx1;
+                            vy1 = ry - rv + i - 1;
+                            vy2  = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
@@ -103,61 +103,61 @@ $(document).ready(function () {
 
 
                     }
-                    if (dir === 2)  ///UP
+                    if (dir === 2)  ///LEFT
                         for (i = 1; i <= rv + 1; i++) {
-                            vy1 = rnx + i;   ///PARTIE CASE QUI APPARAISSE
-                            vy2 = vy1;
-                            vx1 = ry - rv + i - 1;
-                            vx2 = ry + rv - i + 1;
+                            vx1 = rnx + i;   ///PARTIE CASE QUI APPARAISSE
+                            vx2 = vx1;
+                            vy1 = ry - rv + i - 1;
+                            vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
 
-                            vy1 = rx - i;   ///PARTIE CASE QUI disparaisse
-                            vy2 = vy1;
-                            vx1 = ry - rv + i - 1;
-                            vx2 = ry + rv - i + 1;
+                            vx1 = rx - i;   ///PARTIE CASE QUI disparaisse
+                            vx2 = vx1;
+                            vy1 = ry - rv + i - 1;
+                            vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                    if (dir === 3)
+                    if (dir === 3)  ///UP
                         for (i = 1; i <= rv + 1; i++) {
-                            vx1 = rny + i;   ///PARTIE CASE QUI APPARAISSE
-                            vx2 = vx1;
-                            vy1 = rx - rv + i - 1;
-                            vy2 = rx + rv - i + 1;
+                            vy1 = rny + i;   ///PARTIE CASE QUI APPARAISSE
+                            vy2 = vy1;
+                            vx1 = rx - rv + i - 1;
+                            vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
 
-                            vx1 = ry - i;   ///PARTIE CASE QUI apparaisse
-                            vx2 = vx1;
-                            vy1 = rx - rv + i - 1;
-                            vy2 = rx + rv - i + 1;
+                            vy1 = ry - i;   ///PARTIE CASE QUI apparaisse
+                            vy2 = vy1;
+                            vx1 = rx - rv + i - 1;
+                            vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                    if (dir === 4)
+                    if (dir === 4)   ///DOWN
                         for (i = 1; i <= rv + 1; i++) {
-                            vx1 = ry + i;   ///PARTIE CASE QUI APPARAISSE
-                            vx2 = vx1;
-                            vy1 = rx - rv + i - 1;
-                            vy2 = rx + rv - i + 1;
+                            vy1 = ry + i;   ///PARTIE CASE QUI APPARAISSE
+                            vy2 = vy1;
+                            vx1 = rx - rv + i - 1;
+                            vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
 
-                            vx1 = rny - i;   ///PARTIE CASE QUI apparaisse
-                            vx2 = vx1;
-                            vy1 = rx - rv + i - 1;
-                            vy2 = rx + rv - i + 1;
+                            vy1 = rny - i;   ///PARTIE CASE QUI apparaisse
+                            vy2 = vy1;
+                            vx1 = rx - rv + i - 1;
+                            vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
@@ -166,9 +166,9 @@ $(document).ready(function () {
                     //  console.log(response.tab.length);
 
                     for (i = 0; i < response.tab.length; i++) {
-                        coor1 = tocoor(response.tab[i][1], response.tab[i][0]);
+                        coor1 = tocoor(response.tab[i][0], response.tab[i][1]);
                         $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
-                        console.log(response.tab[i][2]);
+                     //   console.log(response.tab[i][2]);
 
                     }
 
@@ -358,25 +358,25 @@ $(document).ready(function () {
 
 
             a = 0;
-            move(2);
+            move(3);
         }
     });
     $('#down').click(function () {
         if (a == 1) {
-            move(1);
+            move(4);
             a = 0;
         }
     });
     $('#left').click(function () {
         if (a == 1) {
-            move(3);
+            move(2);
             a = 0;
         }
     });
     $('#right').click(function () {
        if (b == 1) {
             b=0;
-            move(4);
+            move(1);
             a = 0;
         }
     });

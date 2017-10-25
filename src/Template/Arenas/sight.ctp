@@ -12,11 +12,11 @@ $this->assign('title', $titredepage);?>
             <?php foreach ($value1 as $value2) { ?>     
             <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                 <?php        
-                $y = $i% 10;
-                if($y == 0){
-                     $y = 10;
+                $x = $i% 15;
+                if($x == 0){
+                     $x = 15;
                 }
-                $x = ($i-$y)/10 +1;
+                $y = ($i-$x)/15 +1;
                 
                 
                 

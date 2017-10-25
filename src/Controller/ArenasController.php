@@ -126,15 +126,16 @@ class ArenasController extends AppController {
         for ($i = 1; $i <= 15; $i++) {
             for ($j = 1; $j <= 10; $j++) {
                 if ($this->Fighters->getFighterByCoord($i, $j) != NULL) {
-                    $tab[$i][$j] = 'f' . $this->Fighters->getFighterByCoord($i, $j)->id;
+                    $tab[$j][$i] = 'f' . $this->Fighters->getFighterByCoord($i, $j)->id;
                     //  pr($tab[$i][$j]);
                 } elseif ($this->Surroundings->getSurroundingByCoord($i, $j) != NULL) {
-                    $tab[$i][$j] = 's' . $this->Surroundings->getSurroundingByCoord($i, $j)->id;
+                    $tab[$j][$i] = 's' . $this->Surroundings->getSurroundingByCoord($i, $j)->id;
                 } else {
-                    $tab[$i][$j] = 'vide';
+                    $tab[$j][$i] = 'vide';
                 }
             }
         }
+   //     pr($tab);
         $this->set('tab', $tab);
         $this->set('vue', $fighter->skill_sight);
         $this->set('fid', $fighter->id);
@@ -166,17 +167,22 @@ class ArenasController extends AppController {
         $y = $fighter->coordinate_y;
         if ($dir == 1) {
             $ennemy = $this->Fighters->getFighterByCoord($x + 1, $y);
-        }
+             $sur = $this->Surroundings->getSurroundingByCoord($x+1,$y);
+            
+        }   
         if ($dir == 2) {
             $ennemy = $this->Fighters->getFighterByCoord($x - 1, $y);
+             $sur = $this->Surroundings->getSurroundingByCoord($x-1,$y);
         }
         if ($dir == 3) {
             $ennemy = $this->Fighters->getFighterByCoord($x, $y - 1);
+             $sur = $this->Surroundings->getSurroundingByCoord($x,$y-1);
         }
         if ($dir == 4) {
             $ennemy = $this->Fighters->getFighterByCoord($x, $y + 1);
+             $sur = $this->Surroundings->getSurroundingByCoord($x,$y+1);
         }
-        if ($ennemy == NULL) {
+        if ($ennemy == NULL && $sur ==NULL) {
             $success = $this->Fighters->moveFighter($id, $dir);
         }
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
