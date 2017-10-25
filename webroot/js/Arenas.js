@@ -221,7 +221,7 @@ $(document).ready(function () {
                         setTimeout(function () {
                             $('#' + a).html(save);
 
-                        }, 1500);
+                        }, 900);
                     }
 
                 } else if (response.ennemy === 1) {
@@ -383,25 +383,26 @@ $(document).ready(function () {
     $('#aup').click(function () {
        if (b == 1) {
             b=0;
-            attack(2);
+            attack(3);
         }
     });
     $('#adown').click(function () {
       if (b == 1) {
             b=0;
-            attack(1);
+            console.log("oki00");
+            attack(4);
         }
     });
     $('#aleft').click(function () {
       if (b == 1) {
             b=0;
-            attack(3);
+            attack(2);
         }
     });
     $('#aright').click(function () {
         if (b == 1) {
             b=0;
-            attack(4);
+            attack(1);
            
         }
     });
@@ -413,8 +414,8 @@ $(document).ready(function () {
         }
     });
     $('.case').click(function () {
-        a = this.id;
-        a = a.replace('cid', '');
+     var   a = this.id;
+      var  a = a.replace('cid', '');
         b = $('#' + this.id).html();
         detect(a);
         b = b.replace(/\n|\r|(\n\r)/g, '');
@@ -447,6 +448,7 @@ $(document).ready(function () {
     
      setInterval(function () {
         b = 1
-    }, 1000);
+     //   console.log(b);
+    }, 1300);
 
 });
