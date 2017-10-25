@@ -69,20 +69,17 @@ class ArenasController extends AppController {
 
         $updateFighter = $this->request->getData();
 
+
         if (!empty($updateFighter)) {
             $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+            $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
             if ($updateFighter['name']) {
-                $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
                 if($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png')))
                 {
                     move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
                 }
-                else
-                {
-                    copy('img/' . 'img_not_found.png', 'img/' . 'f' . $id . ".png");
-                }
-                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
             }
+            $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
         }
     }
 
