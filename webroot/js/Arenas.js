@@ -2,7 +2,7 @@
 
 
 $(document).ready(function () {
-    var a,b;
+    var a, b;
 
 
     function tocoor(x, y) {
@@ -31,28 +31,30 @@ $(document).ready(function () {
         var y = ((coor - (tox(coor))) / 15) + 1;
         return y;
     }
-    
-    
+
+
     function cri() {
-        var y="";
-        while(y==""){
-        y = prompt("entrer votre message");}
-        console.log(y);  
-    if(y!=null){
-     $.ajax({
-            url: '/webArena/arenas/cri/' + y,
-            type: 'GET',
-            dataType: 'JSON',
+        var y = "";
+        while (y == "") {
+            y = prompt("entrer votre message");
+        }
+        console.log(y);
+        if (y != null) {
+            $.ajax({
+                url: '/webArena/arenas/cri/' + y,
+                type: 'GET',
+                dataType: 'JSON',
 
-            success: function (response) {
-               $('#info').html('votre cri à etait entendu');
+                success: function (response) {
+                    $('#info').html('votre cri à etait entendu');
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });}
-}
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    }
 
 
     function move(dir) {
@@ -69,7 +71,7 @@ $(document).ready(function () {
             success: function (response) {
 
 
-                if (response.success == 1) {
+                if (response.success === 1) {
                     //      alert("oki");
                     rx = response.x;
                     ry = response.y;
@@ -93,7 +95,7 @@ $(document).ready(function () {
                             vx1 = rnx - i;   ///PARTIE CASE QUI disparaisse
                             vx2 = vx1;
                             vy1 = ry - rv + i - 1;
-                            vy2  = ry + rv - i + 1;
+                            vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
@@ -168,7 +170,7 @@ $(document).ready(function () {
                     for (i = 0; i < response.tab.length; i++) {
                         coor1 = tocoor(response.tab[i][0], response.tab[i][1]);
                         $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
-                     //   console.log(response.tab[i][2]);
+                        //   console.log(response.tab[i][2]);
 
                     }
 
@@ -178,6 +180,10 @@ $(document).ready(function () {
                     $(a).html($(b).html());
                     $(b).html(c);
                     ;
+                }
+                if(response.action===0){
+                                        $('#info').html('vous n\'avez plus de PA');
+
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -197,12 +203,13 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-                     a = 'cid' + tocoor(response.x, response.y);
+                a = 'cid' + tocoor(response.x, response.y);
                 //  alert("oki");
-                //    console.log("r:"+response.r+" f:"+response.f);
+               
+
                 if (response.success === 1) {
 
-               
+
                     if (response.death === 0) {
 
                         $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
@@ -226,16 +233,22 @@ $(document).ready(function () {
                     }
 
                 } else if (response.ennemy === 1) {
-                    
+
                     $('#info').html(response.name + ' esquive le coup, il est CHOOO');
                     save = $('#' + a).html();
                     $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
-                  // console.log($('#' + a).html());
+                    // console.log($('#' + a).html());
                     setTimeout(function () {
-                  //      console.log("oki");
+                        //      console.log("oki");
                         $('#' + a).html(save);
 
                     }, 900);
+                } else if (response.ennemy === 0) {
+                       
+                    $('#info').html('vous attaquez dans le vent');
+                }
+                if (response.action === 0 &&response.ennemy!==0) {
+                    $('#info').html('vous avez depensé tout vos PA');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -375,48 +388,48 @@ $(document).ready(function () {
         }
     });
     $('#right').click(function () {
-       if (b == 1) {
-            b=0;
+        if (b == 1) {
+            b = 0;
             move(1);
             a = 0;
         }
     });
     $('#aup').click(function () {
-       if (b == 1) {
-            b=0;
+        if (b == 1) {
+            b = 0;
             attack(3);
         }
     });
     $('#adown').click(function () {
-      if (b == 1) {
-            b=0;
+        if (b == 1) {
+            b = 0;
             console.log("oki00");
             attack(4);
         }
     });
     $('#aleft').click(function () {
-      if (b == 1) {
-            b=0;
+        if (b == 1) {
+            b = 0;
             attack(2);
         }
     });
     $('#aright').click(function () {
         if (b == 1) {
-            b=0;
+            b = 0;
             attack(1);
-           
+
         }
     });
     $('#cri').click(function () {
         if (b == 1) {
-            b=0;
+            b = 0;
             cri();
-           
+
         }
     });
     $('.case').click(function () {
-     var   a = this.id;
-      var  a = a.replace('cid', '');
+        var a = this.id;
+        var a = a.replace('cid', '');
         b = $('#' + this.id).html();
         detect(a);
         b = b.replace(/\n|\r|(\n\r)/g, '');
@@ -446,10 +459,10 @@ $(document).ready(function () {
     setInterval(function () {
         a = 1
     }, 600);
-    
-     setInterval(function () {
+
+    setInterval(function () {
         b = 1
-     //   console.log(b);
+        //   console.log(b);
     }, 1300);
 
 });

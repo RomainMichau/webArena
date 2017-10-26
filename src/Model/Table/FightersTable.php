@@ -5,11 +5,33 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 
 class FightersTable extends Table {
-
+    public static $actiontime=10;
+    public static $maxaction=3;
+   
+    
+    
     public function getAllFighters() {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
     }
+    
+    public function getActionTime(){
+        return static::$actiontime;
+    }
+    public function getMaxAction(){
+        return static::$maxaction;
+    }
+    
+    
+    
+    public function setNextActionTime($id,$date){
+         $fighter = $this->get($id);
+           $fighter->next_action_time = $date;
+           $this->save($fighter);
+    }
+
+    
+
 
     public function setHealth($id, $health) {
         $fighter = $this->get($id);
@@ -54,7 +76,7 @@ class FightersTable extends Table {
     public function moveFighter($id, $dir) {        //1:bas 2:haut 3:gauche 4:droit
         // $this->setSource('surroundings');
         $fighter = $this->get($id);
-        
+
         //pr($fighter->toArray());
         //pr('oki');
 
@@ -79,27 +101,30 @@ class FightersTable extends Table {
         return 0;
     }
 
-    public function addFighter($newFighter, $fightersTable, $player_id,$x,$y) {
+    public function addFighter($newFighter, $fightersTable, $player_id, $x, $y) {
         $fighter = $fightersTable->newEntity();
-       
+
         $fighter->name = $newFighter['name'];
         $fighter->player_id = $player_id;
         $fighter->coordinate_x = $x;
         $fighter->coordinate_y = $y;
         $fighter->level = 1;
-        $fighter->xp = 1;
+        $fighter->xp = 0;
         $fighter->skill_sight = 2;
         $fighter->skill_strength = 1;
         $fighter->skill_health = 5;
         $fighter->current_health = 5;
-        $fighter->next_action_time = 1;
-        $fighter->guild_id = 1;
+        date_default_timezone_set('Europe/Paris');
+        $fighter->next_action_time = date('Y-m-d H:i:s');
+
+        $fighter->guild_id = NULL;
 
         if ($fightersTable->save($fighter)) {
             $id = $fighter->id;
             return $id;
         }
     }
+
     public function updateFighter($updateFighter, $fightersTable, $idFighter) {
         $fighter = $this->get($idFighter);
 
@@ -131,11 +156,11 @@ class FightersTable extends Table {
         $fighter = $this->get($id);
         $fighter->skill_health = $fighter->skill_health + 1;
         $fighter->level = $fighter->level + 1;
-        $fighter->current_health=$fighter->skill_health ;
+        $fighter->current_health = $fighter->skill_health;
         $this->save($fighter);
     }
-    
-    public function deleteFighter($id){
+
+    public function deleteFighter($id) {
         $entity = $this->get($id);
         $this->delete($entity);
     }

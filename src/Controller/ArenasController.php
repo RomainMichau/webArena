@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use Cake\I18n\Time;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\Validation\Validator;
-
 
 /**
  * Personal Controller
@@ -69,7 +69,7 @@ class ArenasController extends AppController {
             $x = rand(1, 15);
             $y = rand(1, 10);
         } while (
-        null!=($this->Fighters->getFighterByCoord($x, $y)) || null!= $this->Surroundings->getSurroundingByCoord($x, $y));
+        null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
 
 
 
@@ -81,7 +81,7 @@ class ArenasController extends AppController {
         if (!empty($newFighter)) {
             $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
             $errors = $validator->errors($this->request->getData());
-            if(!$errors) {
+            if (!$errors) {
                 $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
                 if ($newFighter['name']) {
                     $player_id = $this->Auth->user()['id'];
@@ -113,8 +113,7 @@ class ArenasController extends AppController {
         if (!empty($updateFighter)) {
             $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
             $errors = $validator->errors($this->request->getData());
-            if(!$errors)
-            {
+            if (!$errors) {
                 $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
                 $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
                 if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
@@ -123,8 +122,6 @@ class ArenasController extends AppController {
                 $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
             }
         }
-
-
     }
 
     public function sight() {
@@ -137,11 +134,20 @@ class ArenasController extends AppController {
         //  pr($this->Auth->user());
         $this->loadModel('Fighters');
         $this->loadModel('Events');
+
         //pr($this->Events->tst());
-
-
+        date_default_timezone_set('Europe/Paris');
+        /* $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+          $time = new Time($myfighter->next_action_time);
+          $time2=new Time(Time::now());
+          $time3=new Time(Time::now()->addSeconds(-50));
+          // pr($time2->wasWithinLast('10 seconds')); */
+        //    pr($time3->wasWithinLast('60 seconds'));
+        // pr($this->Fighters->getActionTime());
 
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
 
@@ -182,7 +188,7 @@ class ArenasController extends AppController {
         $this->set('titredepage', "diary");
 
         // Gets fighter of player
-    $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
         // Gets all visible latest events for that fighter
         $this->set('events', $this->Events->getVisibleLatestEvents($fighter->coordinate_x, $fighter->coordinate_y, $fighter->skill_sight));
@@ -203,163 +209,197 @@ class ArenasController extends AppController {
         $id = $fighter->id;
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
-        if ($dir == 1) {
-            $ennemy = $this->Fighters->getFighterByCoord($x + 1, $y);
-            $sur = $this->Surroundings->getSurroundingByCoord($x + 1, $y);
-        }
-        if ($dir == 2) {
-            $ennemy = $this->Fighters->getFighterByCoord($x - 1, $y);
-            $sur = $this->Surroundings->getSurroundingByCoord($x - 1, $y);
-        }
-        if ($dir == 3) {
-            $ennemy = $this->Fighters->getFighterByCoord($x, $y - 1);
-            $sur = $this->Surroundings->getSurroundingByCoord($x, $y - 1);
-        }
-        if ($dir == 4) {
-            $ennemy = $this->Fighters->getFighterByCoord($x, $y + 1);
-            $sur = $this->Surroundings->getSurroundingByCoord($x, $y + 1);
-        }
-        if ($ennemy == NULL && $sur == NULL) {
-            $success = $this->Fighters->moveFighter($id, $dir);
-        }
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        
+        
+        $action = 0;
+        $max = $this->Fighters->getMaxAction();
+        $timeaction = $this->Fighters->getActionTime();
+        
+        $time = new Time($fighter->next_action_time);
 
+        $i = 1;
+        if ($max > 1) {
+            $i = $max - 1;
+        }
+        for ($i; $i == 1; $i--) {
 
-        $nx = $fighter->coordinate_x;
-        $ny = $fighter->coordinate_y;
-        $v = $fighter->skill_sight;
-        $tab = array();
-        if ($success == 1 && $dir == 1) {
-            for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x + $i, $y - $v + $i - 1);
-                if (isset($res1)) {
-                    array_push($tab, array($x + $i, $y - $v + $i - 1, 'f' . $res1->id));
-                } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x + $i, $y - $v + $i - 1);
+            if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) . ' seconds')) {
 
-                    if (isset($res12)) {
-                        array_push($tab, array($x + $i, $y - $v + $i - 1, 's' . $res12->id));
-                    }
-                }
-
-                $res2 = $this->Fighters->getFighterByCoord($x + $i, $y + $v - $i + 1);
-                if (isset($res2)) {
-                    array_push($tab, array($x + $i, $y + $v - $i + 1, 'f' . $res2->id));
-                } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $i, $y + $v - $i + 1);
-
-                    if (isset($res22)) {
-                        array_push($tab, array($x + $i, $y + $v - $i + 1, 's' . $res22->id));
-                    }
-                }
+                $action = 1;
+                $time2 = $time->addSecond(-$timeaction);
+                $this->Fighters->setNextActionTime($fighter->id, $time2);
             }
         }
 
+        if (!$time->wasWithinLast((($max + 1) * $timeaction) - 1 . ' seconds')) {
+            $action = 1;
 
-        if ($success == 1 && $dir == 2) {
-            for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
-                if (isset($res1)) {
-                    array_push($tab, array($x - $i, $y - $v + $i - 1, 'f' . $res1->id));
-                } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $i, $y - $v + $i - 1);
+            $time2 = Time::now();
+            $time2->addSecond(-$timeaction * ($max - 1));
+            $this->Fighters->setNextActionTime($fighter->id, $time2);
+        }
+        $this->set('action', $action);
 
-                    if (isset($res12)) {
-                        array_push($tab, array($x - $i, $y - $v + $i - 1, 's' . $res12->id));
+        if ($action == 1) {
+
+
+            if ($dir == 1) {
+                $ennemy = $this->Fighters->getFighterByCoord($x + 1, $y);
+                $sur = $this->Surroundings->getSurroundingByCoord($x + 1, $y);
+            }
+            if ($dir == 2) {
+                $ennemy = $this->Fighters->getFighterByCoord($x - 1, $y);
+                $sur = $this->Surroundings->getSurroundingByCoord($x - 1, $y);
+            }
+            if ($dir == 3) {
+                $ennemy = $this->Fighters->getFighterByCoord($x, $y - 1);
+                $sur = $this->Surroundings->getSurroundingByCoord($x, $y - 1);
+            }
+            if ($dir == 4) {
+                $ennemy = $this->Fighters->getFighterByCoord($x, $y + 1);
+                $sur = $this->Surroundings->getSurroundingByCoord($x, $y + 1);
+            }
+            if ($ennemy == NULL && $sur == NULL) {
+                $success = $this->Fighters->moveFighter($id, $dir);
+            }
+            $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+
+            $nx = $fighter->coordinate_x;
+            $ny = $fighter->coordinate_y;
+            $v = $fighter->skill_sight;
+            $tab = array();
+            if ($success == 1 && $dir == 1) {
+                for ($i = 1; $i <= $v + 1; $i++) {
+                    $res1 = $this->Fighters->getFighterByCoord($x + $i, $y - $v + $i - 1);
+                    if (isset($res1)) {
+                        array_push($tab, array($x + $i, $y - $v + $i - 1, 'f' . $res1->id));
+                    } else {
+                        $res12 = $this->Surroundings->getSurroundingByCoord($x + $i, $y - $v + $i - 1);
+
+                        if (isset($res12)) {
+                            array_push($tab, array($x + $i, $y - $v + $i - 1, 's' . $res12->id));
+                        }
                     }
-                }
 
-                $res2 = $this->Fighters->getFighterByCoord($x - $i, $y + $v - $i + 1);
-                if (isset($res2)) {
-                    array_push($tab, array($x - $i, $y + $v - $i + 1, 'f' . $res2->id));
-                } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x - $i, $y + $v - $i + 1);
+                    $res2 = $this->Fighters->getFighterByCoord($x + $i, $y + $v - $i + 1);
+                    if (isset($res2)) {
+                        array_push($tab, array($x + $i, $y + $v - $i + 1, 'f' . $res2->id));
+                    } else {
+                        $res22 = $this->Surroundings->getSurroundingByCoord($x + $i, $y + $v - $i + 1);
 
-                    if (isset($res22)) {
-                        array_push($tab, array($x - $i, $y + $v - $i + 1, 's' . $res22->id));
+                        if (isset($res22)) {
+                            array_push($tab, array($x + $i, $y + $v - $i + 1, 's' . $res22->id));
+                        }
                     }
                 }
             }
-        }
 
-        if ($success == 1 && $dir == 2) {
-            for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
-                if (isset($res1)) {
-                    array_push($tab, array($x - $i, $y - $v + $i - 1, 'f' . $res1->id));
-                } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $i, $y - $v + $i - 1);
 
-                    if (isset($res12)) {
-                        array_push($tab, array($x - $i, $y - $v + $i - 1, 's' . $res12->id));
+            if ($success == 1 && $dir == 2) {
+                for ($i = 1; $i <= $v + 1; $i++) {
+                    $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
+                    if (isset($res1)) {
+                        array_push($tab, array($x - $i, $y - $v + $i - 1, 'f' . $res1->id));
+                    } else {
+                        $res12 = $this->Surroundings->getSurroundingByCoord($x - $i, $y - $v + $i - 1);
+
+                        if (isset($res12)) {
+                            array_push($tab, array($x - $i, $y - $v + $i - 1, 's' . $res12->id));
+                        }
                     }
-                }
 
-                $res2 = $this->Fighters->getFighterByCoord($x - $i, $y + $v - $i + 1);
-                if (isset($res2)) {
-                    array_push($tab, array($x - $i, $y + $v - $i + 1, 'f' . $res2->id));
-                } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x - $i, $y + $v - $i + 1);
+                    $res2 = $this->Fighters->getFighterByCoord($x - $i, $y + $v - $i + 1);
+                    if (isset($res2)) {
+                        array_push($tab, array($x - $i, $y + $v - $i + 1, 'f' . $res2->id));
+                    } else {
+                        $res22 = $this->Surroundings->getSurroundingByCoord($x - $i, $y + $v - $i + 1);
 
-                    if (isset($res22)) {
-                        array_push($tab, array($x - $i, $y + $v - $i + 1, 's' . $res22->id));
-                    }
-                }
-            }
-        }
-
-        if ($success == 1 && $dir == 3) {
-            for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y - $i);
-                if (isset($res1)) {
-                    array_push($tab, array($x - $v + $i - 1, $y - $i, 'f' . $res1->id));
-                } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y - $i);
-
-                    if (isset($res12)) {
-                        array_push($tab, array($x - $v + $i - 1, $y - $i, 's' . $res12->id));
-                    }
-                }
-
-                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y - $i);
-                if (isset($res2)) {
-                    array_push($tab, array($x + $v - $i + 1, $y - $i, 'f' . $res2->id));
-                } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y - $i);
-
-                    if (isset($res22)) {
-                        array_push($tab, array($x + $v - $i + 1, $y - $i, 's' . $res22->id));
+                        if (isset($res22)) {
+                            array_push($tab, array($x - $i, $y + $v - $i + 1, 's' . $res22->id));
+                        }
                     }
                 }
             }
-        }
 
-        if ($success == 1 && $dir == 4) {
-            for ($i = 1; $i <= $v + 1; $i++) {
-                $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y + $i);
-                if (isset($res1)) {
-                    array_push($tab, array($x - $v + $i - 1, $y + $i, 'f' . $res1->id));
-                } else {
-                    $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y + $i);
+            if ($success == 1 && $dir == 2) {
+                for ($i = 1; $i <= $v + 1; $i++) {
+                    $res1 = $this->Fighters->getFighterByCoord($x - $i, $y - $v + $i - 1);
+                    if (isset($res1)) {
+                        array_push($tab, array($x - $i, $y - $v + $i - 1, 'f' . $res1->id));
+                    } else {
+                        $res12 = $this->Surroundings->getSurroundingByCoord($x - $i, $y - $v + $i - 1);
 
-                    if (isset($res12)) {
-                        array_push($tab, array($x - $v + $i - 1, $y + $i, 's' . $res12->id));
+                        if (isset($res12)) {
+                            array_push($tab, array($x - $i, $y - $v + $i - 1, 's' . $res12->id));
+                        }
                     }
-                }
 
-                $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y + $i);
-                if (isset($res2)) {
-                    array_push($tab, array($x + $v - $i + 1, $y + $i, 'f' . $res2->id));
-                } else {
-                    $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y + $i);
+                    $res2 = $this->Fighters->getFighterByCoord($x - $i, $y + $v - $i + 1);
+                    if (isset($res2)) {
+                        array_push($tab, array($x - $i, $y + $v - $i + 1, 'f' . $res2->id));
+                    } else {
+                        $res22 = $this->Surroundings->getSurroundingByCoord($x - $i, $y + $v - $i + 1);
 
-                    if (isset($res22)) {
-                        array_push($tab, array($x + $v - $i + 1, $y + $i, 's' . $res22->id));
+                        if (isset($res22)) {
+                            array_push($tab, array($x - $i, $y + $v - $i + 1, 's' . $res22->id));
+                        }
                     }
                 }
             }
-        }
 
+            if ($success == 1 && $dir == 3) {
+                for ($i = 1; $i <= $v + 1; $i++) {
+                    $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y - $i);
+                    if (isset($res1)) {
+                        array_push($tab, array($x - $v + $i - 1, $y - $i, 'f' . $res1->id));
+                    } else {
+                        $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y - $i);
+
+                        if (isset($res12)) {
+                            array_push($tab, array($x - $v + $i - 1, $y - $i, 's' . $res12->id));
+                        }
+                    }
+
+                    $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y - $i);
+                    if (isset($res2)) {
+                        array_push($tab, array($x + $v - $i + 1, $y - $i, 'f' . $res2->id));
+                    } else {
+                        $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y - $i);
+
+                        if (isset($res22)) {
+                            array_push($tab, array($x + $v - $i + 1, $y - $i, 's' . $res22->id));
+                        }
+                    }
+                }
+            }
+
+            if ($success == 1 && $dir == 4) {
+                for ($i = 1; $i <= $v + 1; $i++) {
+                    $res1 = $this->Fighters->getFighterByCoord($x - $v + $i - 1, $y + $i);
+                    if (isset($res1)) {
+                        array_push($tab, array($x - $v + $i - 1, $y + $i, 'f' . $res1->id));
+                    } else {
+                        $res12 = $this->Surroundings->getSurroundingByCoord($x - $v + $i - 1, $y + $i);
+
+                        if (isset($res12)) {
+                            array_push($tab, array($x - $v + $i - 1, $y + $i, 's' . $res12->id));
+                        }
+                    }
+
+                    $res2 = $this->Fighters->getFighterByCoord($x + $v - $i + 1, $y + $i);
+                    if (isset($res2)) {
+                        array_push($tab, array($x + $v - $i + 1, $y + $i, 'f' . $res2->id));
+                    } else {
+                        $res22 = $this->Surroundings->getSurroundingByCoord($x + $v - $i + 1, $y + $i);
+
+                        if (isset($res22)) {
+                            array_push($tab, array($x + $v - $i + 1, $y + $i, 's' . $res22->id));
+                        }
+                    }
+                }
+            }
+        
 
         $this->set('tab', $tab);
         $this->set('vue', $v);
@@ -367,7 +407,7 @@ class ArenasController extends AppController {
         $this->set('nx', $nx);
         $this->set('x', $x);
         $this->set('ny', $ny);
-        $this->set('y', $y);
+        $this->set('y', $y);}
         // return $this->requestAction('sight');
     }
 
@@ -380,6 +420,9 @@ class ArenasController extends AppController {
         $this->set('success', 0);
         $this->set('death', 0);
         $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+
+        // $time->addSecond(40);
         // $ennemy=$this->Fighters->getFighterByCoord($myfighter->coordinate_x+1, $myfighter->coordinate_y);
         if ($dir == 1) {
 
@@ -396,12 +439,49 @@ class ArenasController extends AppController {
             $ennemy = $this->Fighters->getFighterByCoord($myfighter->coordinate_x, $myfighter->coordinate_y + 1);
         }
         $this->set('ennemy', 0);
+        $time = new Time($myfighter->next_action_time);
+
+        $action = 0;
+        $max = $this->Fighters->getMaxAction();
+        $timeaction = $this->Fighters->getActionTime();
+
+
+
         if (isset($ennemy)) {
+            $issetennemy = 1;
+            $this->set('ennemy', 1);
+            $i = 1;
+            if ($max > 1) {
+                $i = $max - 1;
+            }
+            for ($i; $i == 1; $i--) {
+
+                if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) . ' seconds')) {
+
+                    $action = 1;
+                    $time2 = $time->addSecond(-$timeaction);
+                    $this->Fighters->setNextActionTime($myfighter->id, $time2);
+                }
+            }
+
+            if (!$time->wasWithinLast((($max + 1) * $timeaction) - 1 . ' seconds')) {
+                $action = 1;
+
+                $time2 = Time::now();
+                $time2->addSecond(-$timeaction * ($max - 1));
+                $this->Fighters->setNextActionTime($myfighter->id, $time2);
+            }
+        }
+
+        $this->set('action', $action);
+
+
+        if (isset($ennemy) == 1 && $action == 1) {
             $this->set('name', $ennemy->name);
             $this->set('eid', $ennemy->id);
             $this->set('x', $ennemy->coordinate_x);
             $this->set('y', $ennemy->coordinate_y);
-            $this->set('ennemy', 1);
+
 
             $x = $myfighter->coordinate_x;
             $y = $myfighter->coordinate_y;
