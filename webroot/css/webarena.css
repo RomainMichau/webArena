@@ -69,17 +69,17 @@ table{
     background-size: 60px 60px;
 
 }
-.down{
+.down-action{
     -ms-transform: scaleY(-1);
     -webkit-transform: scaleY(-1);
     transform: scaleY(-1);
 }
-.left{
+.left-action{
     -ms-transform: rotate(270deg); /* IE 9 */
     -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
     transform: rotate(270deg);
 }
-.right{
+.right-action{
     -ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
     transform: rotate(90deg);
