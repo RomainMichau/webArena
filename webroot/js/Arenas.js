@@ -485,7 +485,7 @@ $(document).ready(function () {
     
     setInterval(
                 function () {
-       alertmessage();
+      // alertmessage();
         //   console.log(b);
     }, 5000);
 
