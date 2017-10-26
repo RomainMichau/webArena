@@ -4,10 +4,17 @@ use Cake\ORM\Table;
 
 class PlayersTable extends Table
 {
-    public function resetPassword($email){
+    public function resetPassword($email, $newpass){
         $query = $this->find('all')->where(['email' => $email]);
         $player = $query->first();
-        $player->password = "admin";
+        $player->password = $newpass;
         $this->save($player);
+    }
+    
+    public function userExists($email){
+        $query = $this->find('all')->where(['email' => $email]);
+        
+        return $query->first() ? true : false;
+       
     }
 }

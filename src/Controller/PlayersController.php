@@ -78,7 +78,22 @@ class PlayersController  extends AppController
         $this->loadModel('Players');
         
         if ($this->request->is('post')){
-            $this->Players->resetPassword($this->request->getData("email"));
+            
+            $data = $this->request->getData();
+            
+            if($this->Players->userExists($data['email'])){
+                
+                $this->Players->resetPassword($data['email'], $data['password']);
+            
+                $this->Flash->success(__('Vous avez bien changé votre mot de passe')); //Succès
+                
+                $this->redirect(['action' => 'login']);
+                
+            }else{
+            
+                $this->Flash->error(__('Cette adresse mail n\'existe pas'));
+            
+            }    
         }
     }
     

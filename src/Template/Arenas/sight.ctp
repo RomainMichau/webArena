@@ -3,7 +3,9 @@ use Cake\View\Helper\HtmlHelper;
 
 $this->assign('title', $titredepage);?>
 <div>
-<table class="unstriped" id="tab"> 
+    vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )
+<table id="tab"> 
+    
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;
     
@@ -25,10 +27,10 @@ $this->assign('title', $titredepage);?>
                         if($value2!='vide'&&$dist<=2){
                             echo $this->Html->image($value2.'.png', ['alt' => 'ImgNotFound']);
                         }else if($dist<=$vue) {
-                            echo $this->Html->image('case_vide_v.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
+                            echo $this->Html->image('case_vide_v.png', ['alt' => 'ImgNotFound'/*,'width'=>'60','height'=>'50'*/]);
                         }
                         else if($dist>$vue) {
-                            echo $this->Html->image('case_vide_i.png', ['alt' => 'ImgNotFound','width'=>'60','height'=>'50']);
+                            echo $this->Html->image('case_vide_i.png', ['alt' => 'ImgNotFound'/*,'width'=>'60','height'=>'50'*/]);
                         }
                     ?>
             </td>           

@@ -56,7 +56,24 @@ $(document).ready(function () {
         }
     }
 
+    function alertmessage(){
+         $.ajax({
+                url: '/webArena/arenas/alertmessage/',
+                type: 'GET',
+                dataType: 'JSON',
 
+                success: function (response) {
+                    if(response.a>=1){
+                        alert('vous avez '+response.a+' nouveaux messages');
+                        
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); 
+    }
     function move(dir) {
         var vx1, vx2, vy1, vy2, coor1, coor2;
         var b, a, i, c;
@@ -69,7 +86,7 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-
+                console.log(response.t);
 
                 if (response.success === 1) {
                     //      alert("oki");
@@ -457,12 +474,19 @@ $(document).ready(function () {
     });
 
     setInterval(function () {
-        a = 1
+        a = 1;
     }, 600);
 
     setInterval(function () {
-        b = 1
+        b = 1;
         //   console.log(b);
     }, 1300);
+    
+    
+    setInterval(
+                function () {
+       alertmessage();
+        //   console.log(b);
+    }, 5000);
 
 });

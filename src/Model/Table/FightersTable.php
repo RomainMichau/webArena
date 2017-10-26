@@ -5,7 +5,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 
 class FightersTable extends Table {
-    public static $actiontime=10;
+    public static $actiontime=10        ;
     public static $maxaction=3;
    
     
