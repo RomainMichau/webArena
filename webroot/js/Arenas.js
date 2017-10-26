@@ -483,10 +483,10 @@ $(document).ready(function () {
     }, 1300);
     
     
-    setInterval(
+/*    setInterval(
             function () {
-        alertmessage();
+   //     alertmessage();
         //   console.log(b);
-    }, 5000);
+    }, 5000);*/
 
 });
