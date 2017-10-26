@@ -25,9 +25,26 @@ class MessagesController  extends AppController
     public function conversation($id1, $id2)
     {
         $this->loadModel('Messages');
+        $this->loadModel('Fighters');
+
         $messages = $this->Messages->getAllMessagesWith($id1, $id2);
-        pr($messages);
         $this->set('messages', $messages);
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+
+        $newMessage = $this->request->getData();
+
+        if($newMessage)
+        {
+            if($id1 == $fighter->id)
+            {$idReceiver = $id2; $idFighterAuth = $fighter->id;}
+            else
+            {$idReceiver = $id1; $idFighterAuth = $fighter->id;}
+
+            $this->Messages->addMessage($newMessage, $idReceiver, $idFighterAuth);
+            $this->redirect(['controller' => 'Messages', 'action' => 'conversation', $id1, $id2]);
+        }
+
     }
     
     //public function messages(){}
