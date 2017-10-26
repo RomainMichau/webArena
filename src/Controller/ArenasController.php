@@ -613,5 +613,25 @@ class ArenasController extends AppController {
 
         //$this->set('name',$fighter);
     }
-
+    
+    
+   public function alertmessage(){
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+        $this->loadModel('Messages');
+        $this->loadModel('Fighters');
+        $a=0;
+        $time=new Time();
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+  $message= $this->Messages->getNewMessage($fighter->id);
+  for($i=0;$i<sizeof($message);$i++){
+     $time= $message[$i]->date;
+     if($time->wasWithinLast('5 seconds')){
+         $a++;
+     }
+     
+   }
+$this->set('a',$a);
+}
 }
