@@ -64,7 +64,7 @@ $(document).ready(function () {
 
                 success: function (response) {
                     if(response.a>=1){
-                       // alert('vous avez '+response.a+' nouveaux messages');
+                        alert('vous avez '+response.a+' nouveaux messages');
                         
                     }
 
@@ -485,7 +485,7 @@ $(document).ready(function () {
     
     setInterval(
                 function () {
-      // alertmessage();
+       alertmessage();
         //   console.log(b);
     }, 5000);
 
