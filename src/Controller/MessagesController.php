@@ -26,6 +26,7 @@ class MessagesController  extends AppController
     {
         $this->loadModel('Messages');
         $messages = $this->Messages->getAllMessagesWith($id1, $id2);
+        pr($messages);
         $this->set('messages', $messages);
     }
     
