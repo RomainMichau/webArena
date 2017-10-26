@@ -8,6 +8,10 @@
                 <div class="card" style="width: 300px;">
                     <div class="card-divider">
                         name: <?php echo $fighter->name; ?>
+                        <?php if($fighter->id != $idFighterAuth) {
+                            echo $this->Html->link('Conv', array('controller' => 'Messages', 'action' => 'conversation', $fighter->id, $idFighterAuth), ['class' => 'button']);
+                        }?>
+
                     </div>
                     <div class="card-image">
                         <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound']) ?>

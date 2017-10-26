@@ -2,7 +2,6 @@
 $this->assign('title', "Tous les messages");?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
-        <?= $this->Html->link('conv', array('controller' => 'Messages', 'action' => 'conversation', 28, 29), ['class' => 'button']); ?>
         <?php foreach($messages as $message): ?>
             <div class="cell">
                 <div class="card" style="width: 300px;">

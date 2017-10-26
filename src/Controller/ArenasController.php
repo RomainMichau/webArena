@@ -40,7 +40,9 @@ class ArenasController extends AppController {
 
         $this->loadModel('Fighters');
         $fighters = $this->Fighters->getAllFighters();
+        $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
         $this->set('fighters', $fighters);
+        $this->set('idFighterAuth', $idFighterAuth);
     }
 
     public function fighter() {
