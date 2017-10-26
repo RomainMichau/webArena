@@ -179,7 +179,9 @@ class ArenasController extends AppController {
     public function diary() {
 
         // Checks if fighter is dead
-        $this->hasAFighter();
+        if (!$this->hasAFighter()) {
+            return null;
+        }
 
         // Loading of models and curent visible events
         $this->loadModel('Fighters');
