@@ -137,12 +137,12 @@ class ArenasController extends AppController {
 
         //pr($this->Events->tst());
         date_default_timezone_set('Europe/Paris');
-        /* $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-          $time = new Time($myfighter->next_action_time);
-          $time2=new Time(Time::now());
-          $time3=new Time(Time::now()->addSeconds(-50));
-          // pr($time2->wasWithinLast('10 seconds')); */
-        //    pr($time3->wasWithinLast('60 seconds'));
+         //$myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+         // $time = new Time($myfighter->next_action_time);
+         // $time2=new Time(Time::now());
+          //$time3=new Time(Time::now()->addSeconds(-50));
+          // pr($time2->wasWithinLast('10 seconds')); 
+        //    pr($time3);
         // pr($this->Fighters->getActionTime());
 
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
@@ -209,24 +209,30 @@ class ArenasController extends AppController {
         $id = $fighter->id;
         $x = $fighter->coordinate_x;
         $y = $fighter->coordinate_y;
-        
-        
+
+
         $action = 0;
         $max = $this->Fighters->getMaxAction();
         $timeaction = $this->Fighters->getActionTime();
-        
-        $time = new Time($fighter->next_action_time);
 
+        $ti = new Time($fighter->next_action_time);
+        $time=new Time($ti);
+        $time->setDateTime($ti->year, $ti->month, $ti->day, $ti->hour, $ti->minute,$ti->second);
         $i = 1;
         if ($max > 1) {
             $i = $max - 1;
         }
-        for ($i; $i == 1; $i--) {
 
-            if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) . ' seconds')) {
+     
 
+        for ($i; $i >= 1; $i = $i - 1) {
+
+            if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) -1 . ' seconds')) {
+                $time2=$time;
                 $action = 1;
-                $time2 = $time->addSecond(-$timeaction);
+                $this->set('t11', $time2);
+               $time2->addSecond($timeaction/2);
+                $this->set('t12', $time2);
                 $this->Fighters->setNextActionTime($fighter->id, $time2);
             }
         }
@@ -234,9 +240,12 @@ class ArenasController extends AppController {
         if (!$time->wasWithinLast((($max + 1) * $timeaction) - 1 . ' seconds')) {
             $action = 1;
 
-            $time2 = Time::now();
-            $time2->addSecond(-$timeaction * ($max - 1));
-            $this->Fighters->setNextActionTime($fighter->id, $time2);
+
+            $time = Time::now();
+            $this->set('t21', $time);
+            $this->set('t', $time->addSecond(- $timeaction * ($max - 1)));
+            $this->set('t22', $time);
+            $this->Fighters->setNextActionTime($fighter->id, $time);
         }
         $this->set('action', $action);
 
@@ -399,15 +408,16 @@ class ArenasController extends AppController {
                     }
                 }
             }
-        
 
-        $this->set('tab', $tab);
-        $this->set('vue', $v);
-        $this->set('success', $success);
-        $this->set('nx', $nx);
-        $this->set('x', $x);
-        $this->set('ny', $ny);
-        $this->set('y', $y);}
+
+            $this->set('tab', $tab);
+            $this->set('vue', $v);
+            $this->set('success', $success);
+            $this->set('nx', $nx);
+            $this->set('x', $x);
+            $this->set('ny', $ny);
+            $this->set('y', $y);
+        }
         // return $this->requestAction('sight');
     }
 
@@ -448,29 +458,34 @@ class ArenasController extends AppController {
 
 
         if (isset($ennemy)) {
-            $issetennemy = 1;
             $this->set('ennemy', 1);
             $i = 1;
             if ($max > 1) {
                 $i = $max - 1;
             }
-            for ($i; $i == 1; $i--) {
+           
+        for ($i; $i >= 1; $i = $i - 1) {
 
-                if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) . ' seconds')) {
-
-                    $action = 1;
-                    $time2 = $time->addSecond(-$timeaction);
-                    $this->Fighters->setNextActionTime($myfighter->id, $time2);
-                }
-            }
-
-            if (!$time->wasWithinLast((($max + 1) * $timeaction) - 1 . ' seconds')) {
+            if ($time->wasWithinLast((($i + 1) * $timeaction) - 1 . ' seconds') && !$time->wasWithinLast(($i * $timeaction) -1 . ' seconds')) {
+                $time2=$time;
                 $action = 1;
-
-                $time2 = Time::now();
-                $time2->addSecond(-$timeaction * ($max - 1));
+                $this->set('t11', $time2);
+               $time2->addSecond($timeaction/2);
+                $this->set('t12', $time2);
                 $this->Fighters->setNextActionTime($myfighter->id, $time2);
             }
+        }
+
+        if (!$time->wasWithinLast((($max + 1) * $timeaction) - 1 . ' seconds')) {
+            $action = 1;
+
+
+            $time = Time::now();
+            $this->set('t21', $time);
+            $this->set('t', $time->addSecond(- $timeaction * ($max - 1)));
+            $this->set('t22', $time);
+            $this->Fighters->setNextActionTime($myfighter->id, $time);
+        }
         }
 
         $this->set('action', $action);

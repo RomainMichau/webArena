@@ -69,7 +69,7 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-
+                console.log(response.t);
 
                 if (response.success === 1) {
                     //      alert("oki");
@@ -457,11 +457,11 @@ $(document).ready(function () {
     });
 
     setInterval(function () {
-        a = 1
+        a = 1;
     }, 600);
 
     setInterval(function () {
-        b = 1
+        b = 1;
         //   console.log(b);
     }, 1300);
 
