@@ -150,7 +150,9 @@ class ArenasController extends AppController {
 
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
-
+        $this->set('actionmax', $this->Fighters->getMaxAction());
+        $this->set('actiontime', $this->Fighters->getActionTime());
+        
         // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         // pr();
@@ -613,5 +615,25 @@ class ArenasController extends AppController {
 
         //$this->set('name',$fighter);
     }
-
+    
+    
+   public function alertmessage(){
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+        $this->loadModel('Messages');
+        $this->loadModel('Fighters');
+        $a=0;
+        $time=new Time();
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+  $message= $this->Messages->getNewMessage($fighter->id);
+  for($i=0;$i<sizeof($message);$i++){
+     $time= $message[$i]->date;
+     if($time->wasWithinLast('5 seconds')){
+         $a++;
+     }
+     
+   }
+$this->set('a',$a);
+}
 }

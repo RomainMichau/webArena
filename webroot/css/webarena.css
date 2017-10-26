@@ -22,8 +22,8 @@ footer{
     
 }
 .case>*{
-    width: 60px;
-    height: 50px;
+    width: 63px;
+    height: 63px;
 }
 
 .case_fighter{
@@ -54,8 +54,10 @@ td{
 }
 tr{
     padding: 0;
+    border: 0 !important;
 }
 table{
     width: auto;
     margin: auto;
+    border: 0 !important;
 }

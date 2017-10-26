@@ -30,4 +30,10 @@ class MessagesTable extends Table
         $message->fighter_id = $idReceiver;
         $this->save($message);
     }
+
+    public  function getNewMessage($id){
+                $messages = $this->find('all')->from("messages")->where('DATE(date)=CURRENT_DATE  AND fighter_id ='.$id);
+                return $messages->toArray();
+
+    }
 }
