@@ -11,13 +11,10 @@ class MessagesTable extends Table
     public function getAllMessagesWith($id1, $id2)
     {
         $messages = $this->find('all')->from("messages")
-            ->where([$id1 => 'fighter_id_from', $id2 => 'fighter_id'])
-            ->orWhere([$id2 => 'fighter_id_from', $id1 => 'fighter_id'])
+            ->where(['fighter_id_from' => $id1, 'fighter_id' => $id2])
+            ->orWhere(['fighter_id_from' => $id2, 'fighter_id' => $id1])
             ->toArray();
-
-
-
-        pr($messages);
+        $messages;
         return $messages;
     }
 }
