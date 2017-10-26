@@ -15,13 +15,13 @@ $this->assign('title', $titredepage);?>
             <div class="medium-4 cell"></div>
         </div>
         <div class="grid-x centered-text">
-            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'left', 'class' => 'button arrow left-action']); ?> </div>
+            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'left', 'class' => 'button arrow rotate-270']); ?> </div>
             <div class="medium-4 cell"></div>
-            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'right', 'class' => 'button arrow right-action']); ?> </div>
+            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'right', 'class' => 'button arrow rotate-90']); ?> </div>
         </div>
         <div class="grid-x centered-text">
             <div class="medium-4 cell"></div>
-            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'down', 'class' => 'button arrow down-action']); ?> </div>
+            <div class="medium-4 cell"> <?= $this->Form->button('', ['id'=>'down', 'class' => 'button arrow rotate-180']); ?> </div>
             <div class="medium-4 cell"></div>
         </div>
         <div class="grid-x">
