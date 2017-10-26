@@ -61,3 +61,29 @@ table{
     margin: auto;
     border: 0 !important;
 }
+
+.arrow{
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/up_arrow.png');
+    background-size: 60px 60px;
+
+}
+.down{
+    -ms-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+.left{
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+}
+.right{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+.centered-text{
+    text-align: center;
+}
