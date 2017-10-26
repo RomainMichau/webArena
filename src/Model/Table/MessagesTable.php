@@ -14,7 +14,6 @@ class MessagesTable extends Table
             ->where(['fighter_id_from' => $id1, 'fighter_id' => $id2])
             ->orWhere(['fighter_id_from' => $id2, 'fighter_id' => $id1])
             ->toArray();
-        $messages;
         return $messages;
     }
 }
