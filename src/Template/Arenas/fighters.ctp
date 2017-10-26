@@ -1,5 +1,5 @@
 <?php
-    $this->assign('title', "Tous les figters");?>
+    $this->assign('title', 'Combattants de la grille');?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         

@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Modifier combattant');?>
+
 <?= $this->Form->create('Fighter', array('type' => 'file'));?>
 
 

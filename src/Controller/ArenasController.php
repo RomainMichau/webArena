@@ -33,7 +33,7 @@ class ArenasController extends AppController {
     }
 
     public function index() {
-        $this->set('titredepage', "index");
+        $this->set('titredepage', 'Accueil');
     }
 
     public function fighters() {
@@ -149,7 +149,7 @@ class ArenasController extends AppController {
 
 
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
-        $this->set('titredepage', "sight");
+        $this->set('titredepage', 'Vision');
 
         // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
@@ -187,7 +187,7 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $this->loadModel('Events');
 
-        $this->set('titredepage', "diary");
+        $this->set('titredepage', 'Journal');
 
         // Gets fighter of player
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];

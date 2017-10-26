@@ -1,6 +1,4 @@
-<?php
-
-$this->assign('title', $fighter->name);?>
+<?php $this->assign('title', 'Combattant');?>
 
     <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
     <?= $this->Html->link('edit profil', array('controller' => 'Arenas', 'action' => 'editFighter', $fighter->id), ['class' => 'button']); ?>

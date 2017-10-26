@@ -20,72 +20,78 @@
     <head>
         <?= $this->Html->charset() ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <?= $this->Html->css(['webarena.css', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css']) ?>
+        <?= $this->Html->script(['jquery', 'Arenas', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js']) ?>
+
         <title> <?= $this->fetch('title') ?> </title>
         <?= $this->Html->meta('icon') ?>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css" />
-        <?= $this->Html->css('webarena.css') ?>
-        <?= $this->Html->script('jquery') ?>
-        <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js') ?>
-        <?=  $this->Html->script('Arenas') ?>
 
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
     </head>
-
     <body>
+        <header> 
+            <?php 
+                if(!$user)
+                    echo $this->Html->link('Accueil', ['controller' => 'Arenas', 'action' => 'index']);
+                else
+                    echo $this->Html->link('Déconnexion', ['controller' => 'Players', 'action' => 'logout']);
 
-    <?php if($user)
-        {
-    ?>      <ul class="menu">
-            <li> <?= $this->Html->link('Acceuil', '/');?> </li>
-            <li> <?= $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));?> </li>
-            <li> <?= $this->Html->link('fighterByPlayer', array('controller' => 'Arenas', 'action' => 'fighter'));?> </li>
-            <li> <?= $this->Html->link('creer fighter (temporaire)', array('controller' => 'Arenas', 'action' => 'createFighter/1'));?> </li>
-            <li> <?= $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight'));?> </li>
-            <li> <?= $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary'));?> </li>
-            <li> <?= $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout'));?> </li>
-            <li> <?= $user['email'];?> </li>
-        </ul>
-            <?php
-        }
-        else
-        {
-    ?>
-        <ul class="menu">
-            <li> <?= $this->Html->link('Acceuil', '/');?> </li>
-            <li> <?= $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));?> </li>
-
-            <li> <?= $this->Html->link('login', array('controller' => 'Players', 'action' => 'login'));?> </li>
-            <li> <?= $this->Html->link('add', array('controller' => 'Players', 'action' => 'add'));?> </li>
-        </ul>
-            <?php
-        }
-    ?>
-
-        <nav class="top-bar expanded" data-topbar role="navigation">
-            <ul class="title-area large-3 medium-4 columns">
-                <li class="name">
-                    <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-                </li>
+                switch($this->fetch('title'))
+                {
+                    case 'Accueil':                     
+                        echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
+                        echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);   
+                        break;
+                    case 'Création de combattant':
+                        echo $user['email'];
+                        break;
+                    case 'Vision':
+                    case 'Combattant':
+                    case 'Journal':
+                    case 'Guildes':
+                    case 'Messages':
+                    case 'Conversations':
+                    case 'Combattants de la grille':            // On affiche en plus L'avatar du combattant, venant vers sa page
+                    case 'Modifier combattant':
+                        echo $user['email'];
+                        echo $this->Html->link(
+                            $this->Html->image('/img/f' . $fighter['id'] . '.png', ['alt' => 'Avatar', 'width' => '20px']),
+                            "/arenas/fighter",
+                            ['escape' => false]
+                        );
+                        $in_game = 1;  
+                }
+            ?>
+        </header>
+        <?php if(isset($in_game))                               // Si on est en jeu on affiche la navigation des pages de jeu
+              {
+        ?> 
+        <nav>
+            <ul class="menu">
+                <li> <?= $this->Html->link('Vision', ['controller' => 'Arenas', 'action' => 'sight']); ?> </li>
+                <li> <?= $this->Html->link('Combattant', ['controller' => 'Arenas', 'action' => 'fighter']); ?> </li>
+                <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
+                <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
+                <li> <?= $this->Html->link('Messages', ['controller' => 'Arenas', 'action' => 'messages']); ?> </li>
             </ul>
-            <div class="top-bar-section">
-                <ul class="right">
-                    <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                    <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-                </ul>
-            </div>
         </nav>
-        <?= $this->Flash->render() ?>
+        <?php
+              }
+        ?>
+
+        <?= $this->Flash->render() ?>                           <!-- ?? -->
 
         <div class="container clearfix row">
             <?= $this->fetch('content') ?>
         </div>
 
         <footer>
-            TD SI-2
-            <p> Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville - Romain Michau aka le bg </p>
-            <p> Option: BG </p>
-            <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?>
+            TD <strong> SI-2 </strong>
+            <p> Noms de famille des membres : CASARA - JACOB - LOCQUEVILLE - MICHAU </p>
+            <p> Options : B C et G </p>
+            <p> Gestion de versions GIT : <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?>
         </footer>
     </body>
 </html>
