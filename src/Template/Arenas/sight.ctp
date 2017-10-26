@@ -4,7 +4,7 @@ use Cake\View\Helper\HtmlHelper;
 $this->assign('title', $titredepage);?>
 <div>
     vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )
-<table class="unstriped" id="tab"> 
+<table id="tab"> 
     
     <?php echo $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']);
     $i=0;

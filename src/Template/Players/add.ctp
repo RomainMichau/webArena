@@ -1,5 +1,6 @@
 <?php $this->assign('title', $titredepage);?>
 
+<?= $this->Flash->render() ?>
 <?= $this->Form->create($user) ?>
 <form>
     <fieldset class="fieldset">
