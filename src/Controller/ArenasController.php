@@ -150,7 +150,9 @@ class ArenasController extends AppController {
 
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', "sight");
-
+        $this->set('actionmax', $this->Fighters->getMaxAction());
+        $this->set('actiontime', $this->Fighters->getActionTime());
+        
         // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         // pr();
