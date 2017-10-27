@@ -26,24 +26,48 @@ class MessagesController  extends AppController
     {
         $this->loadModel('Messages');
         $this->loadModel('Fighters');
-
         $messages = $this->Messages->getAllMessagesWith($id1, $id2);
-        $this->set('messages', $messages);
+             $this->set('messages', $messages);
+     //   $fighterto=$this->Fighters->getFighterById()
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
-
-        $newMessage = $this->request->getData();
-
-        if($newMessage)
+        $tab=array();
+        
+          foreach($messages as $message){
+              
+              $fighterfrom = $this->Fighters->getFighterById($message->fighter_id_from);
+              if($fighterfrom==$fighter)
+              {
+                  $fighterfrom->name="moi";
+              }
+              array_push($tab, $fighterfrom);
+          }
+        
+        $this->set('tab',$tab);
+        
+        
+        
+        if($fighter->id == $id1 or $fighter->id == $id2)
         {
-            if($id1 == $fighter->id)
-            {$idReceiver = $id2; $idFighterAuth = $fighter->id;}
-            else
-            {$idReceiver = $id1; $idFighterAuth = $fighter->id;}
+            $newMessage = $this->request->getData();
 
-            $this->Messages->addMessage($newMessage, $idReceiver, $idFighterAuth);
-            $this->redirect(['controller' => 'Messages', 'action' => 'conversation', $id1, $id2]);
+            if($newMessage)
+            {
+                if($id1 == $fighter->id)
+                {$idReceiver = $id2; $idFighterAuth = $fighter->id;}
+                else
+                {$idReceiver = $id1; $idFighterAuth = $fighter->id;}
+
+                $this->Messages->addMessage($newMessage, $idReceiver, $idFighterAuth);
+                $this->redirect(['controller' => 'Messages', 'action' => 'conversation', $id1, $id2]);
+            }
         }
+        else
+        {
+            $this->redirect(['controller' => 'Arenas', 'action' => 'fighters']);
+        }
+
+
+
 
     }
     

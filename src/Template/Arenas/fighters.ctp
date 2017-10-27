@@ -1,5 +1,7 @@
 <?php
-    $this->assign('title', 'Combattants de la grille');?>
+    $this->assign('title', 'Combattants de la grille');
+    echo  $this->Html->script('Message') ; ?>
+
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         
@@ -8,6 +10,10 @@
                 <div class="card" style="width: 300px;">
                     <div class="card-divider">
                         name: <?php echo $fighter->name; ?>
+                        <?php if($fighter->id != $idFighterAuth) {
+                            echo $this->Html->link('Conv', array('controller' => 'Messages', 'action' => 'conversation', $fighter->id, $idFighterAuth), ['class' => 'button']);
+                        }?>
+
                     </div>
                     <div class="card-image">
                         <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound']) ?>

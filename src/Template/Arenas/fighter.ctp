@@ -1,4 +1,8 @@
-<?php $this->assign('title', 'Combattant');?>
+
+<?php 
+    $this->assign('title', 'Combattant');
+    echo  $this->Html->script('Message') ; 
+?>
 
     <?= $this->Html->image('f' . $fighter->id . '.png', ['alt' => 'imgNotFound','height' => '150']) ?>
     <?= $this->Html->link('edit profil', array('controller' => 'Arenas', 'action' => 'editFighter', $fighter->id), ['class' => 'button']); ?>

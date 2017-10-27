@@ -5,7 +5,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 
 class FightersTable extends Table {
-    public static $actiontime=10        ;
+    public static $actiontime=10;
     public static $maxaction=3;
    
     
@@ -30,8 +30,17 @@ class FightersTable extends Table {
            $this->save($fighter);
     }
 
-    
+    public function getVoisin($id){
+          $fighter = $this->get($id);
+         
+          $f1=$this->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y);
+          $f2=$this->getFighterByCoord($fighter->coordinate_x-1, $fighter->coordinate_y);
+          $f3=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y+1);
+          $f4=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y-1);
+          return array($f1,$f2,$f3,$f4);
+    }
 
+    
 
     public function setHealth($id, $health) {
         $fighter = $this->get($id);
@@ -64,7 +73,7 @@ class FightersTable extends Table {
 
     public function getFighterByCoord($x, $y) {
         // $this->setSource('surroundings');
-        $fighter = $this->find('all')->from("fighters")->where("coordinate_x=" . $x . " and coordinate_y=" . $y);
+        $fighter = $this->find('all')->from('fighters')->where('coordinate_x=' . $x . ' and coordinate_y=' . $y);
         //pr($fighter->toArray());
         if (sizeof($fighter->toArray()) == 0) {
 
@@ -101,8 +110,8 @@ class FightersTable extends Table {
         return 0;
     }
 
-    public function addFighter($newFighter, $fightersTable, $player_id, $x, $y) {
-        $fighter = $fightersTable->newEntity();
+    public function addFighter($newFighter, $player_id, $x, $y) {
+        $fighter = $this->newEntity();
 
         $fighter->name = $newFighter['name'];
         $fighter->player_id = $player_id;
@@ -119,22 +128,42 @@ class FightersTable extends Table {
 
         $fighter->guild_id = NULL;
 
-        if ($fightersTable->save($fighter)) {
+        if ($this->save($fighter)) {
             $id = $fighter->id;
             return $id;
         }
     }
 
-    public function updateFighter($updateFighter, $fightersTable, $idFighter) {
+    public function updateFighter($updateFighter, $idFighter) {
         $fighter = $this->get($idFighter);
 
         $fighter->name = $updateFighter['name'];
 
-        if ($fightersTable->save($fighter)) {
+        if ($this->save($fighter)) {
             return true;
         }
         return false;
     }
+
+    public function getFightersOfGuild($id){
+        $fighters = $this->find('all')->from("fighters")->where(["guild_id" => $id])->toArray();
+        return $fighters;
+    }
+
+
+    public function updateGuildId($idGuild, $fighter)
+    {
+        if($idGuild != 0)
+        {
+            $fighter->guild_id = $idGuild;
+        }
+        else
+        {
+            $fighter->guild_id = NULL;
+        }
+        $this->save($fighter);
+    }
+
 
     public function skillSightUp($id) {
         $fighter = $this->get($id);
@@ -164,5 +193,4 @@ class FightersTable extends Table {
         $entity = $this->get($id);
         $this->delete($entity);
     }
-
 }

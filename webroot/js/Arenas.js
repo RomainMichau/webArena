@@ -56,24 +56,7 @@ $(document).ready(function () {
         }
     }
 
-    function alertmessage(){
-         $.ajax({
-                url: '/webArena/arenas/alertmessage/',
-                type: 'GET',
-                dataType: 'JSON',
 
-                success: function (response) {
-                    if(response.a>=1){
-                        alert('vous avez '+response.a+' nouveaux messages');
-                        
-                    }
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            }); 
-    }
     function move(dir) {
         var vx1, vx2, vy1, vy2, coor1, coor2;
         var b, a, i, c;
@@ -229,7 +212,7 @@ $(document).ready(function () {
 
                     if (response.death === 0) {
 
-                        $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
+                        $('#info').html('l attaque est un succes, vie restante de ' + response.name + ':' + response.health);
                         save = $('#' + a).html();
                         $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
 
@@ -247,6 +230,9 @@ $(document).ready(function () {
                             $('#' + a).html(save);
 
                         }, 900);
+                    }
+                    if(response.cvoisin>0){
+                         $('#info').html($('#info').html()+' avec l\'aide de '+response.cvoisin+' membre(s) de votre guilde');
                     }
 
                 } else if (response.ennemy === 1) {
@@ -290,12 +276,12 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-                if (response.success == 1 && response.type == 1) {
-                    $('#info2').html('nom:' + response.obj.name + ' level:' + response.obj.level + ' xp:' + response.obj.xp);
-                } else if (response.success == 1 && response.type == 2) {
-                    $('#info2').html('nom:' + response.obj.type);
+                if (response.success === 1 && response.type === 1) {
+                    $('#info2').html('x:'+x+' y:'+y+' nom:' + response.obj.name + ' level:' + response.obj.level + '  life:' + response.obj.current_health + '  xp:' + response.obj.xp+ '  shight:' + response.obj.skill_sight+ '  strenght:' + response.obj.skill_strength);
+                        } else if (response.success === 1 && response.type === 2) {
+                    $('#info2').html('x:'+x+' y:'+y+' nom:' + response.obj.type);
                 } else {
-                    $('#info2').html('');
+                    $('#info2').html('x:'+x+' y:'+y);
                 }
 
             },
@@ -483,10 +469,6 @@ $(document).ready(function () {
     }, 1300);
     
     
-    setInterval(
-                function () {
-       alertmessage();
-        //   console.log(b);
-    }, 5000);
+ 
 
 });

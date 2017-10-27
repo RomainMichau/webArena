@@ -28,6 +28,7 @@ class MessagesTable extends Table
         $message->date = date('Y-m-d H:i:s');
         $message->fighter_id_from = $idFighterAuth;
         $message->fighter_id = $idReceiver;
+        $message->title = "message non lu";
         $this->save($message);
     }
 

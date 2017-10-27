@@ -51,13 +51,15 @@
                     case 'Combattant':
                     case 'Journal':
                     case 'Guildes':
+                    case 'Guilde':
                     case 'Messages':
-                    case 'Conversations':
+                    case 'Conversation':
                     case 'Combattants de la grille':            // On affiche en plus L'avatar du combattant, venant vers sa page
                     case 'Modifier combattant':
+                        echo '<div id="newmessage"></div></div>';
                         echo $user['email'];
                         echo $this->Html->link(
-                            $this->Html->image('/img/f' . $fighter['id'] . '.png', ['alt' => 'Avatar', 'width' => '20px']),
+                            $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'width' => '20px']),
                             "/arenas/fighter",
                             ['escape' => false]
                         );
@@ -66,19 +68,17 @@
             ?>
         </header>
         <?php if(isset($in_game))                               // Si on est en jeu on affiche la navigation des pages de jeu
-              {
+            {
         ?> 
         <nav>
             <ul class="menu">
                 <li> <?= $this->Html->link('Vision', ['controller' => 'Arenas', 'action' => 'sight']); ?> </li>
                 <li> <?= $this->Html->link('Combattant', ['controller' => 'Arenas', 'action' => 'fighter']); ?> </li>
                 <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
+                <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
                 <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
-                <li> <?= $this->Html->link('Messages', ['controller' => 'Arenas', 'action' => 'messages']); ?> </li>
-            </ul>
-        </nav>
-        <?php
-              }
+         <?php
+            }
         ?>
 
         <?= $this->Flash->render() ?>                           <!-- ?? -->

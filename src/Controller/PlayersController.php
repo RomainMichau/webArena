@@ -45,7 +45,7 @@ class PlayersController  extends AppController
                 $user = $this->Auth->identify();
                 $this->Auth->setUser($user);
                 
-                return $this->redirect($this->Auth->redirectUrl()); //Redirige l'utilisateur vers l'url par défaut
+               return $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 0]);//Redirige l'utilisateur vers l'url par défaut
             }
             $this->Flash->error(__('Unable to add the user.')); //Erreur
         }
@@ -65,8 +65,7 @@ class PlayersController  extends AppController
 
             if ($user) {
                 $this->Auth->setUser($user); //Si on trouve, alors on défini la session
-                
-                return $this->redirect($this->Auth->redirectUrl()); //Ensuite on redirige vers l'url par défaut défini dans AppController.php
+                return $this->redirect(['controller' => 'Arenas', 'action' => 'sight']);        // Et on redirige vers la vue
             }
             
             $this->Flash->error(__('Invalid username or password, try again'));
