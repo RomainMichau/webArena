@@ -22,6 +22,13 @@ and open the template in the editor.
       
 }
 
+footer{
+    margin-top: 5em;
+    border-top: 1px black solid; 
+    background-color: #3a3a3a;
+    color: #d6d6d6;
+}
+
 .row{
     width: 70%;
     margin: auto;
@@ -39,6 +46,7 @@ td, tr{
 
 table{
     max-width: 900px;
+    min-width: 400px;
     border: 0 !important;
     margin-bottom: 0 !important;
 }
@@ -77,7 +85,7 @@ table{
 .flip{
     transform: scaleX(-1);
 }
-.teet{
+.control-panel{
     background-color: grey;
     min-width: 220px !important;
 }

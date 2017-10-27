@@ -32,40 +32,46 @@
     </head>
     <body>
         <header> 
-            <?php 
-                if(!$user)
-                    echo $this->Html->link('Accueil', ['controller' => 'Arenas', 'action' => 'index']);
-                else
-                    echo $this->Html->link('Déconnexion', ['controller' => 'Players', 'action' => 'logout']);
+            <div class="top-bar">
+                <div class="top-bar-left"> 
+                    <?php
+                        if(!$user) echo $this->Html->link('Accueil', ['controller' => 'Arenas', 'action' => 'index']);
 
-                switch($this->fetch('title'))
-                {
-                    case 'Accueil':                     
-                        echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
-                        echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);   
-                        break;
-                    case 'Création de combattant':
-                        echo $user['email'];
-                        break;
-                    case 'Vision':
-                    case 'Combattant':
-                    case 'Journal':
-                    case 'Guildes':
-                    case 'Guilde':
-                    case 'Messages':
-                    case 'Conversation':
-                    case 'Combattants de la grille':            // On affiche en plus L'avatar du combattant, venant vers sa page
-                    case 'Modifier combattant':
-                        echo '<div id="newmessage"></div></div>';
-                        echo $user['email'];
-                        echo $this->Html->link(
-                            $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'width' => '20px']),
-                            "/arenas/fighter",
-                            ['escape' => false]
-                        );
-                        $in_game = 1;  
-                }
-            ?>
+                        switch($this->fetch('title'))
+                        {
+                            case 'Accueil':                     
+                                echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
+                                echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);   
+                                break;
+                            case 'Création de combattant':
+                                echo $user['email'];
+                                break;
+                            case 'Vision':
+                            case 'Combattant':
+                            case 'Journal':
+                            case 'Guildes':
+                            case 'Guilde':
+                            case 'Messages':
+                            case 'Conversation':
+                            case 'Combattants de la grille':            // On affiche en plus L'avatar du combattant, venant vers sa page
+                            case 'Modifier combattant':
+                                echo '<div id="newmessage"></div>';
+                                echo $user['email'];
+                                echo $this->Html->link(
+                                    $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'width' => '20px']),
+                                    "/arenas/fighter",
+                                    ['escape' => false]
+                                );
+                                $in_game = 1;  
+                        }
+                    ?>
+                </div>
+                <div class="top-bar-right"> 
+                    <?php
+                         if($user) echo $this->Html->link('Déconnexion', ['controller' => 'Players', 'action' => 'logout']);
+                    ?>
+                </div>
+            </div>
         </header>
         <?php if(isset($in_game))                               // Si on est en jeu on affiche la navigation des pages de jeu
             {
@@ -78,6 +84,7 @@
                 <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
                 <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
             </ul>
+        </nav>
          <?php
             }
         ?>
@@ -89,10 +96,26 @@
         </div>
 
         <footer>
-            TD <strong> SI-2 </strong>
-            <p> Noms de famille des membres : CASARA - JACOB - LOCQUEVILLE - MICHAU </p>
-            <p> Options : B C et G </p>
-            <p> Gestion de versions GIT : <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?>
+            <h3 class="row centered-text"> TD <strong> SI-2 </strong> </h3>
+            <div class="grid-x">
+                <div class="small-3 cell"></div>
+                <div class="small-1 cell"> Fait par : </div>
+                <div class="small-2 cell">
+                    <ul class="">
+                        <li>CASARA</li>
+                        <li>JACOB</li>
+                        <li>LOCQUEVILLE</li>
+                        <li>MICHAU</li>
+                    </ul>
+                </div>
+                <div class="small-2 cell">
+                    <p> Options : B C et G </p>
+                </div>
+                <div class="small-2 cell">
+                    <p> Gestion de versions GIT : <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?> </p>
+                </div>
+                    
+            </div>
         </footer>
     </body>
 </html>

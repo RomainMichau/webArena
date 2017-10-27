@@ -9,7 +9,7 @@ $this->assign('title', $titredepage);?>
     
 <div class="grid-x">
     
-    <div class="medium-3 cell teet">
+    <div class="medium-3 cell control-panel">
         <div class="grid-x">
             <div class="small-4 cell"> <?= $this->Html->image('f'.$fid.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']); ?> </div>
             <div class="small-8 cell"> 
