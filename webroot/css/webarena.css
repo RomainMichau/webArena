@@ -32,17 +32,15 @@ and open the template in the editor.
     overflow-y: hidden;
 }
 
-td{
+td, tr{
     padding: 0 !important;
-}
-tr{
-    padding: 0;
     border: 0 !important;
 }
+
 table{
-    width: auto;
-    margin: auto;
+    max-width: 900px;
     border: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .arrow{
@@ -81,7 +79,7 @@ table{
 }
 .teet{
     background-color: grey;
-    min-width: 220px;
+    min-width: 220px !important;
 }
 .height-60px{
     height: 60px;
