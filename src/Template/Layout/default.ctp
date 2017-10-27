@@ -86,7 +86,7 @@
         <footer>
             TD SI-2
             <p> Dev: Vincent Jacob - Aleksander Kasara - Fabrice Locqueville - Romain Michau aka le bg </p>
-            <p> Option: BG </p>
+            <p> Option: CBG </p>
             <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?>
         </footer>
     </body>
