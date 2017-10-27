@@ -18,16 +18,12 @@ class PlayersController  extends AppController
     }
     
     public function index()
-    {   
-           
-        $this->set('titredepage', "index2");
-
-    }
+    {}
     
     //Ajoute un utilisateur à la BDD a partir d'un username et password
     public function add()
     {
-        $this->set('titredepage', "add2");
+        $this->set('titredepage', 'Inscription');
         
         //Crée un nouveau user
         $user = $this->Players->newEntity();
@@ -60,7 +56,7 @@ class PlayersController  extends AppController
     public function login()
     {
         
-         $this->set('titredepage', "login2");
+         $this->set('titredepage', 'Connexion');
          
          //Dès qu'on submit le formulaire
          if ($this->request->is('post')) {
@@ -69,8 +65,7 @@ class PlayersController  extends AppController
 
             if ($user) {
                 $this->Auth->setUser($user); //Si on trouve, alors on défini la session
-                
-                return $this->redirect($this->Auth->redirectUrl()); //Ensuite on redirige vers l'url par défaut défini dans AppController.php
+                return $this->redirect(['controller' => 'Arenas', 'action' => 'sight']);        // Et on redirige vers la vue
             }
             
             $this->Flash->error(__('Invalid username or password, try again'));
@@ -78,7 +73,7 @@ class PlayersController  extends AppController
     }  
     
     public function forgotPassword(){
-        $this->set('titredepage', "forgotPassword2");
+        $this->set('titredepage', 'MDP Oublié');
         $this->loadModel('Players');
         
         if ($this->request->is('post')){
@@ -104,7 +99,5 @@ class PlayersController  extends AppController
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
-    }
-    
-    
+    } 
 }

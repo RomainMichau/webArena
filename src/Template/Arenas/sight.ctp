@@ -70,10 +70,10 @@ $this->assign('title', $titredepage);?>
                         
                         $dist= abs($y-$jy)+abs($x-$jx);
 
-                                if($value2!='vide'&&$dist<=2){
-                                    echo $this->Html->image($value2.'.png', ['alt' => 'ImgNotFound']);
+                                if($value2!='vide'&&$dist<=$vue){
+                                    echo $this->Html->image($value2.'.png', ['alt' => 'ImgNotFound','class'=>'main']);
                                 }else if($dist<=$vue) {
-                                    echo $this->Html->image('case_vide_v.png', ['alt' => 'ImgNotFound'/*,'width'=>'60','height'=>'50'*/]);
+                                    echo $this->Html->image('case_vide_v.png', ['alt' => 'ImgNotFound']);
                                 }
                                 else if($dist>$vue) {
                                     echo $this->Html->image('case_vide_i.png', ['alt' => 'ImgNotFound'/*,'width'=>'60','height'=>'50'*/]);

@@ -1,6 +1,6 @@
 <?php
  echo  $this->Html->script('Message');
-$this->assign('title', "conv message"); ?>
+$this->assign('title', 'Conversation'); ?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         <?php

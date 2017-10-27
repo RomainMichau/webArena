@@ -33,7 +33,7 @@ class ArenasController extends AppController {
     }
 
     public function index() {
-        $this->set('titredepage', "index");
+        $this->set('titredepage', 'Accueil');
     }
 
     // SIGHT
@@ -65,7 +65,7 @@ class ArenasController extends AppController {
 
 
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
-        $this->set('titredepage', "sight");
+        $this->set('titredepage', 'Vision');
         $this->set('actionmax', $this->Fighters->getMaxAction());
         $this->set('actiontime', $this->Fighters->getActionTime());
 
@@ -108,7 +108,7 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $this->loadModel('Events');
 
-        $this->set('titredepage', "diary");
+        $this->set('titredepage', 'Journal');
 
         // Gets fighter of player
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
@@ -124,6 +124,15 @@ class ArenasController extends AppController {
         $guilds = $this->Guilds->getAllGuilds();
         $this->set('guilds', $guilds);
         $this->set('fighter', $fighter);
+
+        $newGuild = $this->request->getData();
+
+        if($newGuild)
+        {
+            $idNewGuild = $this->Guilds->addGuild($newGuild);
+            $this->joinGuild($idNewGuild);
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
+        }
     }
 
     public function joinGuild($idGuild) {
@@ -202,6 +211,7 @@ class ArenasController extends AppController {
                     } else {
                         copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
                     }
+                    $this->request->session()->write('user_fighter_id', $newId);  
                     $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
                 }
             }
@@ -540,26 +550,27 @@ class ArenasController extends AppController {
 
             $x = $myfighter->coordinate_x;
             $y = $myfighter->coordinate_y;
-            
+
 
             $r = rand(1, 20);
             if ($r > 10 + $ennemy->level - $myfighter->level) {
                 $name = $myfighter->name . " attaque " . $ennemy->name;
                 $cvoisin = 0;
                 if (isset($myfighter->guild_id)) {
-                   
-                    $voisin = $this->Fighters->getVoisin($ennemy->id); 
+
+                    $voisin = $this->Fighters->getVoisin($ennemy->id);
                     for ($i = 0; $i < sizeof($voisin); $i++) {
-                       
-                        if (isset($voisin[$i])) { $this->set("guild",$voisin[$i]);
-                            if ($voisin[$i]->guild_id == $myfighter->guild_id&&$voisin[$i]->id!=$myfighter->id) {
+
+                        if (isset($voisin[$i])) {
+                            $this->set("guild", $voisin[$i]);
+                            if ($voisin[$i]->guild_id == $myfighter->guild_id && $voisin[$i]->id != $myfighter->id) {
                                 $cvoisin++;
                             }
                         }
                     }
                 }
-                $this->set('cvoisin',$cvoisin);
-                $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength-$cvoisin);
+                $this->set('cvoisin', $cvoisin);
+                $this->Fighters->setHealth($ennemy->id, $ennemy->current_health - $myfighter->skill_strength - $cvoisin);
                 $ennemy = $this->Fighters->getFighterById($ennemy->id);
                 $this->set('success', 1);
                 $this->Fighters->xpUp($myfighter->id, 1);
@@ -585,16 +596,22 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
+        $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $x2=$myfighter->coordinate_x;
+        $y2=$myfighter->coordinate_y;
         $this->loadModel('Surroundings');
         $success = 0;
-        $y = $coord % 10;
-        if ($y == 0) {
-            $y = 10;
+        $x = $coord % 15;
+        if ($x == 0) {
+            $x = 15;
         }
-        $x = floor($coord / 10) + 1;
-        $ennemy = $this->Fighters->getFighterByCoord($x, $y);
-
-
+        $y = (($coord - $x) / 15) + 1;
+       
+            $ennemy = $this->Fighters->getFighterByCoord($x, $y);
+        //    $this->set("vue",abs($x-$x2)+abs($y-$y2));
+             if (abs($x-$x2)+abs($y-$y2)>$myfighter->skill_sight){
+                 $ennemy=null;
+             }
         if (!isset($ennemy)) {
             $sur = $this->Surroundings->getSurroundingByCoord($x, $y);
             if (isset($sur)) {

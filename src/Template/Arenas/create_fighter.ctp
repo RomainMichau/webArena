@@ -1,7 +1,8 @@
+<?php $this->assign('title', 'Créer combattant');?>
 
 <?= $this->Form->create('Fighter', array('type' => 'file'));?>
 
-<?php if($dead==1){ echo 'perso dead';} ?>
+<?php if($dead==1){ echo 'Vous êtes mort';} ?>
 
    
     <?= $this->Form->input('name', array('label' => 'Nom')); ?>

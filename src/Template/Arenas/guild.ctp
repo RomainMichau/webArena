@@ -1,5 +1,5 @@
 <?php
-$this->assign('title', "UN guild");?>
+$this->assign('title', 'Guilde');?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         <?= $guild->id?>

@@ -1,5 +1,5 @@
 <?php
-$this->assign('title', "Tous les messages");?>
+$this->assign('title', 'Messages');?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         <?php foreach($messages as $message): ?>
