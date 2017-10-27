@@ -30,8 +30,17 @@ class FightersTable extends Table {
            $this->save($fighter);
     }
 
-    
+    public function getVoisin($id){
+          $fighter = $this->get($id);
+         
+          $f1=$this->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y);
+          $f2=$this->getFighterByCoord($fighter->coordinate_x-1, $fighter->coordinate_y);
+          $f3=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y+1);
+          $f4=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y-1);
+          return array($f1,$f2,$f3,$f4);
+    }
 
+    
 
     public function setHealth($id, $health) {
         $fighter = $this->get($id);

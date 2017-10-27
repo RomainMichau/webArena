@@ -212,7 +212,7 @@ $(document).ready(function () {
 
                     if (response.death === 0) {
 
-                        $('#info').html('l attaque est un succes, vie restante de' + response.name + ':' + response.health);
+                        $('#info').html('l attaque est un succes, vie restante de ' + response.name + ':' + response.health);
                         save = $('#' + a).html();
                         $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
 
@@ -230,6 +230,9 @@ $(document).ready(function () {
                             $('#' + a).html(save);
 
                         }, 900);
+                    }
+                    if(response.cvoisin>0){
+                         $('#info').html($('#info').html()+' avec l\'aide de '+response.cvoisin+' membre(s) de votre guilde');
                     }
 
                 } else if (response.ennemy === 1) {
