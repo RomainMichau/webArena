@@ -136,6 +136,19 @@ class FightersTable extends Table {
         return false;
     }
 
+    public function getFightersOfGuild($id){
+        $fighters = $this->find('all')->from("fighters")->where(["guild_id" => $id])->toArray();
+        return $fighters;
+    }
+
+
+    public function updateGuildId($idGuild, $fighter)
+    {
+        $fighter->guild_id = $idGuild;
+        $this->save($fighter);
+    }
+
+
     public function skillSightUp($id) {
         $fighter = $this->get($id);
         $fighter->skill_sight = $fighter->skill_sight + 1;
