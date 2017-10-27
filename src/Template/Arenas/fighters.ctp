@@ -1,5 +1,6 @@
 <?php
-    $this->assign('title', "Tous les figters");?>
+    $this->assign('title', "Tous les figters");
+     echo  $this->Html->script('Message') ; ?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         

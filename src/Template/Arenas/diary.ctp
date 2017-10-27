@@ -1,4 +1,5 @@
-<?php $this->assign('title', $titredepage);?>
+<?php $this->assign('title', $titredepage);
+ echo  $this->Html->script('Message') ; ?>
 <?php
 	if($events == null)
 		echo 'No recent event to display in this zone';
