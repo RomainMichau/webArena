@@ -13,7 +13,7 @@ $this->assign('title', 'Guildes'); ?>
                 <div class="card" style="width: 300px;">
                     <div class="card-divider">
                         <p> id: <?php echo $guild->id ?> </p>
-                        <p> name: <?php echo $guild->name ?> </p>
+                        <p> name:  <?= $this->Html->link($guild->name, array('controller' => 'Arenas', 'action' => 'guild', $guild->id))?>"</p>
                         <?php
                             if($fighter->guild_id != $guild->id)
                             {
