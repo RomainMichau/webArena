@@ -64,7 +64,6 @@ class ArenasController extends AppController {
 
         $this->loadModel('Fighters');
         $this->loadModel('Surroundings');
-        $fightersTable = $this->Fighters;
 
 
         do {
@@ -72,10 +71,6 @@ class ArenasController extends AppController {
             $y = rand(1, 10);
         } while (
         null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
-
-
-
-
 
         $newFighter = $this->request->getData();
 
@@ -87,7 +82,7 @@ class ArenasController extends AppController {
                 $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
                 if ($newFighter['name']) {
                     $player_id = $this->Auth->user()['id'];
-                    $newId = $this->Fighters->addFighter($newFighter, $fightersTable, $player_id, $x, $y);
+                    $newId = $this->Fighters->addFighter($newFighter, $player_id, $x, $y);
                     if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
                         move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
                     } else {
@@ -104,7 +99,6 @@ class ArenasController extends AppController {
         $validator = new Validator();
 
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $fightersTable = $this->Fighters;
 
         $this->set('fighter', $fighter);
 
@@ -117,7 +111,7 @@ class ArenasController extends AppController {
             $errors = $validator->errors($this->request->getData());
             if (!$errors) {
                 $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-                $this->Fighters->updateFighter($updateFighter, $fightersTable, $id);
+                $this->Fighters->updateFighter($updateFighter, $id);
                 if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
                     move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
                 }
