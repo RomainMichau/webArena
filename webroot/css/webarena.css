@@ -7,30 +7,13 @@ and open the template in the editor.
     Created on : 4 oct. 2017, 18:55:57
     Author     : romain michau.Vincent Jacob- Alexandre casara- Fabrice Lcqville
 */
-
-#navigation{
-    font-size: 50px;    
-}
-
-footer{
-    font-size:10px;
-}
-.damier{
-    display: inline;
-}
-.case{
-    
-}
 .case>*{
     width: 63px;
     height: 63px;
 }
-
-.case_fighter{
-    
+.main{
+    cursor: pointer;
 }
-
-
 .vide {
       padding-top:17px;
       padding-bottom:17px;

@@ -276,12 +276,12 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-                if (response.success == 1 && response.type == 1) {
-                    $('#info2').html('nom:' + response.obj.name + ' level:' + response.obj.level + ' xp:' + response.obj.xp);
-                } else if (response.success == 1 && response.type == 2) {
-                    $('#info2').html('nom:' + response.obj.type);
+                if (response.success === 1 && response.type === 1) {
+                    $('#info2').html('x:'+x+' y:'+y+' nom:' + response.obj.name + ' level:' + response.obj.level + '  life:' + response.obj.current_health + '  xp:' + response.obj.xp+ '  shight:' + response.obj.skill_sight+ '  strenght:' + response.obj.skill_strength);
+                        } else if (response.success === 1 && response.type === 2) {
+                    $('#info2').html('x:'+x+' y:'+y+' nom:' + response.obj.type);
                 } else {
-                    $('#info2').html('');
+                    $('#info2').html('x:'+x+' y:'+y);
                 }
 
             },
