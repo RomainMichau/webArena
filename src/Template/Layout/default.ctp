@@ -91,9 +91,7 @@
 
         <?= $this->Flash->render() ?>                           <!-- ?? -->
 
-        <div class="container clearfix row">
-            <?= $this->fetch('content') ?>
-        </div>
+        <?= $this->fetch('content') ?>
 
         <footer>
             <h3 class="row centered-text"> TD <strong> SI-2 </strong> </h3>

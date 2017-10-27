@@ -1,7 +1,7 @@
 <?php
 $this->assign('title', 'Messages');?>
 <div class="grid-container">
-    <div class="grid-x grid-padding-x small-up-2 medium-up-3">
+    <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
         <?php foreach($messages as $message): ?>
             <div class="cell">
                 <div class="card" style="width: 300px;">

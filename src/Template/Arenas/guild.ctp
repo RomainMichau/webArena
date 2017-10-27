@@ -1,10 +1,9 @@
 <?php
 $this->assign('title', 'Guilde');?>
-<div class="grid-container">
-    <div class="grid-x grid-padding-x small-up-2 medium-up-3">
-        <?= $guild->id?>
-        <?= $guild->name?>
-
+<div class="container clearfix small-11 medium-9">
+    <?= $guild->id?>
+    <?= $guild->name?>
+    <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
         <?php foreach( $fighters as $fighter ): ?>
             <div class="cell">
                 <div class="card" style="width: 300px;">
@@ -15,6 +14,5 @@ $this->assign('title', 'Guilde');?>
                 </div>
             </div>
         <?php endforeach; ?>
-
     </div>
 </div>
