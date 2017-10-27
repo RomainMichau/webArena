@@ -117,16 +117,34 @@ class ArenasController extends AppController {
     }
 
     public function guilds() {
+        $this->loadModel('Fighters');
         $this->loadModel('Guilds');
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $guilds = $this->Guilds->getAllGuilds();
         $this->set('guilds', $guilds);
+        $this->set('fighter', $fighter);
+
+        $newGuild = $this->request->getData();
+
+        if($newGuild)
+        {
+            $this->Guilds->addGuild($newGuild);
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
+        }
     }
 
     public function joinGuild($idGuild) {
         $this->loadModel('Fighters');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $this->Fighters->updateGuildId($idGuild, $fighter);
-        $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $idGuild]);
+        if($idGuild != 0)
+        {
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $idGuild]);
+        }
+        else
+        {
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
+        }
     }
 
     public function guild($id) {
