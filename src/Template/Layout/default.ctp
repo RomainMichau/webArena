@@ -77,6 +77,7 @@
                 <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
                 <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
                 <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
+            </ul>
          <?php
             }
         ?>
