@@ -43,7 +43,9 @@
             <li> <?= $this->Html->link('creer fighter (temporaire)', array('controller' => 'Arenas', 'action' => 'createFighter/1'));?> </li>
             <li> <?= $this->Html->link('Vision', array('controller' => 'Arenas', 'action' => 'sight'));?> </li>
             <li> <?= $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary'));?> </li>
+            <li> <?= $this->Html->link('guilds', array('controller' => 'Arenas', 'action' => 'guilds'));?> </li>
             <li> <?= $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout'));?> </li>
+
             <li> <?= $user['email'];?> </li>
             <li id='newmessage'></li>
         </ul>

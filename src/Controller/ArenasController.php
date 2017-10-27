@@ -36,89 +36,11 @@ class ArenasController extends AppController {
         $this->set('titredepage', "index");
     }
 
-    public function fighters() {
-
-        $this->loadModel('Fighters');
-        $fighters = $this->Fighters->getAllFighters();
-        $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
-        $this->set('fighters', $fighters);
-        $this->set('idFighterAuth', $idFighterAuth);
-    }
-
-    public function fighter() {
-        $this->hasAFighter();
-        $this->loadModel('Fighters');
-
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
-        $this->set('fighter', $fighter);
-    }
-
-    public function createFighter($d) {
 
 
-        //$this->Fighters->find("all");
-        $this->set('dead', $d);
-        $validator = new Validator();
+    // SIGHT
 
 
-        $this->loadModel('Fighters');
-        $this->loadModel('Surroundings');
-
-
-        do {
-            $x = rand(1, 15);
-            $y = rand(1, 10);
-        } while (
-        null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
-
-        $newFighter = $this->request->getData();
-
-
-        if (!empty($newFighter)) {
-            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
-            $errors = $validator->errors($this->request->getData());
-            if (!$errors) {
-                $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-                if ($newFighter['name']) {
-                    $player_id = $this->Auth->user()['id'];
-                    $newId = $this->Fighters->addFighter($newFighter, $player_id, $x, $y);
-                    if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
-                        move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
-                    } else {
-                        copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
-                    }
-                    $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
-                }
-            }
-        }
-    }
-
-    public function editFighter($id) {
-        $this->loadModel('Fighters');
-        $validator = new Validator();
-
-        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
-        $this->set('fighter', $fighter);
-
-        $updateFighter = $this->request->getData();
-
-
-
-        if (!empty($updateFighter)) {
-            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
-            $errors = $validator->errors($this->request->getData());
-            if (!$errors) {
-                $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
-                $this->Fighters->updateFighter($updateFighter, $id);
-                if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
-                    move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
-                }
-                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
-            }
-        }
-    }
 
     public function sight() {
 
@@ -174,6 +96,9 @@ class ArenasController extends AppController {
         //   $this->tst();
     }
 
+
+    //DIARY
+
     public function diary() {
 
         // Checks if fighter is dead
@@ -193,6 +118,115 @@ class ArenasController extends AppController {
         // Gets all visible latest events for that fighter
         $this->set('events', $this->Events->getVisibleLatestEvents($fighter->coordinate_x, $fighter->coordinate_y, $fighter->skill_sight));
     }
+
+    public function guilds(){
+        $this->loadModel('Guilds');
+        $guilds = $this->Guilds->getAllGuilds();
+        $this->set('guilds', $guilds);
+    }
+    public function joinGuild($idGuild){
+        $this->loadModel('Fighters');
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+        $this->Fighters->updateGuildId($idGuild, $fighter);
+        $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $idGuild]);
+    }
+    public function guild($id){
+        $this->loadModel('Fighters');
+        $this->loadModel('Guilds');
+        $guid = $this->Guilds->getGuild($id);
+        $fighters = $this->Fighters->getFightersOfGuild($id);
+        $this->set('guild', $guid);
+        $this->set('fighters', $fighters);
+    }
+
+
+
+        //FIGHTER
+    public function fighters() {
+
+        $this->loadModel('Fighters');
+        $fighters = $this->Fighters->getAllFighters();
+        $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
+        $this->set('fighters', $fighters);
+        $this->set('idFighterAuth', $idFighterAuth);
+    }
+
+    public function fighter() {
+        $this->hasAFighter();
+        $this->loadModel('Fighters');
+
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+        $this->set('fighter', $fighter);
+    }
+
+    public function createFighter($d) {
+
+
+        //$this->Fighters->find("all");
+        $this->set('dead', $d);
+        $validator = new Validator();
+
+
+        $this->loadModel('Fighters');
+        $this->loadModel('Surroundings');
+
+
+        do {
+            $x = rand(1, 15);
+            $y = rand(1, 10);
+        } while (
+            null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
+
+        $newFighter = $this->request->getData();
+
+
+        if (!empty($newFighter)) {
+            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
+            $errors = $validator->errors($this->request->getData());
+            if (!$errors) {
+                $extention = strtolower(pathinfo($newFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+                if ($newFighter['name']) {
+                    $player_id = $this->Auth->user()['id'];
+                    $newId = $this->Fighters->addFighter($newFighter, $player_id, $x, $y);
+                    if ($newFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
+                        move_uploaded_file($newFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $newId . ".png");
+                    } else {
+                        copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
+                    }
+                    $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
+                }
+            }
+        }
+    }
+
+    public function editFighter($id) {
+        $this->loadModel('Fighters');
+        $validator = new Validator();
+
+        $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+
+        $this->set('fighter', $fighter);
+
+        $updateFighter = $this->request->getData();
+
+
+
+        if (!empty($updateFighter)) {
+            $validator->requirePresence('name')->notEmpty('name', 'Please fill this field');
+            $errors = $validator->errors($this->request->getData());
+            if (!$errors) {
+                $extention = strtolower(pathinfo($updateFighter['avatar_file']['name'], PATHINFO_EXTENSION));
+                $this->Fighters->updateFighter($updateFighter, $id);
+                if ($updateFighter['avatar_file']['tmp_name'] and in_array($extention, array('jpg', 'jpeg', 'png'))) {
+                    move_uploaded_file($updateFighter['avatar_file']['tmp_name'], 'img/' . 'f' . $id . ".png");
+                }
+                $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $id]);
+            }
+        }
+    }
+
+
 
     public function moveFighter($dir) {
 
