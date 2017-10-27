@@ -20,5 +20,7 @@ class GuildsTable extends Table
         $guild->name = $newGuild['nouveau_guild'];
 
         $this->save($guild);
+
+        return $guild->id;
     }
 }

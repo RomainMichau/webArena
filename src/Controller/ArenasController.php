@@ -128,7 +128,8 @@ class ArenasController extends AppController {
 
         if($newGuild)
         {
-            $this->Guilds->addGuild($newGuild);
+            $idNewGuild = $this->Guilds->addGuild($newGuild);
+            $this->joinGuild($idNewGuild);
             $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
         }
     }
