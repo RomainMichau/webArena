@@ -5,7 +5,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 
 class FightersTable extends Table {
-    public static $actiontime=10        ;
+    public static $actiontime=10;
     public static $maxaction=3;
    
     
@@ -101,8 +101,8 @@ class FightersTable extends Table {
         return 0;
     }
 
-    public function addFighter($newFighter, $fightersTable, $player_id, $x, $y) {
-        $fighter = $fightersTable->newEntity();
+    public function addFighter($newFighter, $player_id, $x, $y) {
+        $fighter = $this->newEntity();
 
         $fighter->name = $newFighter['name'];
         $fighter->player_id = $player_id;
@@ -119,18 +119,18 @@ class FightersTable extends Table {
 
         $fighter->guild_id = NULL;
 
-        if ($fightersTable->save($fighter)) {
+        if ($this->save($fighter)) {
             $id = $fighter->id;
             return $id;
         }
     }
 
-    public function updateFighter($updateFighter, $fightersTable, $idFighter) {
+    public function updateFighter($updateFighter, $idFighter) {
         $fighter = $this->get($idFighter);
 
         $fighter->name = $updateFighter['name'];
 
-        if ($fightersTable->save($fighter)) {
+        if ($this->save($fighter)) {
             return true;
         }
         return false;
