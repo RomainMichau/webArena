@@ -627,9 +627,16 @@ class ArenasController extends AppController {
      $time= $message[$i]->date;
      if($time->wasWithinLast('5 seconds')){
          $a++;
+     $fighter2 = $this->Fighters->getFighterById($message[$i]->fighter_id_from);
+         $this->set('a',$a);
+         $this->set('id2',$fighter2->id);
+        $this->set('name',$fighter2->name);
+
      }
      
    }
+            $this->set('id1',$fighter->id);
+
 $this->set('a',$a);
 }
 }
