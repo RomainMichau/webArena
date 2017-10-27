@@ -66,8 +66,13 @@ table{
     width: 60px;
     height: 60px;
     background-image: url('../img/up_arrow.png');
-    background-size: 60px 60px;
-
+    background-position: center; 
+}
+.sword{
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/sword_arrow.png');
+    background-position: center; 
 }
 .rotate-180{
     -ms-transform: rotate(180deg);
@@ -82,8 +87,19 @@ table{
 .rotate-90{
     -ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
+    transform: rotate(90deg) ;
+    
 }
 .centered-text{
     text-align: center;
+}
+.flip{
+    transform: scaleX(-1);
+}
+.teet{
+    background-color: grey;
+    min-width: 220px;
+}
+.height-60px{
+    height: 60px;
 }

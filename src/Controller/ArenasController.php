@@ -85,6 +85,7 @@ class ArenasController extends AppController {
             }
         }
         //     pr($tab);
+        $this->set('fighter', $fighter);
         $this->set('tab', $tab);
         $this->set('vue', $fighter->skill_sight);
         $this->set('fid', $fighter->id);
