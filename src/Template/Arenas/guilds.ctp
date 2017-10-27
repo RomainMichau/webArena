@@ -1,5 +1,11 @@
 <?php
 $this->assign('title', "Tous les guilds"); ?>
+
+<?= $this->Form->create('Guilds')?>
+<?= $this->Form->input('nouveau guild', array('label' => 'Nom')) ?>
+<?= $this->Form->button(__('create')) ?>
+<?= $this->Form->end() ?>
+
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-2 medium-up-3">
         <?php foreach( $guilds as $guild ): ?>

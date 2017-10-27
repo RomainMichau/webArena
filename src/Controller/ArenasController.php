@@ -123,6 +123,14 @@ class ArenasController extends AppController {
         $guilds = $this->Guilds->getAllGuilds();
         $this->set('guilds', $guilds);
         $this->set('fighter', $fighter);
+
+        $newGuild = $this->request->getData();
+
+        if($newGuild)
+        {
+            $this->Guilds->addGuild($newGuild);
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
+        }
     }
 
     public function joinGuild($idGuild) {

@@ -13,4 +13,12 @@ class GuildsTable extends Table
         $guild = $this->find('all')->from("guilds")->where(["id" => $id])->toArray()[0];
         return $guild;
     }
+    public function addGuild($newGuild)
+    {
+        $guild = $this->newEntity();
+
+        $guild->name = $newGuild['nouveau_guild'];
+
+        $this->save($guild);
+    }
 }
