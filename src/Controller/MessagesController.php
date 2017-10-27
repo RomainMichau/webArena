@@ -27,9 +27,25 @@ class MessagesController  extends AppController
         $this->loadModel('Messages');
         $this->loadModel('Fighters');
         $messages = $this->Messages->getAllMessagesWith($id1, $id2);
-        $this->set('messages', $messages);
+             $this->set('messages', $messages);
+     //   $fighterto=$this->Fighters->getFighterById()
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-
+        $tab=array();
+        
+          foreach($messages as $message){
+              
+              $fighterfrom = $this->Fighters->getFighterById($message->fighter_id_from);
+              if($fighterfrom==$fighter)
+              {
+                  $fighterfrom->name="moi";
+              }
+              array_push($tab, $fighterfrom);
+          }
+        
+        $this->set('tab',$tab);
+        
+        
+        
         if($fighter->id == $id1 or $fighter->id == $id2)
         {
             $newMessage = $this->request->getData();
