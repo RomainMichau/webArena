@@ -153,7 +153,14 @@ class FightersTable extends Table {
 
     public function updateGuildId($idGuild, $fighter)
     {
-        $fighter->guild_id = $idGuild;
+        if($idGuild != 0)
+        {
+            $fighter->guild_id = $idGuild;
+        }
+        else
+        {
+            $fighter->guild_id = NULL;
+        }
         $this->save($fighter);
     }
 
@@ -186,5 +193,4 @@ class FightersTable extends Table {
         $entity = $this->get($id);
         $this->delete($entity);
     }
-
 }
