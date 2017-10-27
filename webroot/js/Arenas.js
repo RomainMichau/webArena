@@ -56,24 +56,7 @@ $(document).ready(function () {
         }
     }
 
-    function alertmessage(){
-         $.ajax({
-                url: '/webArena/arenas/alertmessage/',
-                type: 'GET',
-                dataType: 'JSON',
 
-                success: function (response) {
-                    if(response.a>=1){
-                        alert('vous avez '+response.a+' nouveaux messages');
-                        
-                    }
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            }); 
-    }
     function move(dir) {
         var vx1, vx2, vy1, vy2, coor1, coor2;
         var b, a, i, c;
@@ -483,10 +466,6 @@ $(document).ready(function () {
     }, 1300);
     
     
-    setInterval(
-                function () {
-       alertmessage();
-        //   console.log(b);
-    }, 5000);
+ 
 
 });

@@ -49,7 +49,7 @@ class PlayersController  extends AppController
                 $user = $this->Auth->identify();
                 $this->Auth->setUser($user);
                 
-                return $this->redirect($this->Auth->redirectUrl()); //Redirige l'utilisateur vers l'url par défaut
+               return $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 0]);//Redirige l'utilisateur vers l'url par défaut
             }
             $this->Flash->error(__('Unable to add the user.')); //Erreur
         }

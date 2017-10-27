@@ -47,6 +47,7 @@
             <li> <?= $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout'));?> </li>
 
             <li> <?= $user['email'];?> </li>
+            <li id='newmessage'></li>
         </ul>
             <?php
         }
@@ -55,7 +56,6 @@
     ?>
         <ul class="menu">
             <li> <?= $this->Html->link('Acceuil', '/');?> </li>
-            <li> <?= $this->Html->link('fighters', array('controller' => 'Arenas', 'action' => 'fighters'));?> </li>
 
             <li> <?= $this->Html->link('login', array('controller' => 'Players', 'action' => 'login'));?> </li>
             <li> <?= $this->Html->link('add', array('controller' => 'Players', 'action' => 'add'));?> </li>
