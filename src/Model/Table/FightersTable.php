@@ -64,7 +64,7 @@ class FightersTable extends Table {
 
     public function getFighterByCoord($x, $y) {
         // $this->setSource('surroundings');
-        $fighter = $this->find('all')->from("fighters")->where("coordinate_x=" . $x . " and coordinate_y=" . $y);
+        $fighter = $this->find('all')->from('fighters')->where('coordinate_x=' . $x . ' and coordinate_y=' . $y);
         //pr($fighter->toArray());
         if (sizeof($fighter->toArray()) == 0) {
 

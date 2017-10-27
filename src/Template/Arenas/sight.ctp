@@ -1,8 +1,9 @@
 <?php
 use Cake\View\Helper\HtmlHelper;
+        echo  $this->Html->script('Message') ;
 
 $this->assign('title', $titredepage);?>
-<div>
+<div id='okui'>
     vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )
 </div>
     
