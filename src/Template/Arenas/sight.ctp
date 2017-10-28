@@ -1,5 +1,4 @@
-<div class="container clearfix row small-12 medium-10">
-
+<div class="row">
     <?php
     use Cake\View\Helper\HtmlHelper;
             echo  $this->Html->script('Message') ;
