@@ -92,7 +92,9 @@ class ArenasController extends AppController {
         $this->set('jx', $fighter->coordinate_x);
         $this->set('jy', $fighter->coordinate_y);
 
-        //   $this->tst();
+        // Id du fighter dans la session si on ne l'a pas déjà fait
+        if(!$this->request->session()->read('user_fighter_id'))
+            $this->request->session()->write('user_fighter_id', $fighter['id']); 
     }
 
     //DIARY
@@ -211,7 +213,7 @@ class ArenasController extends AppController {
                     } else {
                         copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
                     }
-                    $this->request->session()->write('user_fighter_id', $newId);  
+                    $this->request->session()->write('user_fighter_id', $newId);               // Id du fighter dans la session
                     $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
                 }
             }
