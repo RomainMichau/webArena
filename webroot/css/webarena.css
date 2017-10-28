@@ -11,16 +11,6 @@ and open the template in the editor.
     width: 63px;
     height: 63px;
 }
-.main{
-    cursor: pointer;
-}
-.vide {
-      padding-top:17px;
-      padding-bottom:17px;
-      padding-left: 21px;
-      padding-right: 21px;
-      
-}
 
 footer{
     margin-top: 5em;
@@ -51,17 +41,16 @@ table{
     margin-bottom: 0 !important;
 }
 
-.arrow{
+.arrow, .sword{
     width: 60px;
     height: 60px;
-    background-image: url('../img/up_arrow.png');
     background-position: center; 
 }
+.arrow{
+    background-image: url('../img/up_arrow.png');
+}
 .sword{
-    width: 60px;
-    height: 60px;
     background-image: url('../img/sword_arrow.png');
-    background-position: center; 
 }
 .rotate-180{
     -ms-transform: rotate(180deg);
@@ -88,7 +77,4 @@ table{
 .control-panel{
     background-color: grey;
     min-width: 220px !important;
-}
-.height-60px{
-    height: 60px;
 }

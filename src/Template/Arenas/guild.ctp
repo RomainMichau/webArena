@@ -1,6 +1,6 @@
-<?php
-$this->assign('title', 'Guilde');?>
-<div class="container clearfix small-11 medium-9">
+<div class="grid-container">
+    <?php
+    $this->assign('title', 'Guilde');?>
     <?= $guild->id?>
     <?= $guild->name?>
     <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
