@@ -8,7 +8,7 @@
         vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )
     </div>
 
-    <div class="grid-x">
+    <div class="grid-x sight-grid">
 
         <div class="medium-3 cell control-panel">
             <div class="grid-x">

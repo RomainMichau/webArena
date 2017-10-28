@@ -90,7 +90,7 @@
         ?>
 
         <?= $this->Flash->render() ?>                           <!-- ?? -->
-        <div class="container clearfix">
+        <div class="container clearfix main">
             <?= $this->fetch('content') ?>
         </div>  
 
