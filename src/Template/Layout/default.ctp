@@ -110,7 +110,7 @@
                     <p> Options : B C et G </p>
                 </div>
                 <div class="small-2 cell">
-                    <p> Gestion de versions GIT : <?= $this->Html->link('versions', array('controller' => 'arenas', 'action' => 'versions'));?> </p>
+                    <p> Gestion de versions GIT : <?= $this->Html->link('versions', '/versions.log');?> </p>
                 </div>
                     
             </div>
