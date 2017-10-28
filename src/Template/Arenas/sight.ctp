@@ -20,10 +20,10 @@
 
                 </div>
             </div>
-            <div class="row centered-text height-60px">
+            <div class="row centered-text" style="height: 60px;">
                  <?= $this->Form->button('', ['id'=>'up', 'class' => 'button arrow']); ?>
             </div>
-            <div class="grid-x centered-text height-60px">
+            <div class="grid-x centered-text" style="height: 60px;">
                 <div class="small-4 cell"> <?= $this->Form->button('', ['id'=>'left', 'class' => 'button arrow rotate-270 float-right']); ?> </div>
                 <div class="small-4 cell"></div>
                 <div class="small-4 cell"> <?= $this->Form->button('', ['id'=>'right', 'class' => 'button arrow rotate-90 float-left']); ?> </div>
@@ -31,10 +31,10 @@
             <div class="row centered-text">
                 <?= $this->Form->button('', ['id'=>'down', 'class' => 'button arrow rotate-180']); ?>
             </div>
-            <div class="row centered-text height-60px">
+            <div class="row centered-text" style="height: 60px;">
                 <?= $this->Form->button('', ['id'=>'aup', 'class' => 'button sword rotate-90']); ?>
             </div>
-            <div class="grid-x centered-text height-60px">
+            <div class="grid-x centered-text" style="height: 60px;">
                 <div class="small-4 cell"> <?= $this->Form->button('', ['id'=>'aleft', 'class' => 'button sword float-right']); ?> </div>
                 <div class="small-4 cell"></div>
                 <div class="small-4 cell"> <?= $this->Form->button('', ['id'=>'aright', 'class' => 'button sword flip float-left']); ?> </div>
