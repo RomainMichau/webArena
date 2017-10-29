@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var a, b;
    
-var player = document.querySelector('#audioPlayer');
+var sdcri = document.querySelector('#sdcri');
     function tocoor(x, y) {
         if (x > 15)
             return null;
@@ -38,7 +38,6 @@ var player = document.querySelector('#audioPlayer');
         while (y == "") {
             y = prompt("entrer votre message");
         }
-        console.log(y);
         if (y != null) {
             $.ajax({
                 url: '/webArena/arenas/cri/' + y,
@@ -69,7 +68,6 @@ var player = document.querySelector('#audioPlayer');
             dataType: 'JSON',
 
             success: function (response) {
-                console.log(response.t);
 
                 if (response.success === 1) {
                     //      alert("oki");
@@ -165,18 +163,15 @@ var player = document.querySelector('#audioPlayer');
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                    //  console.log(response.tab.length);
 
                     for (i = 0; i < response.tab.length; i++) {
                         coor1 = tocoor(response.tab[i][0], response.tab[i][1]);
                         $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
-                        //   console.log(response.tab[i][2]);
 
                     }
 
 
                     c = $(a).html();
-                    //  console.log("a:" + b + "  b:" + a);
                     $(a).html($(b).html());
                     $(b).html(c);
                     ;
@@ -240,9 +235,7 @@ var player = document.querySelector('#audioPlayer');
                     $('#info').html(response.name + ' esquive le coup, il est CHOOO');
                     save = $('#' + a).html();
                     $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
-                    // console.log($('#' + a).html());
                     setTimeout(function () {
-                        //      console.log("oki");
                         $('#' + a).html(save);
 
                     }, 900);
@@ -406,7 +399,6 @@ var player = document.querySelector('#audioPlayer');
     $('#adown').click(function () {
         if (b == 1) {
             b = 0;
-           console.log("oki00");
             attack(4);
         }
     });
@@ -418,7 +410,7 @@ var player = document.querySelector('#audioPlayer');
     });
     $('#aright').click(function () {
         //var player = document.querySelector('#son');
-        player.play();
+       
         // audioElement.play();
         if (b == 1) {
             b = 0;
@@ -428,6 +420,7 @@ var player = document.querySelector('#audioPlayer');
     });
     $('#cri').click(function () {
         if (b === 1) {
+             sdcri.play();
             b = 0;
             cri();
 
@@ -473,7 +466,6 @@ var player = document.querySelector('#audioPlayer');
 
     setInterval(function () {
         b = 1;
-        //   console.log(b);
     }, 1300);
     
     
