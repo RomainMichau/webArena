@@ -1,9 +1,13 @@
 <div class="row">
     <?php
+    
     use Cake\View\Helper\HtmlHelper;
+    
             echo  $this->Html->script('Message') ;
+         
 
     $this->assign('title', $titredepage);?>
+    <audio id="audioPlayer" src="https://occasional-respect.000webhostapp.com/audio.mp3"></audio>  
     <div id='okui'>
         vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )
     </div>

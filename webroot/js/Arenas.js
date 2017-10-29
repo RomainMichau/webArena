@@ -3,8 +3,8 @@
 
 $(document).ready(function () {
     var a, b;
-
-
+   
+var player = document.querySelector('#audioPlayer');
     function tocoor(x, y) {
         if (x > 15)
             return null;
@@ -406,7 +406,7 @@ $(document).ready(function () {
     $('#adown').click(function () {
         if (b == 1) {
             b = 0;
-            console.log("oki00");
+           console.log("oki00");
             attack(4);
         }
     });
@@ -417,6 +417,9 @@ $(document).ready(function () {
         }
     });
     $('#aright').click(function () {
+        //var player = document.querySelector('#son');
+        player.play();
+        // audioElement.play();
         if (b == 1) {
             b = 0;
             attack(1);
@@ -424,7 +427,7 @@ $(document).ready(function () {
         }
     });
     $('#cri').click(function () {
-        if (b == 1) {
+        if (b === 1) {
             b = 0;
             cri();
 
@@ -448,15 +451,20 @@ $(document).ready(function () {
     });
 
     $('#sh').click(function () {
+        if(a===1){
         supsh();
+    a=0;}
     });
 
     $('#ssi').click(function () {
-        supssi();
+                if(a===1){
+
+        supssi();    a=0;}
     });
     $('#sst').click(function () {
+        if(a===1){
 
-        supsst();
+        supsst();    a=0;}
     });
 
     setInterval(function () {
