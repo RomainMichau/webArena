@@ -49,9 +49,9 @@ IN GAME
     height: 25px;
     padding-left: 20px;
 }
-
 #ingame-corner {
     width: 30%;
+    min-width: 300px;
 }
 #player-info {
     color: rgba(255, 255, 255, 0.8);
@@ -61,7 +61,6 @@ IN GAME
     padding-left: 25px;
 }
 #players-access button {
-    color: rgba(255, 255, 255, 0.8);
     background-color: #333;
 }
 #players-access button:hover {
@@ -72,6 +71,10 @@ IN GAME
 }
 #player-img:hover {
     background-color: rgba(255, 255, 255, 0.05);
+}
+header i {
+    font-size: 1.2em;
+    padding-left: 10px;
 }
 
 
@@ -96,6 +99,9 @@ nav {
 nav a {
     width: 100%;
 }
+nav a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
 nav span {
     font-size: 0.9em;
     text-align: center;
@@ -110,8 +116,6 @@ nav i {
     background-image: url('../img/layout/vintage-concrete.png');
     color: rgba(0, 0, 0, 0.9);
 }
-
-
 
 /* *************************************************************************
 CONTENU - PAGE XXX
@@ -137,6 +141,14 @@ footer hr {
 }
 footer a {
     color: rgba(255, 255, 255, 0.7);
+}
+
+/* *************************************************************************
+OFF CANVAS CONTENT
+************************************************************************* */
+
+#players {
+    background-color: #333;
 }
 
 /* *************************************************************************
