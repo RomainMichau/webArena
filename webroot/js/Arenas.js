@@ -8,30 +8,36 @@ var sdcri = document.querySelector('#sdcri');
 var sdpas = document.querySelector('#sdpas');
 var sdfail= document.querySelector('#sdattack');
 var sdblesse= document.querySelector('#sdblesse');
+ var maxy = $('#tab').find("tr").length; 
+ var maxx = $('#tab').find("td").length/maxy; 
     function tocoor(x, y) {
-        if (x > 15)
+         //trouvé sur   https://stackoverflow.com/questions/3053503/javascript-to-get-rows-count-of-a-html-table
+    //    var maxx = document.getElementById('tab').getElementsByTagName("tr").length;   //trouvé sur   https://stackoverflow.com/questions/3053503/javascript-to-get-rows-count-of-a-html-table
+        //alert(maxx);
+       // alert(maxy);
+        if (x > maxx)
             return null;
 
         else if (x <= 0)
             return null;
-        else if (y > 10)
+        else if (y > maxy)
             return null;
         else if (y <= 0)
             return null;
-        var a = (y - 1) * 15 + x;
+        var a = (y - 1) * maxx + x;
         return a;
     }
 
     function tox(coor) {
 
-        var x = coor % 15;
+        var x = coor % maxx;
         if (x === 0)
-            x = 15;
+            x = maxx;
         return x;
     }
 
     function toy(coor) {
-        var y = ((coor - (tox(coor))) / 15) + 1;
+        var y = ((coor - (tox(coor))) / maxx) + 1;
         return y;
     }
 

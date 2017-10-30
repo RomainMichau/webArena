@@ -3,44 +3,44 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 class FightersTable extends Table {
-    public static $actiontime=10;
-    public static $maxaction=3;
-   
-    
-    
+    ///  parametre  
+    private static $ACTIONTIME = 10;
+    private static $MAXACTION = 3;
+    private static $SKILL_H_INIT = 5;
+    private static $SKILL_SI_INIT = 2;
+    private static $SKILL_ST_INIT = 1;
+
     public function getAllFighters() {
         $fighters = $this->find('all')->from("fighters")->toArray();
         return $fighters;
     }
-    
-    public function getActionTime(){
-        return static::$actiontime;
-    }
-    public function getMaxAction(){
-        return static::$maxaction;
-    }
-    
-    
-    
-    public function setNextActionTime($id,$date){
-         $fighter = $this->get($id);
-           $fighter->next_action_time = $date;
-           $this->save($fighter);
+
+    public function getActionTime() {
+        return static::$ACTIONTIME;
     }
 
-    public function getVoisin($id){
-          $fighter = $this->get($id);
-         
-          $f1=$this->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y);
-          $f2=$this->getFighterByCoord($fighter->coordinate_x-1, $fighter->coordinate_y);
-          $f3=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y+1);
-          $f4=$this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y-1);
-          return array($f1,$f2,$f3,$f4);
+    public function getMaxAction() {
+        return static::$MAXACTION;
     }
 
-    
+    public function setNextActionTime($id, $date) {
+        $fighter = $this->get($id);
+        $fighter->next_action_time = $date;
+        $this->save($fighter);
+    }
+
+    public function getVoisin($id) {
+        $fighter = $this->get($id);
+
+        $f1 = $this->getFighterByCoord($fighter->coordinate_x + 1, $fighter->coordinate_y);
+        $f2 = $this->getFighterByCoord($fighter->coordinate_x - 1, $fighter->coordinate_y);
+        $f3 = $this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y + 1);
+        $f4 = $this->getFighterByCoord($fighter->coordinate_x, $fighter->coordinate_y - 1);
+        return array($f1, $f2, $f3, $f4);
+    }
 
     public function setHealth($id, $health) {
         $fighter = $this->get($id);
@@ -85,11 +85,11 @@ class FightersTable extends Table {
     public function moveFighter($id, $dir) {        //1:bas 2:haut 3:gauche 4:droit
         // $this->setSource('surroundings');
         $fighter = $this->get($id);
-
+        $this->Parameters = TableRegistry::get('Parameters');
         //pr($fighter->toArray());
         //pr('oki');
 
-        if ($dir == 1 && $fighter->coordinate_x < 15) {
+        if ($dir == 1 && $fighter->coordinate_x < $this->Parameters->get_size_x()) {
             $fighter->coordinate_x = $fighter->coordinate_x + 1;
             $this->save($fighter);
             return 1;
@@ -101,7 +101,7 @@ class FightersTable extends Table {
             $fighter->coordinate_y = $fighter->coordinate_y - 1;
             $this->save($fighter);
             return 1;
-        } else if ($dir == 4 && $fighter->coordinate_y < 10) {
+        } else if ($dir == 4 && $fighter->coordinate_y < $this->Parameters->get_size_y()) {
             $fighter->coordinate_y = $fighter->coordinate_y + 1;
             $this->save($fighter);
             return 1;
@@ -112,17 +112,17 @@ class FightersTable extends Table {
 
     public function addFighter($newFighter, $player_id, $x, $y) {
         $fighter = $this->newEntity();
-
+        //  $this->Paramters= TableRegistry::get('Parameters');
         $fighter->name = $newFighter['name'];
         $fighter->player_id = $player_id;
         $fighter->coordinate_x = $x;
         $fighter->coordinate_y = $y;
         $fighter->level = 1;
         $fighter->xp = 0;
-        $fighter->skill_sight = 2;
-        $fighter->skill_strength = 1;
-        $fighter->skill_health = 5;
-        $fighter->current_health = 5;
+        $fighter->skill_sight = static::$SKILL_SI_INIT;
+        $fighter->skill_strength = static::$SKILL_ST_INIT;
+        $fighter->skill_health = static::$SKILL_H_INIT;
+        $fighter->current_health = static::$SKILL_H_INIT;
         date_default_timezone_set('Europe/Paris');
         $fighter->next_action_time = date('Y-m-d H:i:s');
 
@@ -145,25 +145,19 @@ class FightersTable extends Table {
         return false;
     }
 
-    public function getFightersOfGuild($id){
+    public function getFightersOfGuild($id) {
         $fighters = $this->find('all')->from("fighters")->where(["guild_id" => $id])->toArray();
         return $fighters;
     }
 
-
-    public function updateGuildId($idGuild, $fighter)
-    {
-        if($idGuild != 0)
-        {
+    public function updateGuildId($idGuild, $fighter) {
+        if ($idGuild != 0) {
             $fighter->guild_id = $idGuild;
-        }
-        else
-        {
+        } else {
             $fighter->guild_id = NULL;
         }
         $this->save($fighter);
     }
-
 
     public function skillSightUp($id) {
         $fighter = $this->get($id);
@@ -193,4 +187,5 @@ class FightersTable extends Table {
         $entity = $this->get($id);
         $this->delete($entity);
     }
+
 }

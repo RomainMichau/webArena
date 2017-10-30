@@ -72,11 +72,11 @@
                         <?php foreach ($value1 as $value2) { ?>
                         <td <?php  $i++; if($value2=='f'.$fid){ ?> class='case' <?php } else{ ?> class='case' <?php } ?> id='cid<?php echo $i; ?>'>
                             <?php
-                            $x = $i% 15;
+                            $x = $i% $sizex;
                             if($x == 0){
-                                 $x = 15;
+                                 $x = $sizex;
                             }
-                            $y = ($i-$x)/15 +1;
+                            $y = ($i-$x)/$sizex +1;
 
                             $dist= abs($y-$jy)+abs($x-$jx);
 
