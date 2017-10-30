@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,16 +12,16 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 ?>
+
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en" dir="ltr">
     <head>
         <?= $this->Html->charset() ?>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <?= $this->Html->css(['webarena.css', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css']) ?>
-        <?= $this->Html->script(['jquery', 'Arenas', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js']) ?>
+        <?= $this->Html->css(['foundation.css', 'webarena.css']) ?>
 
         <title> <?= $this->fetch('title') ?> </title>
         <?= $this->Html->meta('icon') ?>
@@ -31,90 +30,151 @@
         <?= $this->fetch('css') ?>
     </head>
     <body>
-        <header> 
-            <div class="top-bar">
-                <div class="top-bar-left"> 
-                    <?php
-                        if(!$user) echo $this->Html->link('Accueil', ['controller' => 'Arenas', 'action' => 'index']);
+        <!-- MAIN NAVIGATION (HEADER) -->
+        <header class="top-bar">
 
-                        switch($this->fetch('title'))
-                        {
-                            case 'Accueil':                     
+            <!-- LEFT SIDE -->
+            <div class="top-bar-left">
+                <ul class="menu">
+                    <li class="menu-text">
+                    <?php
+                        if(!$user)              
+                            echo $this->Html->link('Web Arena', ['controller' => 'Arenas', 'action' => 'index'], ['id' => 'site-title', 'title' => 'Retour à l\'accueil']);
+                        else   
+                            echo $this->Html->link('Web Arena' . '<img src="/webArena/img/layout/deco.png" alt="[Déconnexion]" id="logout-img"/>', ['controller' => 'Players', 'action' => 'logout'], ['escape' => false, 'id' => 'site-title', 'title' => 'Déconnexion']);
+                    ?>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- RIGHT SIDE -->
+            <?php
+                switch($this->fetch('title'))
+                    {
+                        case 'Accueil':   
+                                echo '<div class="top-bar-right" id="login-corner">';  
+                                echo '<ul class="vertical menu expanded align-center">';   
+                                echo '<li>';          
                                 echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
-                                echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);   
+                                echo '</li> <li>';  
+                                echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);
+                                echo '</li>';  
+                                echo '</ul>'; 
+                                echo '</div>';    
                                 break;
-                            case 'Création de combattant':
-                                echo $user['email'];
+                        case 'Vision':
+                        case 'Combattant':
+                        case 'Journal':
+                        case 'Guildes':
+                        case 'Guilde':
+                        case 'Messages':
+                        case 'Conversation':
+                        case 'Modifier combattant':
+                                echo '<div class="top-bar-right" id="ingame-corner">'; 
+                                echo '<ul class="menu align-center">';
+
+                                echo '<li id="player-info">';                                           
+                                    echo '<ul class="vertical menu expanded align-center">';
+                                    echo '<li>' . $user['email'] . '</li>';
+                                    echo '<li>';
+                                    echo $this->Html->link(
+                                        $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'id' => 'player-img']),
+                                            "/arenas/fighter",
+                                            ['escape' => false]
+                                    );
+                                    echo '</li>';
+                                    echo '</ul>';
+                                echo '</li>';
+
+                                echo '<li id="players-access">';                                                                        
+                                echo '<button type="button" class="button">Autres combattants </button>';
+                                echo '</li>';
+                                echo '</ul>';
+                                echo '</div>';
+
+                                $in_game = 1; 
                                 break;
-                            case 'Vision':
-                            case 'Combattant':
-                            case 'Journal':
-                            case 'Guildes':
-                            case 'Guilde':
-                            case 'Messages':
-                            case 'Conversation':
-                            case 'Combattants de la grille':            // On affiche en plus L'avatar du combattant, venant vers sa page
-                            case 'Modifier combattant':
-                                echo '<div id="newmessage"></div>';
-                                echo $user['email'];
-                                echo $this->Html->link(
-                                    $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'width' => '20px']),
-                                    "/arenas/fighter",
-                                    ['escape' => false]
-                                );
-                                $in_game = 1;  
                         }
                     ?>
-                </div>
-                <div class="top-bar-right"> 
-                    <?php
-                         if($user) echo $this->Html->link('Déconnexion', ['controller' => 'Players', 'action' => 'logout']);
-                    ?>
-                </div>
-            </div>
         </header>
-        <?php if(isset($in_game))                               // Si on est en jeu on affiche la navigation des pages de jeu
-            {
-        ?> 
-        <nav>
-            <ul class="menu">
-                <li> <?= $this->Html->link('Vision', ['controller' => 'Arenas', 'action' => 'sight']); ?> </li>
-                <li> <?= $this->Html->link('Combattant', ['controller' => 'Arenas', 'action' => 'fighter']); ?> </li>
-                <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
-                <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
-                <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
-            </ul>
-        </nav>
-         <?php
-            }
-        ?>
 
-        <?= $this->Flash->render() ?>                           <!-- ?? -->
-        <div class="container clearfix">
-            <?= $this->fetch('content') ?>
-        </div>  
+        <!-- CENTER BLOCK -->
+        <div class="grid-x" id="center-block">
 
-        <footer>
-            <h3 class="row centered-text"> TD <strong> SI-2 </strong> </h3>
-            <div class="grid-x">
-                <div class="small-3 cell"></div>
-                <div class="small-1 cell"> Fait par : </div>
-                <div class="small-2 cell">
-                    <ul class="">
-                        <li>CASARA</li>
-                        <li>JACOB</li>
-                        <li>LOCQUEVILLE</li>
-                        <li>MICHAU</li>
+            <!-- CASE IN GAME -->
+            <?php if(isset($in_game))                               
+                    {
+            ?> 
+                <!-- NAVIGATION BETWEEN GAME PAGES -->
+                <nav class="medium-2 small-2 cell">
+                    <ul class="menu">
+                        <li> <?= $this->Html->link('Vision', ['controller' => 'Arenas', 'action' => 'sight']); ?> </li>
+                        <li> <?= $this->Html->link('Combattant', ['controller' => 'Arenas', 'action' => 'fighter']); ?> </li>
+                        <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
+                        <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
+                        <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
                     </ul>
+                </nav>
+
+                <!-- PAGE CONTENT -->
+                <?= $this->Flash->render() ?>                           
+                <div class="medium-10 small-10 cell" id="page-content">
+                    <?= $this->fetch('content') ?>
+                </div>  
+            
+            <!-- CASE NOT IN GAME -->
+            <?php
+                    }
+                else                                                 
+                    {
+            ?> 
+                <!-- PAGE CONTENT -->
+                <?= $this->Flash->render() ?>    
+                <div class="wrap">                    
+                    <div class="cell" id="page-content">
+                        <?= $this->fetch('content') ?>
+                    </div>  
                 </div>
-                <div class="small-2 cell">
-                    <p> Options : B C et G </p>
-                </div>
-                <div class="small-2 cell">
-                    <p> Gestion de versions GIT : <?= $this->Html->link('versions', '/versions.log');?> </p>
-                </div>
-                    
+            <?php
+                    }
+            ?>
+            </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="wrap grid-x small-up-1 medium-up-3">
+                <div class="cell">
+                    <h3> Groupe SI TD02 </h3>
+                    <hr />
+                    <p>
+                        <ul class="no-bullet">
+                            <li><strong>CASARA</strong> Alexandre</li>
+                            <li><strong>JACOB</strong> Vincent</li>
+                            <li><strong>LOCQUEVILLE</strong> Fabrice</li>
+                            <li><strong>MICHAU</strong> Romain</li>
+                        </ul>
+                    </p>
+                </div> 
+                <div class="cell">
+                    <h3> Options </h3>
+                    <hr />
+                    <p>
+                        <ul class="no-bullet">
+                            <li><strong>B</strong> - Gestion de la communication et des guildes </li>
+                            <li><strong>C</strong> - Gestion d'une limite temporelle </li>
+                            <li><strong>G</strong> - Utilisation de Foundation 6 </li>
+                        </ul>
+                    </p>
+                </div> 
+                <div class="cell">
+                    <h3> Gestion de versions </h3>
+                    <hr />
+                    <p>
+                        <?= $this->Html->link('versions.log', '/versions.log');?>
+                    </p>
+                </div> 
             </div>
         </footer>
+        <?= $this->Html->script(['jquery', '/vendor/jquery', '/vendor/what-input', '/vendor/foundation', 'Arenas']) ?>
     </body>
 </html>

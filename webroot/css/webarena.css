@@ -1,26 +1,113 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 4 oct. 2017, 18:55:57
-    Author     : romain michau.Vincent Jacob- Alexandre casara- Fabrice Lcqville
-*/
+/* *************************************************************************
+GENERAL
+************************************************************************* */
+
+.wrap {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* *************************************************************************
+HEADER
+************************************************************************* */
+
+/* **************************************
+OUT GAME
+*************************************** */
+.top-bar, .top-bar .menu {
+    background-color: #333;
+}
+.top-bar a {
+    color: rgba(255, 255, 255, 0.9);
+}
+#site-title {
+    font-size: 2em;
+}
+#login-corner .menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#login-corner {
+    width: 15%;
+}
+
+/* **************************************
+IN GAME
+*************************************** */
+
+#logout-img {
+    height: 25px;
+    padding-left: 15px;
+}
+
+#ingame-corner {
+    width: 30%;
+}
+#player-info {
+    color: rgba(255, 255, 255, 0.8);
+    padding-right: 25px;
+}
+#players-access {
+    padding-left: 25px;
+}
+#players-access button {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #333;
+}
+#players-access button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#player-img {
+    width: 35px;
+}
+
+
+/* *************************************************************************
+CENTER BLOC
+************************************************************************* */
+
+#center-block {
+    min-height: 100vh;
+    background-image: url('../img/layout/vintage-concrete.png');
+}
+
+/* *************************************************************************
+NAVIGATION
+************************************************************************* */
+
+/* *************************************************************************
+CONTENU - PAGE XXX
+************************************************************************* */
+
+/* *************************************************************************
+FOOTER
+************************************************************************* */
+
+footer {
+    padding: 60px 20px 30px 20px;
+    background-color: #333;
+    color: rgba(255, 255, 255, 0.7);
+}
+footer .cell {
+    padding: 0 40px;
+}
+footer p, footer li {
+    font-size: 0.9em;
+}
+footer hr {
+       border-color: rgba(255, 255, 255, 0.2); 
+}
+footer a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .case>*{
     width: 63px;
     height: 63px;
 }
 
-footer{
-    margin-top: 5em;
-    border-top: 1px black solid; 
-    background-color: #3a3a3a;
-    color: #d6d6d6;
-}
-
 .row{
-    width: 70%;
+    width: 80%;
     margin: auto;
 }
 

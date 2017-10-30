@@ -1,6 +1,4 @@
-
-
-
+$(document).foundation();
 $(document).ready(function () {
     var a, b;
 
