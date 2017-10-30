@@ -3,6 +3,7 @@
     $this->assign('title', 'Guilde');?>
     <?= $guild->id?>
     <?= $guild->name?>
+    <?= $nb ?> membre(s)
     <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
         <?php foreach( $fighters as $fighter ): ?>
             <div class="cell">

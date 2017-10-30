@@ -187,5 +187,11 @@ class FightersTable extends Table {
         $entity = $this->get($id);
         $this->delete($entity);
     }
+   
+    public function nbMembre($gid){
+        $query= $this->find('all')->from("fighters")->where(["guild_id" => $gid]);
+        $nb=$query->count();
+        return $nb;
+    }
 
 }
