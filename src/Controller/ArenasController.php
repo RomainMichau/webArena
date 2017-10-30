@@ -128,6 +128,7 @@ class ArenasController extends AppController {
         $guilds = $this->Guilds->getAllGuilds();
         $this->set('guilds', $guilds);
         $this->set('fighter', $fighter);
+        
 
         $newGuild = $this->request->getData();
 
@@ -139,16 +140,22 @@ class ArenasController extends AppController {
         }
     }
 
-    public function joinGuild($idGuild) {
+    public function joinGuild($newidGuild,$oldidGuild = NULL) {
         $this->loadModel('Fighters');
+        $this->loadModel('Guilds');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $this->Fighters->updateGuildId($idGuild, $fighter);
-        if($idGuild != 0)
+        
+        
+        $this->Fighters->updateGuildId($newidGuild, $fighter);
+        if($newidGuild != 0)
         {
-            $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $idGuild]);
+            $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $newidGuild]);
         }
         else
-        {
+        {  // pr($idGuild);
+            if($this->Fighters->nbMembre($oldidGuild)<=0){
+              //  $this->Guilds->deleteGuilds($oldidGuild);
+            }
             $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
         }
     }
@@ -158,6 +165,7 @@ class ArenasController extends AppController {
         $this->loadModel('Guilds');
         $guid = $this->Guilds->getGuild($id);
         $fighters = $this->Fighters->getFightersOfGuild($id);
+        $this->set('nb', $this->Fighters->nbMembre($id));
         $this->set('guild', $guid);
         $this->set('fighters', $fighters);
     }

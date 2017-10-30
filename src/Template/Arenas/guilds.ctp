@@ -16,11 +16,11 @@ $this->assign('title', 'Guildes'); ?>
                         <?php
                             if($fighter->guild_id != $guild->id)
                             {
-                                echo $this->Html->link('add', array('controller' => 'Arenas', 'action' => 'joinGuild', $guild->id), ['class' => 'button']);
+                                echo $this->Html->link('add', array('controller' => 'Arenas', 'action' => 'joinGuild', $guild->id,$fighter->guild_id), ['class' => 'button']);
                             }
                             else if($fighter->guild_id == $guild->id)
                             {
-                                echo $this->Html->link('disADD', array('controller' => 'Arenas', 'action' => 'joinGuild', 0), ['class' => 'button alert']);
+                                echo $this->Html->link('disADD', array('controller' => 'Arenas', 'action' => 'joinGuild', 0,$fighter->guild_id), ['class' => 'button alert']);
                             }
                         ?>
                     </div>
