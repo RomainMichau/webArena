@@ -1,7 +1,7 @@
 <?php
     $this->assign('title', 'Combattants de la grille');
     echo  $this->Html->script('Message') ; ?>
-
+    
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
         

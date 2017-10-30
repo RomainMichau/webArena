@@ -723,4 +723,22 @@ class ArenasController extends AppController {
         $this->set('a', $a);
     }
 
+    // Re-put every fighters info in session (apart from current player)
+    public function updateSession() {
+        $this->loadModel('Fighters');
+        $fighters = $this->Fighters->getAllFighters();
+        $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
+
+        $fighters_nb = count($fighters) - 1;                                // Minus current player
+        $this->request->session()->write('fighters_nb', $fighters_nb); 
+
+        $fighter_no = 1;
+        foreach($fighters as $fighter) {
+            if($fighter->id !== $idFighterAuth) {
+                $this->request->session()->write('fighter' . $fighter_no, $fighter);
+                $fighter_no++;
+            }
+        }
+    }
+
 }
