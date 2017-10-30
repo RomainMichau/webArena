@@ -21,7 +21,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <?= $this->Html->css(['foundation.css', 'webarena.css']) ?>
+        <?= $this->Html->css(['foundation.css', 'foundation-icons/foundation-icons.css', 'webarena.css']) ?>
 
         <title> <?= $this->fetch('title') ?> </title>
         <?= $this->Html->meta('icon') ?>
@@ -78,7 +78,7 @@
                                     echo '<li>' . $user['email'] . '</li>';
                                     echo '<li>';
                                     echo $this->Html->link(
-                                        $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'id' => 'player-img']),
+                                        $this->Html->image('/img/f' . $this->request->session()->read('user_fighter_id') . '.png', ['alt' => 'Avatar', 'id' => 'player-img', 'title' => 'Voir combattant']),
                                             "/arenas/fighter",
                                             ['escape' => false]
                                     );
@@ -107,12 +107,11 @@
             ?> 
                 <!-- NAVIGATION BETWEEN GAME PAGES -->
                 <nav class="medium-2 small-2 cell">
-                    <ul class="menu">
-                        <li> <?= $this->Html->link('Vision', ['controller' => 'Arenas', 'action' => 'sight']); ?> </li>
-                        <li> <?= $this->Html->link('Combattant', ['controller' => 'Arenas', 'action' => 'fighter']); ?> </li>
-                        <li> <?= $this->Html->link('Journal', ['controller' => 'Arenas', 'action' => 'diary']); ?> </li>
-                        <li> <?= $this->Html->link('Combattants de la grille', ['controller' => 'Arenas', 'action' => 'fighters']); ?> </li>
-                        <li> <?= $this->Html->link('Guildes', ['controller' => 'Arenas', 'action' => 'guilds']); ?> </li>
+                    <ul class="vertical menu align-center icons icon-top">
+                        <li class="<?= $this->fetch('title') === 'Vision' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-map"></i> <span>Vision</span>', ['controller' => 'Arenas', 'action' => 'sight'], ['escape' => false]); ?> </li>
+                        <li class="<?= $this->fetch('title') === 'Journal' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-book"></i> <span>Journal</span>', ['controller' => 'Arenas', 'action' => 'diary'], ['escape' => false]); ?> </li>
+                        <li class="<?= $this->fetch('title') === 'Combattant' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torso"></i> <span>Combattant</span>', ['controller' => 'Arenas', 'action' => 'fighter'], ['escape' => false]); ?> </li>
+                        <li class="<?= $this->fetch('title') === 'Guildes' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torsos-all"></i> <span>Guildes</span>', ['controller' => 'Arenas', 'action' => 'guilds'], ['escape' => false]); ?> </li>
                     </ul>
                 </nav>
 
@@ -170,7 +169,7 @@
                     <h3> Gestion de versions </h3>
                     <hr />
                     <p>
-                        <?= $this->Html->link('versions.log', '/versions.log');?>
+                        <?= $this->Html->link('versions.log', '/versions.log', ['target' => '_blank']);?>
                     </p>
                 </div> 
             </div>

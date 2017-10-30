@@ -11,18 +11,28 @@ GENERAL
 HEADER
 ************************************************************************* */
 
-/* **************************************
-OUT GAME
-*************************************** */
+.top-bar {
+    padding: 25px 0;
+}
 .top-bar, .top-bar .menu {
     background-color: #333;
 }
+
 .top-bar a {
     color: rgba(255, 255, 255, 0.9);
 }
+
 #site-title {
-    font-size: 2em;
+    font-size: 2.5em;
 }
+#site-title:hover {
+    background-color: rgba(255, 255, 255, 0.1)
+}
+
+/* **************************************
+OUT GAME
+*************************************** */
+
 #login-corner .menu a:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
@@ -37,7 +47,7 @@ IN GAME
 
 #logout-img {
     height: 25px;
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 #ingame-corner {
@@ -58,7 +68,10 @@ IN GAME
     background-color: rgba(0, 0, 0, 0.5);
 }
 #player-img {
-    width: 35px;
+    width: 40px;
+}
+#player-img:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 
@@ -74,6 +87,31 @@ CENTER BLOC
 /* *************************************************************************
 NAVIGATION
 ************************************************************************* */
+ 
+nav {
+    background-color: #591310;
+    padding-top: 50px;
+    border-right: 3px solid #591310;
+}
+nav a {
+    width: 100%;
+}
+nav span {
+    font-size: 0.9em;
+    text-align: center;
+    padding-top: 5px;
+    color: rgba(255, 255, 255, 0.8);
+}
+nav i {
+    font-size: 2em;
+    color: rgba(255, 255, 255, 0.8);;
+}
+.menu .is-active > a, .is-active span, .is-active i {
+    background-image: url('../img/layout/vintage-concrete.png');
+    color: rgba(0, 0, 0, 0.9);
+}
+
+
 
 /* *************************************************************************
 CONTENU - PAGE XXX
@@ -101,6 +139,9 @@ footer a {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* *************************************************************************
+TO MOVE
+************************************************************************* */
 .case>*{
     width: 63px;
     height: 63px;
