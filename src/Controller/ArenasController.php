@@ -50,6 +50,7 @@ class ArenasController extends AppController {
         //  pr($this->Auth->user());
         $this->loadModel('Fighters');
         $this->loadModel('Events');
+        $this->loadModel('Parameters');
 
         //pr($this->Events->tst());
         date_default_timezone_set('Europe/Paris');
@@ -57,23 +58,24 @@ class ArenasController extends AppController {
         // $time = new Time($myfighter->next_action_time);
         // $time2=new Time(Time::now());
         //$time3=new Time(Time::now()->addSeconds(-50));
-        // pr($time2->wasWithinLast('10 seconds')); 
         //    pr($time3);
         // pr($this->Fighters->getActionTime());
 
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
-
+        
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', 'Vision');
         $this->set('actionmax', $this->Fighters->getMaxAction());
         $this->set('actiontime', $this->Fighters->getActionTime());
+        $this->set('sizex', $this->Parameters->get_size_x());
+        $this->set('sizey', $this->Parameters->get_size_y());
 
         // pr($this->Fighters->getAllFighrersByPlayerId($this->Auth->user()['id'])[0]);
         $this->loadModel('Surroundings');
         // pr();
-        for ($i = 1; $i <= 15; $i++) {
-            for ($j = 1; $j <= 10; $j++) {
+        for ($i = 1; $i <= $this->Parameters->get_size_x(); $i++) {
+            for ($j = 1; $j <= $this->Parameters->get_size_y(); $j++) {
                 if ($this->Fighters->getFighterByCoord($i, $j) != NULL) {
                     $tab[$j][$i] = 'f' . $this->Fighters->getFighterByCoord($i, $j)->id;
                     //  pr($tab[$i][$j]);
@@ -188,12 +190,13 @@ class ArenasController extends AppController {
 
 
         $this->loadModel('Fighters');
+        $this->loadModel('Parameters');
         $this->loadModel('Surroundings');
 
 
         do {
-            $x = rand(1, 15);
-            $y = rand(1, 10);
+            $x = rand(1,$this->Parameters->get_size_x() );
+            $y = rand(1, $this->Parameters->get_size_y());
         } while (
         null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
 
@@ -321,7 +324,7 @@ class ArenasController extends AppController {
                 $sur = $this->Surroundings->getSurroundingByCoord($x, $y + 1);
             }
             if ($ennemy == NULL && $sur == NULL) {
-                $success = $this->Fighters->moveFighter($id, $dir);
+               $success=$this->Fighters->moveFighter($id, $dir);
             }
             $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
@@ -598,16 +601,18 @@ class ArenasController extends AppController {
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Fighters');
+        $this->loadModel('Parameters');
         $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $x2=$myfighter->coordinate_x;
         $y2=$myfighter->coordinate_y;
         $this->loadModel('Surroundings');
+        $maxx=$this->Parameters->get_size_x();
         $success = 0;
-        $x = $coord % 15;
+        $x = $coord % $maxx;
         if ($x == 0) {
-            $x = 15;
+            $x = $maxx;
         }
-        $y = (($coord - $x) / 15) + 1;
+        $y = (($coord - $x) / $maxx) + 1;
        
             $ennemy = $this->Fighters->getFighterByCoord($x, $y);
         //    $this->set("vue",abs($x-$x2)+abs($y-$y2));

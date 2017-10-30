@@ -1,32 +1,41 @@
 $(document).foundation();
 $(document).ready(function () {
     var a, b;
-
-
+   
+var sdcri = document.querySelector('#sdcri');
+var sdpas = document.querySelector('#sdpas');
+var sdfail= document.querySelector('#sdattack');
+var sdblesse= document.querySelector('#sdblesse');
+ var maxy = $('#tab').find("tr").length; 
+ var maxx = $('#tab').find("td").length/maxy; 
     function tocoor(x, y) {
-        if (x > 15)
+         //trouvé sur   https://stackoverflow.com/questions/3053503/javascript-to-get-rows-count-of-a-html-table
+    //    var maxx = document.getElementById('tab').getElementsByTagName("tr").length;   //trouvé sur   https://stackoverflow.com/questions/3053503/javascript-to-get-rows-count-of-a-html-table
+        //alert(maxx);
+       // alert(maxy);
+        if (x > maxx)
             return null;
 
         else if (x <= 0)
             return null;
-        else if (y > 10)
+        else if (y > maxy)
             return null;
         else if (y <= 0)
             return null;
-        var a = (y - 1) * 15 + x;
+        var a = (y - 1) * maxx + x;
         return a;
     }
 
     function tox(coor) {
 
-        var x = coor % 15;
+        var x = coor % maxx;
         if (x === 0)
-            x = 15;
+            x = maxx;
         return x;
     }
 
     function toy(coor) {
-        var y = ((coor - (tox(coor))) / 15) + 1;
+        var y = ((coor - (tox(coor))) / maxx) + 1;
         return y;
     }
 
@@ -36,7 +45,6 @@ $(document).ready(function () {
         while (y == "") {
             y = prompt("entrer votre message");
         }
-        console.log(y);
         if (y != null) {
             $.ajax({
                 url: '/webArena/arenas/cri/' + y,
@@ -67,7 +75,6 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-                console.log(response.t);
 
                 if (response.success === 1) {
                     //      alert("oki");
@@ -163,18 +170,15 @@ $(document).ready(function () {
                             $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
                             $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
-                    //  console.log(response.tab.length);
 
                     for (i = 0; i < response.tab.length; i++) {
                         coor1 = tocoor(response.tab[i][0], response.tab[i][1]);
                         $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
-                        //   console.log(response.tab[i][2]);
 
                     }
 
 
                     c = $(a).html();
-                    //  console.log("a:" + b + "  b:" + a);
                     $(a).html($(b).html());
                     $(b).html(c);
                     ;
@@ -207,7 +211,7 @@ $(document).ready(function () {
 
                 if (response.success === 1) {
 
-
+                    sdblesse.play();
                     if (response.death === 0) {
 
                         $('#info').html('l attaque est un succes, vie restante de ' + response.name + ':' + response.health);
@@ -234,17 +238,15 @@ $(document).ready(function () {
                     }
 
                 } else if (response.ennemy === 1) {
-
+                        sdfail.play();
                     $('#info').html(response.name + ' esquive le coup, il est CHOOO');
                     save = $('#' + a).html();
                     $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
-                    // console.log($('#' + a).html());
                     setTimeout(function () {
-                        //      console.log("oki");
                         $('#' + a).html(save);
 
                     }, 900);
-                } else if (response.ennemy === 0) {
+                } else if (response.ennemy === 0) { sdfail.play();
                        
                     $('#info').html('vous attaquez dans le vent');
                 }
@@ -370,59 +372,68 @@ $(document).ready(function () {
 
     $('#up').click(function () {
         if (a == 1) {
-
+sdpas.play();
 
             a = 0;
             move(3);
         }
     });
     $('#down').click(function () {
-        if (a == 1) {
+        if (a == 1) {            sdpas.play();
+
             move(4);
             a = 0;
         }
     });
     $('#left').click(function () {
-        if (a == 1) {
+        if (a == 1) {            sdpas.play();
+
             move(2);
             a = 0;
         }
     });
     $('#right').click(function () {
         if (b == 1) {
+            sdpas.play();
             b = 0;
             move(1);
             a = 0;
         }
     });
     $('#aup').click(function () {
-        if (b == 1) {
+        if (b == 1) {           
+
             b = 0;
             attack(3);
         }
     });
     $('#adown').click(function () {
-        if (b == 1) {
+        if (b == 1) {      
+
             b = 0;
-            console.log("oki00");
             attack(4);
         }
     });
     $('#aleft').click(function () {
-        if (b == 1) {
+        if (b == 1) {       
+
             b = 0;
             attack(2);
         }
     });
     $('#aright').click(function () {
-        if (b == 1) {
+        //var player = document.querySelector('#son');
+        // audioElement.play();
+        if (b == 1) {       
+
             b = 0;
             attack(1);
 
         }
     });
     $('#cri').click(function () {
-        if (b == 1) {
+        if (b === 1) {
+             sdcri.play();
             b = 0;
             cri();
 
@@ -446,15 +457,20 @@ $(document).ready(function () {
     });
 
     $('#sh').click(function () {
+        if(a===1){
         supsh();
+    a=0;}
     });
 
     $('#ssi').click(function () {
-        supssi();
+                if(a===1){
+
+        supssi();    a=0;}
     });
     $('#sst').click(function () {
+        if(a===1){
 
-        supsst();
+        supsst();    a=0;}
     });
 
     setInterval(function () {
@@ -463,7 +479,6 @@ $(document).ready(function () {
 
     setInterval(function () {
         b = 1;
-        //   console.log(b);
     }, 1300);
     
     
