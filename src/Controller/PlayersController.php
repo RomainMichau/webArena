@@ -39,7 +39,7 @@ class PlayersController  extends AppController
             $user->password = $this->request->getData("password"); //Récupère le password
                         if($this->Players->userExists($this->request->getData("email"))){
 
-                             $this->Flash->error(__('l\adresse mail est deja utilisé.'))
+                             $this->Flash->error(__('l\'adresse mail est deja utilisé.'))
                             ;
                         }else{
             if ($this->Players->save($user)) { //Si on arrive a sauvegarder

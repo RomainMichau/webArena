@@ -7,10 +7,11 @@
          
 
     $this->assign('title', $titredepage);?>
-    <?= $this->Html->media('s.mp3', [
-    'id' => 'sdcri'
-]) ?>
-²
+    <?= $this->Html->media('s.mp3', [    'id' => 'sdcri']) ?>
+    <?= $this->Html->media('pas.mp3', [    'id' => 'sdpas']) ?>
+    <?= $this->Html->media('esquive.mp3', [    'id' => 'sdattack']) ?>
+    <?= $this->Html->media('blessure.mp3', [    'id' => 'sdblesse']) ?>
+
     <audio id="audioPlayer" src="https://occasional-respect.000webhostapp.com/audio.mp3"></audio>  
     <div id='okui'>
         vous avez gagnez 1 action toute les <?php echo $actiontime ?> secondes. (max:  <?php echo $actionmax ?> )

@@ -5,6 +5,9 @@ $(document).ready(function () {
     var a, b;
    
 var sdcri = document.querySelector('#sdcri');
+var sdpas = document.querySelector('#sdpas');
+var sdfail= document.querySelector('#sdattack');
+var sdblesse= document.querySelector('#sdblesse');
     function tocoor(x, y) {
         if (x > 15)
             return null;
@@ -204,7 +207,7 @@ var sdcri = document.querySelector('#sdcri');
 
                 if (response.success === 1) {
 
-
+                    sdblesse.play();
                     if (response.death === 0) {
 
                         $('#info').html('l attaque est un succes, vie restante de ' + response.name + ':' + response.health);
@@ -231,7 +234,7 @@ var sdcri = document.querySelector('#sdcri');
                     }
 
                 } else if (response.ennemy === 1) {
-
+                        sdfail.play();
                     $('#info').html(response.name + ' esquive le coup, il est CHOOO');
                     save = $('#' + a).html();
                     $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
@@ -239,7 +242,7 @@ var sdcri = document.querySelector('#sdcri');
                         $('#' + a).html(save);
 
                     }, 900);
-                } else if (response.ennemy === 0) {
+                } else if (response.ennemy === 0) { sdfail.play();
                        
                     $('#info').html('vous attaquez dans le vent');
                 }
@@ -365,54 +368,60 @@ var sdcri = document.querySelector('#sdcri');
 
     $('#up').click(function () {
         if (a == 1) {
-
+sdpas.play();
 
             a = 0;
             move(3);
         }
     });
     $('#down').click(function () {
-        if (a == 1) {
+        if (a == 1) {            sdpas.play();
+
             move(4);
             a = 0;
         }
     });
     $('#left').click(function () {
-        if (a == 1) {
+        if (a == 1) {            sdpas.play();
+
             move(2);
             a = 0;
         }
     });
     $('#right').click(function () {
         if (b == 1) {
+            sdpas.play();
             b = 0;
             move(1);
             a = 0;
         }
     });
     $('#aup').click(function () {
-        if (b == 1) {
+        if (b == 1) {           
+
             b = 0;
             attack(3);
         }
     });
     $('#adown').click(function () {
-        if (b == 1) {
+        if (b == 1) {      
+
             b = 0;
             attack(4);
         }
     });
     $('#aleft').click(function () {
-        if (b == 1) {
+        if (b == 1) {       
+
             b = 0;
             attack(2);
         }
     });
     $('#aright').click(function () {
         //var player = document.querySelector('#son');
-       
         // audioElement.play();
-        if (b == 1) {
+        if (b == 1) {       
+
             b = 0;
             attack(1);
 
