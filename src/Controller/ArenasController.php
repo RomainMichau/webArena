@@ -45,6 +45,8 @@ class ArenasController extends AppController {
         if (!$this->hasAFighter()) {
             return null;
         }
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
 
         // pr(self::$pri);
         //  pr($this->Auth->user());
@@ -107,6 +109,8 @@ class ArenasController extends AppController {
         if (!$this->hasAFighter()) {
             return null;
         }
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
 
         // Loading of models and curent visible events
         $this->loadModel('Fighters');
@@ -122,6 +126,14 @@ class ArenasController extends AppController {
     }
 
     public function guilds() {
+
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
+
         $this->loadModel('Fighters');
         $this->loadModel('Guilds');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
@@ -161,6 +173,14 @@ class ArenasController extends AppController {
     }
 
     public function guild($id) {
+
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+        
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
+
         $this->loadModel('Fighters');
         $this->loadModel('Guilds');
         $guid = $this->Guilds->getGuild($id);
@@ -181,6 +201,14 @@ class ArenasController extends AppController {
     }
 
     public function fighter() {
+
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+        
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
+
         $this->hasAFighter();
         $this->loadModel('Fighters');
 
@@ -225,13 +253,21 @@ class ArenasController extends AppController {
                         copy('img/' . 'img_not_found.png', 'img/' . 'f' . $newId . ".png");
                     }
                     $this->request->session()->write('user_fighter_id', $newId);               // Id du fighter dans la session
-                    $this->redirect(['controller' => 'Arenas', 'action' => 'fighter', $newId]);
+                    $this->redirect(['controller' => 'Arenas', 'action' => 'sight']);
                 }
             }
         }
     }
 
     public function editFighter($id) {
+
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+        
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
+
         $this->loadModel('Fighters');
         $validator = new Validator();
 

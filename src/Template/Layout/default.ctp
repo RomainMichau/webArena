@@ -88,7 +88,7 @@
                                         echo '</ul>';
                                     echo '</li>';
                                     echo '<li id="players-access">';
-                                    echo '<button type="button" class="button" data-toggle="players"> Population <i class="fi-mail"></i></button>';
+                                    echo '<button type="button" class="button" data-toggle="fighters"> Population <i class="fi-mail"></i></button>';
                                     echo '</li>';
                                     echo '</ul>';
                                     echo '</div>';
@@ -181,18 +181,42 @@
         <?php if(isset($in_game))                               
                {
         ?> 
-        <!-- PLAYERS LIST (OFF CANVAS) -->
-        <div class="off-canvas position-right" id="players" data-off-canvas>
+        <!-- FIGHTERS LIST (OFF CANVAS) -->
+        <div class="off-canvas position-right" id="fighters" data-off-canvas>
             <!-- Close button -->
             <button class="close-button" aria-label="Close menu" type="button" data-close>
                 <span aria-hidden="true">&times;</span>
             </button>
 
-            <!-- Menu -->
-            <ul class="vertical menu">
-                
-            </ul>
-        </div>
+                <!-- If no other fighter, simply display a message -->
+
+                <?php if($this->request->session()->read('fighters_nb') == 0)                               
+                      {
+                ?> 
+                    <p id="nobody-here">
+                        Vous êtes seul sur la grille !
+                    </p>
+                <?php
+                      }
+
+                 // Else, dynamic menu [Photo] name [lvl]
+                 else                               
+                      {
+                ?> 
+                        <ul id="fighters-list" class="vertical menu align-center icons icon-left">
+                        <?php for($i = 1; $i <= $this->request->session()->read('fighters_nb'); $i++): ?>
+
+                            <?php $fighter_i = $this->request->session()->read('fighter' . $i); ?>
+                        
+                            <li> 
+                                <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' ' . $fighter_i->level . '</span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?> 
+                            </li>
+
+                        <?php endfor; ?>
+                        </ul>
+                <?php
+                      }
+                ?>
        <?php
                 }
         ?>

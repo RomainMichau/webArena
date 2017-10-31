@@ -24,6 +24,12 @@ class MessagesController  extends AppController
 
     public function conversation($id1, $id2)
     {
+        if (!$this->hasAFighter()) {
+            return null;
+        }
+        // Mise à jour des fighters dans la session
+        $this->updateSession();
+        
         $this->loadModel('Messages');
         $this->loadModel('Fighters');
         $messages = $this->Messages->getAllMessagesWith($id1, $id2);
@@ -70,7 +76,36 @@ class MessagesController  extends AppController
 
 
     }
+
+      public function hasAFighter() {
+        $this->loadModel('Fighters');
+        $fighters = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id']);
+        //   pr($fighters);
+        if ($fighters == NULL) {
+            //  pr('zsdertdefrg');
+            $this->redirect(['controller' => 'Arenas', 'action' => 'createFighter', 1]);
+            return false;
+        } else {
+            return true;
+        }
+    }
     
-    //public function messages(){}
+    // Re-put every fighters info in session (apart from current player)
+    public function updateSession() {
+        $this->loadModel('Fighters');
+        $fighters = $this->Fighters->getAllFighters();
+        $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
+
+        $fighters_nb = count($fighters) - 1;                                // Minus current player
+        $this->request->session()->write('fighters_nb', $fighters_nb); 
+
+        $fighter_no = 1;
+        foreach($fighters as $fighter) {
+            if($fighter->id !== $idFighterAuth) {
+                $this->request->session()->write('fighter' . $fighter_no, $fighter);
+                $fighter_no++;
+            }
+        }
+    }
     
 }
