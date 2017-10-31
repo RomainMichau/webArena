@@ -152,12 +152,35 @@ OFF CANVAS CONTENT
 }
 
 #fighters-list {
-    margin-top: 60px;
+    margin-top: 77px;
+}
+#fighters-list img {
+    width: 40px; 
+    height: 40px;
+    margin-right: 20px;
+}
+#fighters-list a {
+    padding-left: 30px;
+    line-height: 39px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-#fighters-list li {
-    padding: 5px 0;
+#fighters-list a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
+.level {
+    color: rgb(188, 107, 15);
+}
+#fighters-list hr, #nolody-here hr {
+    border-color: rgba(255, 255, 255, 0.2); 
+    margin: 2px 0;
+}
+#nobody-here {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 96px;
+    padding-left: 22px;
+}
+
 /* *************************************************************************
 TO MOVE
 ************************************************************************* */

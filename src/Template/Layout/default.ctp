@@ -196,6 +196,7 @@
                     <p id="nobody-here">
                         Vous êtes seul sur la grille !
                     </p>
+                    <hr />
                 <?php
                       }
 
@@ -203,13 +204,14 @@
                  else                               
                       {
                 ?> 
-                        <ul id="fighters-list" class="vertical menu align-center icons icon-left">
+                        <ul id="fighters-list" class="vertical menu align-left icons icon-left">
                         <?php for($i = 1; $i <= $this->request->session()->read('fighters_nb'); $i++): ?>
 
                             <?php $fighter_i = $this->request->session()->read('fighter' . $i); ?>
                         
                             <li> 
-                                <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' ' . $fighter_i->level . '</span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?> 
+                                <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' <span class="level">[' . $fighter_i->level . ']</span></span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?> 
+                                <hr />
                             </li>
 
                         <?php endfor; ?>
