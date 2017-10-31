@@ -59,7 +59,7 @@
                                     echo '<ul class="vertical menu expanded align-center">';   
                                     echo '<li>';          
                                     echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
-                                    echo '</li> <li>';  
+                                    echo '</li> <br> <li>';
                                     echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);
                                     echo '</li>';  
                                     echo '</ul>'; 
