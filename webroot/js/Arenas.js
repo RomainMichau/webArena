@@ -354,7 +354,7 @@ var sdblesse= document.querySelector('#sdblesse');
                 $('#lvl').text(parseInt($('#lvl').text()) + 1);
                 $('#skil').text(parseInt($('#skil').text()) - 1);
                 $('#vie').text(parseInt($('#psh').text()));
-                if ($('#skil').text() == '0') {
+                if ($('#skil').text() === '0') {
                     $('#bsh').html('');
                     $('#bssi').html('');
                     $('#bsst').html('');

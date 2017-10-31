@@ -12,6 +12,8 @@ class FightersTable extends Table {
     private static $SKILL_H_INIT = 5;
     private static $SKILL_SI_INIT = 2;
     private static $SKILL_ST_INIT = 1;
+    private static $BEGIN_LVL = 0;
+    private static $BEGIN_XP = 0;
 
     public function getAllFighters() {
         $fighters = $this->find('all')->from("fighters")->toArray();
@@ -117,8 +119,8 @@ class FightersTable extends Table {
         $fighter->player_id = $player_id;
         $fighter->coordinate_x = $x;
         $fighter->coordinate_y = $y;
-        $fighter->level = 1;
-        $fighter->xp = 0;
+        $fighter->level = static::$BEGIN_LVL;
+        $fighter->xp = static::$BEGIN_XP;
         $fighter->skill_sight = static::$SKILL_SI_INIT;
         $fighter->skill_strength = static::$SKILL_ST_INIT;
         $fighter->skill_health = static::$SKILL_H_INIT;
