@@ -109,10 +109,10 @@
                     <!-- NAVIGATION BETWEEN GAME PAGES -->
                     <nav class="medium-2 small-2 cell">
                         <ul class="vertical menu align-center icons icon-top">
-                            <li class="<?= $this->fetch('title') === 'Vision' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-map"></i> <span>Vision</span>', ['controller' => 'Arenas', 'action' => 'sight'], ['escape' => false]); ?> </li>
-                            <li class="<?= $this->fetch('title') === 'Journal' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-book"></i> <span>Journal</span>', ['controller' => 'Arenas', 'action' => 'diary'], ['escape' => false]); ?> </li>
-                            <li class="<?= $this->fetch('title') === 'Combattant' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torso"></i> <span>Combattant</span>', ['controller' => 'Arenas', 'action' => 'fighter'], ['escape' => false]); ?> </li>
-                            <li class="<?= $this->fetch('title') === 'Guildes' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torsos-all"></i> <span>Guildes</span>', ['controller' => 'Arenas', 'action' => 'guilds'], ['escape' => false]); ?> </li>
+                            <li class="<?= $this->fetch('title') === 'Vision' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-map"></i> <span class="show-for-medium">Vision</span>', ['controller' => 'Arenas', 'action' => 'sight'], ['escape' => false]); ?> </li>
+                            <li class="<?= $this->fetch('title') === 'Journal' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-book"></i> <span class="show-for-medium">Journal</span>', ['controller' => 'Arenas', 'action' => 'diary'], ['escape' => false]); ?> </li>
+                            <li class="<?= $this->fetch('title') === 'Combattant' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torso"></i> <span class="show-for-medium">Combattant</span>', ['controller' => 'Arenas', 'action' => 'fighter'], ['escape' => false]); ?> </li>
+                            <li class="<?= $this->fetch('title') === 'Guildes' ? 'is-active' : ''; ?>"> <?= $this->Html->link('<i class="fi-torsos-all"></i> <span class="show-for-medium">Guildes</span>', ['controller' => 'Arenas', 'action' => 'guilds'], ['escape' => false]); ?> </li>
                         </ul>
                     </nav>
 
