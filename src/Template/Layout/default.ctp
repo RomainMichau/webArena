@@ -44,13 +44,12 @@
                             if(!$user)              
                                 echo $this->Html->link('Web Arena', ['controller' => 'Arenas', 'action' => 'index'], ['id' => 'site-title', 'title' => 'Retour à l\'accueil']);
                             else   
-                                echo $this->Html->link('Web Arena' . '<img src="/webArena/img/layout/deco.png" alt="[Déconnexion]" id="logout-img"/>', ['controller' => 'Players', 'action' => 'logout'], ['escape' => false, 'id' => 'site-title', 'title' => 'Déconnexion']);
+                                echo $this->Html->link('<img src="/webArena/img/layout/deco.png" alt="[Déconnexion]" id="logout-img"/>' . 'Web Arena', ['controller' => 'Players', 'action' => 'logout'], ['escape' => false, 'id' => 'site-title', 'title' => 'Déconnexion']);
                         ?>
                         </li>
                     </ul>
                 </div>
-                
-                <!-- RIGHT SIDE -->
+            
                <!-- RIGHT SIDE -->
                 <?php
                     switch($this->fetch('title'))
