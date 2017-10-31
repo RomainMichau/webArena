@@ -36,31 +36,10 @@ $(document).ready(function () {
                 alertmessage();
                 //    console.log("1");
             }, 5000);
+  alertmessage();
 
 
-
-    $('.bailleducanvas').click(function () {
-        //  alert($(this).css("background-color"));
-        var i=this.id;
-// alert("oki");
-        if ($(this).css("background-color") === color) {
-            i=i.replace('canvas','');
-             $.ajax({
-            url: '/webArena/arenas/messagelu/'+i,
-            type: 'GET',
-            dataType: 'JSON',
-
-            success: function (response) {
-
-             
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-        }
-
-    });
+  
 });
 
 

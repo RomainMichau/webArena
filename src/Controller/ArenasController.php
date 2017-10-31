@@ -771,6 +771,8 @@ class ArenasController extends AppController {
         }
     }
    public function messagelu($idfrom) {
+          $this->set('done',1);
+
         $this->RequestHandler->renderAs($this, 'json');
         $this->response->type('application/json');
         $this->viewBuilder()->layout('ajax');
@@ -778,6 +780,7 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
           $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
    $this->Messages->setRead($idfrom,$fighter->id);
+   $this->set('done',1);
    //$this->set('res',$this->Messages->checkread($idfrom,$fighter->id));
   // $this->set('$idfrom',$idfrom); $this-> set('$idto',$fighter->id);
    

@@ -1,5 +1,7 @@
 <?php
+ echo  $this->Html->script('messagelu');
  echo  $this->Html->script('Message');
+
 $this->assign('title', 'Conversation'); ?>
 <div class="grid-container">
     <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
@@ -12,7 +14,10 @@ $this->assign('title', 'Conversation'); ?>
             <div class="cell">
                 <div class="card" style="width: 300px;">
                     <div class="card-divider">
-                        <p> from: <?php echo $tab[$i]->name?> </p>
+                      <?php if($tab[$i]->name=="moi") {  ?>
+                      <p> <?php } else { ?> 
+                      <p class='autre' id=<?= $tab[$i]->id ?> >  <?php } ?> 
+                            from: <?php echo $tab[$i]->name?> </p>
                         <?php echo $this->Html->image('f'.$tab[$i]->id.'.png', ['alt' => 'imgNotFound','width'=>'80','height'=>'80']); ?>
                     </div>
                     <div class="card-section">
