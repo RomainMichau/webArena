@@ -65,7 +65,7 @@ class ArenasController extends AppController {
 
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
-        
+
         //  pr(  $ennemy=$this->Fighters->getFighterByCoord($fighter->coordinate_x+1, $fighter->coordinate_y));
         $this->set('titredepage', 'Vision');
         $this->set('actionmax', $this->Fighters->getMaxAction());
@@ -97,8 +97,8 @@ class ArenasController extends AppController {
         $this->set('jy', $fighter->coordinate_y);
 
         // Id du fighter dans la session si on ne l'a pas déjà fait
-        if(!$this->request->session()->read('user_fighter_id'))
-            $this->request->session()->write('user_fighter_id', $fighter['id']); 
+        if (!$this->request->session()->read('user_fighter_id'))
+            $this->request->session()->write('user_fighter_id', $fighter['id']);
     }
 
     //DIARY
@@ -140,33 +140,29 @@ class ArenasController extends AppController {
         $guilds = $this->Guilds->getAllGuilds();
         $this->set('guilds', $guilds);
         $this->set('fighter', $fighter);
-        
+
 
         $newGuild = $this->request->getData();
 
-        if($newGuild)
-        {
+        if ($newGuild) {
             $idNewGuild = $this->Guilds->addGuild($newGuild);
             $this->joinGuild($idNewGuild);
             $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
         }
     }
 
-    public function joinGuild($newidGuild,$oldidGuild = NULL) {
+    public function joinGuild($newidGuild, $oldidGuild = NULL) {
         $this->loadModel('Fighters');
         $this->loadModel('Guilds');
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        
-        
+
+
         $this->Fighters->updateGuildId($newidGuild, $fighter);
-        if($newidGuild != 0)
-        {
+        if ($newidGuild != 0) {
             $this->redirect(['controller' => 'Arenas', 'action' => 'guild', $newidGuild]);
-        }
-        else
-        {  // pr($idGuild);
-            if($this->Fighters->nbMembre($oldidGuild)<=0){
-              //  $this->Guilds->deleteGuilds($oldidGuild);
+        } else {  // pr($idGuild);
+            if ($this->Fighters->nbMembre($oldidGuild) <= 0) {
+                //  $this->Guilds->deleteGuilds($oldidGuild);
             }
             $this->redirect(['controller' => 'Arenas', 'action' => 'guilds']);
         }
@@ -177,7 +173,7 @@ class ArenasController extends AppController {
         if (!$this->hasAFighter()) {
             return null;
         }
-        
+
         // Mise à jour des fighters dans la session
         $this->updateSession();
 
@@ -205,7 +201,7 @@ class ArenasController extends AppController {
         if (!$this->hasAFighter()) {
             return null;
         }
-        
+
         // Mise à jour des fighters dans la session
         $this->updateSession();
 
@@ -231,7 +227,7 @@ class ArenasController extends AppController {
 
 
         do {
-            $x = rand(1,$this->Parameters->get_size_x() );
+            $x = rand(1, $this->Parameters->get_size_x());
             $y = rand(1, $this->Parameters->get_size_y());
         } while (
         null != ($this->Fighters->getFighterByCoord($x, $y)) || null != $this->Surroundings->getSurroundingByCoord($x, $y));
@@ -264,7 +260,7 @@ class ArenasController extends AppController {
         if (!$this->hasAFighter()) {
             return null;
         }
-        
+
         // Mise à jour des fighters dans la session
         $this->updateSession();
 
@@ -368,7 +364,7 @@ class ArenasController extends AppController {
                 $sur = $this->Surroundings->getSurroundingByCoord($x, $y + 1);
             }
             if ($ennemy == NULL && $sur == NULL) {
-               $success=$this->Fighters->moveFighter($id, $dir);
+                $success = $this->Fighters->moveFighter($id, $dir);
             }
             $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
 
@@ -647,22 +643,22 @@ class ArenasController extends AppController {
         $this->loadModel('Fighters');
         $this->loadModel('Parameters');
         $myfighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
-        $x2=$myfighter->coordinate_x;
-        $y2=$myfighter->coordinate_y;
+        $x2 = $myfighter->coordinate_x;
+        $y2 = $myfighter->coordinate_y;
         $this->loadModel('Surroundings');
-        $maxx=$this->Parameters->get_size_x();
+        $maxx = $this->Parameters->get_size_x();
         $success = 0;
         $x = $coord % $maxx;
         if ($x == 0) {
             $x = $maxx;
         }
         $y = (($coord - $x) / $maxx) + 1;
-       
-            $ennemy = $this->Fighters->getFighterByCoord($x, $y);
+
+        $ennemy = $this->Fighters->getFighterByCoord($x, $y);
         //    $this->set("vue",abs($x-$x2)+abs($y-$y2));
-             if (abs($x-$x2)+abs($y-$y2)>$myfighter->skill_sight){
-                 $ennemy=null;
-             }
+        if (abs($x - $x2) + abs($y - $y2) > $myfighter->skill_sight) {
+            $ennemy = null;
+        }
         if (!isset($ennemy)) {
             $sur = $this->Surroundings->getSurroundingByCoord($x, $y);
             if (isset($sur)) {
@@ -740,23 +736,21 @@ class ArenasController extends AppController {
         $this->viewBuilder()->layout('ajax');
         $this->loadModel('Messages');
         $this->loadModel('Fighters');
-        $a = 0;
+        $tab =array();
         $time = new Time();
         $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
         $message = $this->Messages->getNewMessage($fighter->id);
         for ($i = 0; $i < sizeof($message); $i++) {
+         //   $this->set("ok",1);
             $time = $message[$i]->date;
-            if ($time->wasWithinLast('5 seconds')) {
-                $a++;
-                $fighter2 = $this->Fighters->getFighterById($message[$i]->fighter_id_from);
-                $this->set('a', $a);
-                $this->set('id2', $fighter2->id);
-                $this->set('name', $fighter2->name);
-            }
+
+            $fighter2 = $this->Fighters->getFighterById($message[$i]->fighter_id_from);
+            array_push($tab, $fighter2->id);
         }
+        
+        $this->set('tab', $tab);
         $this->set('id1', $fighter->id);
 
-        $this->set('a', $a);
     }
 
     // Re-put every fighters info in session (apart from current player)
@@ -766,15 +760,28 @@ class ArenasController extends AppController {
         $idFighterAuth = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0]->id;
 
         $fighters_nb = count($fighters) - 1;                                // Minus current player
-        $this->request->session()->write('fighters_nb', $fighters_nb); 
+        $this->request->session()->write('fighters_nb', $fighters_nb);
 
         $fighter_no = 1;
-        foreach($fighters as $fighter) {
-            if($fighter->id !== $idFighterAuth) {
+        foreach ($fighters as $fighter) {
+            if ($fighter->id !== $idFighterAuth) {
                 $this->request->session()->write('fighter' . $fighter_no, $fighter);
                 $fighter_no++;
             }
         }
     }
-
+   public function messagelu($idfrom) {
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->response->type('application/json');
+        $this->viewBuilder()->layout('ajax');
+        $this->loadModel('Messages');
+        $this->loadModel('Fighters');
+          $fighter = $this->Fighters->getAllFightersByPlayerId($this->Auth->user()['id'])[0];
+   $this->Messages->setRead($idfrom,$fighter->id);
+   //$this->set('res',$this->Messages->checkread($idfrom,$fighter->id));
+  // $this->set('$idfrom',$idfrom); $this-> set('$idto',$fighter->id);
+   
+   
+   
+   }
 }

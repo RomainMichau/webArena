@@ -56,7 +56,7 @@ var sdblesse= document.querySelector('#sdblesse');
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                //    alert(errorThrown);
                 }
             });
         }

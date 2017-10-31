@@ -28,13 +28,32 @@ class MessagesTable extends Table
         $message->date = date('Y-m-d H:i:s');
         $message->fighter_id_from = $idFighterAuth;
         $message->fighter_id = $idReceiver;
-        $message->title = "message non lu";
+        $message->title = "nl";
         $this->save($message);
     }
 
     public  function getNewMessage($id){
-                $messages = $this->find('all')->from("messages")->where('DATE(date)=CURRENT_DATE  AND fighter_id ='.$id);
+                $messages = $this->find('all')->from("messages")->where('title = \'nl\'  AND fighter_id ='.$id);
                 return $messages->toArray();
+
+    }
+
+    
+      public  function checkread($idfrom,$idto){
+                
+                $mes=$this->find(all)
+        -> where(['fighter_id_from '=> $idfrom  ,'fighter_id '=> $idto ,'title' => 'nl'])
+        ;
+                return $mes->toArray();
+
+    }
+    public  function setRead($idfrom,$idto){
+                
+                $this->query()
+        ->update()
+        ->set(['title' => 'lu'])
+        -> where(['fighter_id_from '=> $idfrom  ,'fighter_id '=> $idto ,'title' => 'nl'])
+        ->execute();
 
     }
 }

@@ -210,8 +210,9 @@
 
                             <?php $fighter_i = $this->request->session()->read('fighter' . $i); ?>
                         
-                            <li id='<?='canvas'.$fighter_i->id ?>'> 
-                                <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' <span class="level">[' . $fighter_i->level . ']</span></span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?> 
+                            <li id='<?='canvas'.$fighter_i->id ?>' class='bailleducanvas'>      <!-- j'utilise ça dans le js , merci de pas surprimer sans me demander ROMAIN --> 
+                               <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' <span class="level">[' . $fighter_i->level . ']</span></span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?>
+                                    
                                 <hr />
                             </li>
 

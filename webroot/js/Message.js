@@ -5,6 +5,7 @@
  */
 
 $(document).ready(function () {
+    var color = 'rgb(255, 0, 0)';
     function alertmessage() {
         $.ajax({
             url: '/webArena/arenas/alertmessage/',
@@ -12,12 +13,16 @@ $(document).ready(function () {
             dataType: 'JSON',
 
             success: function (response) {
-                if (response.a >= 1) {
-                  //  alert('vous avez ' + response.a + ' nouveaux messages');
-                //  var a=  '<a href=\'/webArena/messages/conversation/'+response.id1+'/'+response.id2+'\'>'+'vous avez '+response.a+' nouveau(x) message(s) de '+response.name+'</a>';
-                   $('#pop').css('background-color','red');
-                  $('#canvas'+response.id2).css('background-color','red');
-               }
+
+                var i = 0;
+                if (response.tab.length >= 1) {
+                    $('#pop').css('background-color', color);
+                    for (i = 0; i < response.tab.length; i++) {
+                        //  alert('vous avez ' + response.a + ' nouveaux messages');
+                        //  var a=  '<a href=\'/webArena/messages/conversation/'+response.id1+'/'+response.id2+'\'>'+'vous avez '+response.a+' nouveau(x) message(s) de '+response.name+'</a>';
+                        $('#canvas' + response.tab[i]).css('background-color', 'red');
+                    }
+                }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -29,7 +34,33 @@ $(document).ready(function () {
     setInterval(
             function () {
                 alertmessage();
-                  //console.log("1");
+                //    console.log("1");
             }, 5000);
 
+
+
+    $('.bailleducanvas').click(function () {
+        //  alert($(this).css("background-color"));
+        var i=this.id;
+// alert("oki");
+        if ($(this).css("background-color") === color) {
+            i=i.replace('canvas','');
+             $.ajax({
+            url: '/webArena/arenas/messagelu/'+i,
+            type: 'GET',
+            dataType: 'JSON',
+
+            success: function (response) {
+
+             
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+        }
+
+    });
 });
+
+
