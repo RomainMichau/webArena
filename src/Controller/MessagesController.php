@@ -55,9 +55,9 @@ class MessagesController  extends AppController
         if($fighter->id == $id1 or $fighter->id == $id2)
         {
             $newMessage = $this->request->getData();
-
-            if($newMessage)
-            {
+           
+            if($newMessage&&$newMessage['nouveau_message']!='')
+            { 
                 if($id1 == $fighter->id)
                 {$idReceiver = $id2; $idFighterAuth = $fighter->id;}
                 else

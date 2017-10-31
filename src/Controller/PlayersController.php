@@ -57,7 +57,7 @@ class PlayersController  extends AppController
     
     //Login un utilisateur a partir d'un email (username) et un password
     public function login()
-    {
+    {   
         
          $this->set('titredepage', 'Connexion');
          
