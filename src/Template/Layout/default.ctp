@@ -22,6 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <?= $this->Html->css(['foundation.css', 'foundation-icons/foundation-icons.css', 'webarena.css']) ?>
+        <?= $this->Html->script('jquery') ?>
 
         <title> <?= $this->fetch('title') ?> </title>
         <?= $this->Html->meta('icon') ?>
@@ -88,7 +89,7 @@
                                         echo '</ul>';
                                     echo '</li>';
                                     echo '<li id="players-access">';
-                                    echo '<button type="button" class="button" data-toggle="fighters"> Population <i class="fi-mail"></i></button>';
+                                    echo '<button type="button" class="button" data-toggle="fighters" id="pop"  > Population <i class="fi-mail"></i></button>';
                                     echo '</li>';
                                     echo '</ul>';
                                     echo '</div>';
@@ -209,7 +210,7 @@
 
                             <?php $fighter_i = $this->request->session()->read('fighter' . $i); ?>
                         
-                            <li> 
+                            <li id='<?='canvas'.$fighter_i->id ?>'> 
                                 <?= $this->Html->link($this->Html->image('/img/f' . $fighter_i->id . '.png', ['alt' => 'Icon']) . ' <span>' . $fighter_i->name . ' <span class="level">[' . $fighter_i->level . ']</span></span>', ['controller' => 'Messages', 'action' => 'conversation', $fighter_i->id, $this->request->session()->read('user_fighter_id')], ['escape' => false]); ?> 
                                 <hr />
                             </li>
@@ -222,6 +223,6 @@
        <?php
                 }
         ?>
-        <?= $this->Html->script(['jquery', '/vendor/jquery', '/vendor/what-input', '/vendor/foundation', 'Arenas']) ?>
+        <?= $this->Html->script([ '/vendor/jquery', '/vendor/what-input', '/vendor/foundation', 'Arenas']) ?>
     </body>
 </html>

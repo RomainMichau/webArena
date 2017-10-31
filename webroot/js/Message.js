@@ -14,9 +14,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.a >= 1) {
                   //  alert('vous avez ' + response.a + ' nouveaux messages');
-                  var a=  '<a href=\'/webArena/messages/conversation/'+response.id1+'/'+response.id2+'\'>'+'vous avez '+response.a+' nouveau(x) message(s) de '+response.name+'</a>';
-                   $('#newmessage').html(a);
-                }
+                //  var a=  '<a href=\'/webArena/messages/conversation/'+response.id1+'/'+response.id2+'\'>'+'vous avez '+response.a+' nouveau(x) message(s) de '+response.name+'</a>';
+                   $('#pop').css('background-color','red');
+                  $('#canvas'+response.id2).css('background-color','red');
+               }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
