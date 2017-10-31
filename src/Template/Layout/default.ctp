@@ -44,25 +44,25 @@
                             if(!$user)              
                                 echo $this->Html->link('Web Arena', ['controller' => 'Arenas', 'action' => 'index'], ['id' => 'site-title', 'title' => 'Retour à l\'accueil']);
                             else   
-                                echo $this->Html->link('Web Arena' . '<img src="/webArena/img/layout/deco.png" alt="[Déconnexion]" id="logout-img"/>', ['controller' => 'Players', 'action' => 'logout'], ['escape' => false, 'id' => 'site-title', 'title' => 'Déconnexion']);
+                                echo $this->Html->link('<img src="/webArena/img/layout/deco.png" alt="[Déconnexion]" id="logout-img"/>' . 'Web Arena', ['controller' => 'Players', 'action' => 'logout'], ['escape' => false, 'id' => 'site-title', 'title' => 'Déconnexion']);
                         ?>
                         </li>
                     </ul>
                 </div>
-                
-                <!-- RIGHT SIDE -->
+            
+               <!-- RIGHT SIDE -->
                 <?php
                     switch($this->fetch('title'))
                         {
                             case 'Accueil':   
                                     echo '<div class="top-bar-right" id="login-corner">';  
-                                    echo '<ul class="vertical menu expanded align-center">';   
-                                    echo '<li>';          
-                                    echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
-                                    echo '</li> <li>';  
-                                    echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);
-                                    echo '</li>';  
-                                    echo '</ul>'; 
+                                        echo '<ul class="vertical menu align-center">';   
+                                        echo '<li>';          
+                                        echo $this->Html->link('Connexion' , ['controller' => 'Players', 'action' => 'login']);   
+                                        echo '</li> <li>';  
+                                        echo $this->Html->link('Inscription' , ['controller' => 'Players', 'action' => 'add']);
+                                        echo '</li>';  
+                                        echo '</ul>'; 
                                     echo '</div>';    
                                     break;
                             case 'Vision':
@@ -77,7 +77,7 @@
                                     echo '<ul class="menu align-center">';
 
                                     echo '<li id="player-info">';                                           
-                                        echo '<ul class="vertical menu expanded align-center">';
+                                        echo '<ul class="vertical menu align-center">';
                                         echo '<li>' . $user['email'] . '</li>';
                                         echo '<li>';
                                         echo $this->Html->link(

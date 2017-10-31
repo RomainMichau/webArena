@@ -37,7 +37,7 @@ IN GAME
 *************************************** */
 #logout-img {
     height: 25px;
-    padding-left: 20px;
+    margin-right: 20px;
 }
 #ingame-corner {
     margin-right: 30px;
@@ -170,7 +170,10 @@ MEDIA QUERIES
 /* Small only */
 @media screen and (max-width: 39.9375em) {
     nav i {
-        font-size: 1.2em;
+        font-size: 1.2em; 
+    }
+    #site-title {
+        font-size: 2em;
     }
 }
 
