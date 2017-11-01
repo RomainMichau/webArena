@@ -72,11 +72,16 @@ CENTER BLOC
     min-height: 100vh;
     background-image: url('../img/layout/vintage-concrete.png');
 }
+#index-content {
+    min-height: 100vh;
+    background-image: url("../img/layout/index.jpg");
+}
+
 /* *************************************************************************
 NAVIGATION
 ************************************************************************* */
 nav {
-    background-color: #591310;
+    background-image: url("../img/layout/side.jpg");
     padding-top: 50px;
     border-right: 3px solid #591310;
 }
@@ -101,7 +106,7 @@ nav i {
     color: rgba(0, 0, 0, 0.9);
 }
 /* *************************************************************************
-CONTENU - PAGE XXX
+CONTENU - PAGE ACCUEIL
 ************************************************************************* */
 
 /* *************************************************************************

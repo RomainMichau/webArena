@@ -101,7 +101,7 @@
             </header>
 
             <!-- CENTER BLOCK -->
-            <div class="grid-x" id="center-block">
+            <div class="grid-x" id="<?= $this->fetch('title') === 'Accueil' ? 'index-content' : 'center-block' ?>">
 
                 <!-- CASE IN GAME -->
                 <?php if(isset($in_game))                               
@@ -130,12 +130,11 @@
                         {
                 ?> 
                     <!-- PAGE CONTENT -->
-                    <?= $this->Flash->render() ?>    
-                    <div class="wrap">                    
-                        <div class="cell" id="page-content">
+                    <?= $this->Flash->render() ?>                    
+                    <div class="cell" id="page-content">
                             <?= $this->fetch('content') ?>
-                        </div>  
-                    </div>
+                    </div>  
+
                 <?php
                         }
                 ?>

@@ -1,3 +1,1 @@
-<div class="row">
-    <?php $this->assign('title', $titredepage);?>
-</div>
+<?php $this->assign('title', $titredepage);?>
