@@ -226,6 +226,7 @@ var sdblesse= document.querySelector('#sdblesse');
                         $('#info').html('l attaque est un succes, et tue' + response.name);
                         save = ' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
                         $('#' + a).html(' <img src="/webArena/img/mort.gif" alt="Not found" width="42" height="35"> ');
+                        $('#canvas'+response.idennemy).html("");
 
 
                         setTimeout(function () {
