@@ -256,7 +256,6 @@ var sdblesse= document.querySelector('#sdblesse');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         });
 
@@ -269,8 +268,6 @@ var sdblesse= document.querySelector('#sdblesse');
 
 
         //    $x = floor($coord / 10) + 1;
-        console.log('x' + x + 'y' + (y));
-        console.log(' coor:' + tocoor(x, y));
         $.ajax({
             url: '/webArena/arenas/detect/' + coord,
             type: 'GET',
@@ -287,7 +284,6 @@ var sdblesse= document.querySelector('#sdblesse');
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         });
 
@@ -311,8 +307,7 @@ var sdblesse= document.querySelector('#sdblesse');
 
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
+               error: function (jqXHR, textStatus, errorThrown) {
             }
         });
 
@@ -337,7 +332,6 @@ var sdblesse= document.querySelector('#sdblesse');
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         });
 
@@ -364,7 +358,6 @@ var sdblesse= document.querySelector('#sdblesse');
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         });
 
