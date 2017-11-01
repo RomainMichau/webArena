@@ -1,3 +1,708 @@
+commit cf9d3deaac6e7210360cd0998ec60bde7aa38653
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 22:06:41 2017 +0100
+
+    je met le level a 0
+
+commit 8c447e1f221e546a48fdb096b284f93544624957
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 21:52:33 2017 +0100
+
+    messag lieux
+
+commit a4ab41486be6ac8646bc1036856f04bbb413a924
+Merge: 4f93e69 c68e66b
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 20:18:28 2017 +0100
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 4f93e699698593e3f856a7c500c7305c025abb26
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 20:18:17 2017 +0100
+
+    nouv message
+
+commit c68e66b8c40cd375b372e547f008ac7a703cf80c
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 19:41:32 2017 +0100
+
+    header responsive avant modificaton
+
+commit 08da3ed1ed046f6f3feb4fb412939599a4e3ba61
+Merge: b069d8d 8463de9
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 19:15:25 2017 +0100
+
+    Merge : fix durable header chrome
+
+commit b069d8db8dbc0030b20b073fabb391c530ce5b15
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 19:12:38 2017 +0100
+
+    Fix header
+
+commit 8463de9de7083309570a75635137a391e2e775ec
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Tue Oct 31 18:47:09 2017 +0100
+
+    decoller inscription et connextion
+
+commit bc9f82b6ce588d7198bdf2fdfc1cdd88d687fd3b
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 17:51:50 2017 +0100
+
+    message vide
+
+commit 1f75fe2f28b43423e49f8928e6b6fe2cd08f8a8d
+Merge: 0582707 75a7e47
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 14:53:02 2017 +0100
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 05827070806641ae888d9ad3ab2ed5ab8ea269dd
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Tue Oct 31 14:52:50 2017 +0100
+
+    messa
+
+commit 75a7e477db823860ebe8c4c6fd1c16cf8f0582f1
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 14:39:40 2017 +0100
+
+    nav responsive
+
+commit 156adfa476d7c482a0ec26fa8e5f0f8a8a240c57
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 12:54:50 2017 +0100
+
+    Navigation off canvas terminée sans s'occuper du temps réel
+
+commit aea21617cfbad4fe69fa5987544fa90a4180c36d
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Tue Oct 31 12:02:37 2017 +0100
+
+    Bugs liés à la session corrigés + menu messages fonctionnel
+
+commit 7c8d1abf57c474ee3919650308bf7ba9add65396
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 22:13:01 2017 +0100
+
+    Fonction update session
+
+commit 3b9bb4ac4637fd48fde1e426c360bb1b60046df1
+Merge: 9900ed2 3ef7169
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 21:42:20 2017 +0100
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 9900ed2ae2c3cd00d64267294154752f88a52217
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 21:41:44 2017 +0100
+
+    Ajout de la structure off-canvas
+
+commit 3ef71694e60b4911e4bcef5bef4c7f4a1a1f165c
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Mon Oct 30 19:39:19 2017 +0100
+
+    guild mieux
+
+commit 09e712a612cf4b979968bbd3198e654cd989dd75
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 19:37:04 2017 +0100
+
+    Layout Général [85%] - Ajout de la nav
+
+commit ffd80388885030bf4ac2797cee71bd486bab8cd5
+Merge: 61c67a6 117a040
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 16:20:25 2017 +0100
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 61c67a600cbeacd3852e573c6959664eee2b3d64
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Mon Oct 30 16:16:50 2017 +0100
+
+    Layout général [70%]
+
+commit 117a040967dc0459fa9db6e28c663e7bffc8fa39
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Mon Oct 30 16:16:08 2017 +0100
+
+    on paramtere
+
+commit 5a553cb44b150cf86436993a99e409045912d1c1
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Mon Oct 30 14:35:06 2017 +0100
+
+    new sound
+
+commit 92d751807c12e6528d254e2535202bbbcf380d25
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Mon Oct 30 12:33:31 2017 +0100
+
+    verfif mél
+
+commit 030542ffd984162a6dae7a151d86bbd73c805ffd
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Sun Oct 29 21:42:35 2017 +0100
+
+    sonen local
+
+commit c227801f1b4e7be6db7ca65ae30781720712fc85
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Sun Oct 29 20:37:02 2017 +0100
+
+    bruit'
+
+commit 52be1cf9211365d56bfb433d8f9c2698a40dedf3
+Author: Alexandre <bocketo@gmail.com>
+Date:   Sat Oct 28 19:59:33 2017 +0200
+
+    couleur et margin de la grille de la vision
+
+commit f3a249c9a0ac74af1d10f435d11fffc3d3bc3549
+Merge: 36fa5e2 a6ad99e
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Sat Oct 28 11:55:31 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 36fa5e270933634c2be634f024bad0b3bd183613
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Sat Oct 28 11:55:09 2017 +0200
+
+    Lien au fichier de versions
+
+commit a6ad99e248b0b3d512d2718ec7bbfff9a9f1af47
+Author: Alexandre <bocketo@gmail.com>
+Date:   Sat Oct 28 11:43:34 2017 +0200
+
+    enleve la class height60px
+
+commit 935b11f8d33329153c0597ebc17fbd64009ccb0e
+Author: Alexandre <bocketo@gmail.com>
+Date:   Sat Oct 28 11:42:20 2017 +0200
+
+    allege le css pour la limite de 30 ligne de fdp
+
+commit 0d029812aa19092920cfd3c2a1c13a17e4751d03
+Author: Alexandre <bocketo@gmail.com>
+Date:   Sat Oct 28 11:29:58 2017 +0200
+
+    fix
+
+commit 2ea43533da67f9a757236afa91ae2ef063336ce3
+Author: Alexandre <bocketo@gmail.com>
+Date:   Sat Oct 28 11:25:49 2017 +0200
+
+    on repare les conneries de fabrice
+
+commit f42eb8acbce489d364c5999b4fc8f8e0c908387d
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Sat Oct 28 11:21:02 2017 +0200
+
+    Mise en session de l'id du fighter pour avatar dans le header
+
+commit b0cc0cfd81911baa715baab025937c1d0c6f8c52
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 23:45:33 2017 +0200
+
+    site respondsive
+
+commit 6baee96048f10605336288d89b71dfdae0425901
+Author: Alexandre <bocketo@gmail.com>
+Date:   Fri Oct 27 23:04:17 2017 +0200
+
+    valerie damidot dans la page default
+
+commit 068a95081afc0222dfbee6ea6d3f71907ca009de
+Merge: d373cd2 79b5b1e
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 22:06:35 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit d373cd2e19181c2359d307b6490eba1c9029f258
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 22:06:20 2017 +0200
+
+    voir les gens de chque guild
+
+commit 79b5b1e7ac629a7e99fb560f772796a16ec0ba73
+Author: Alexandre <bocketo@gmail.com>
+Date:   Fri Oct 27 22:03:44 2017 +0200
+
+    amelioration
+
+commit da861d083bcdf17d76f28ae298a3746e3c5f8269
+Author: Alexandre <bocketo@gmail.com>
+Date:   Fri Oct 27 21:51:29 2017 +0200
+
+    faute de debutant
+
+commit f58607165cbe4ada9af51bc56679e1c8c48cf4f3
+Merge: 86825c5 004e1c7
+Author: Alexandre <bocketo@gmail.com>
+Date:   Fri Oct 27 21:41:23 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 86825c5699ff0ad4017ac14d94723d93aed3f120
+Author: Alexandre <bocketo@gmail.com>
+Date:   Fri Oct 27 21:41:18 2017 +0200
+
+    merge
+
+commit 004e1c7a1d8979dec6ddbb9a801177dcdc9970e7
+Merge: 632eb51 63562d2
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Fri Oct 27 21:35:33 2017 +0200
+
+    Merge branch 'master' -> footer default
+
+commit 632eb51ca0e729105bba6fcf52d4a99fdd7b2d0a
+Merge: 6569c23 6ea19ee
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Fri Oct 27 21:31:55 2017 +0200
+
+    Merge branch 'master' -> Structuration des pages/
+
+commit 63562d293cbbb58f8f96ced428babd726809ef2f
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 20:55:07 2017 +0200
+
+    zbraaaa
+
+commit 6ea19ee8e75a19ddaf8b0180bc5a34018342d3b6
+Merge: 718022b 67d6704
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 19:11:41 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 718022b387f1658bdcc8bb6ae2305e0b138e26cd
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 19:11:26 2017 +0200
+
+    caprice de romain
+
+commit 67d670492c1589c5c3ae678e145224d683e7f271
+Merge: 0b3d22c 8f299d3
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 18:52:54 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 0b3d22c47ae715e70f0bac25a01c4965536c5396
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 18:52:48 2017 +0200
+
+    on clicle sur le jeu
+
+commit 8f299d354bc9b573adcbceda05ead47d638328e6
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 18:48:30 2017 +0200
+
+    possibilite de s'enlever d'un guild
+
+commit 104bf49ff10bcf9fc708a762dd5ee299a5c804d6
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 18:36:50 2017 +0200
+
+    possibilite de supprimer le guild_id de fighter
+
+commit 0c1befe9636f9a591e139cf16a0a24dfda594ca5
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 18:04:09 2017 +0200
+
+    attaque de guilde
+
+commit d5419dc090538eba2a04947b051eef155a1e9def
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 17:37:25 2017 +0200
+
+    on rajoute l'option c hop
+
+commit 54cc53ab9236fc541534aea7a41c241deabe15fd
+Merge: 2c14a51 f2b2fef
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 17:24:24 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 2c14a51b9cc9d5975968fd17a1f95fe9b6c8b916
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 17:24:14 2017 +0200
+
+    new interface message
+
+commit f2b2fef16438379bfc69b5c6e0cbc3cc15657869
+Merge: b1f5374 90c598b
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 17:16:57 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit b1f5374c9e58ad4eade658ffdbbc23f008c1a464
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 17:16:45 2017 +0200
+
+    guilds sans trop de fondation
+
+commit 90c598bbf92671fdcc33d6c14e3bd9bbaf4bdf8b
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 17:07:20 2017 +0200
+
+    messahege mieux
+
+commit e435dcb41aa98f6a12f3c8023b7296404f5130fd
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 16:29:56 2017 +0200
+
+    message alert
+
+commit 2d9dd318fda0cd925c85ea51606b41b8cfd358bc
+Merge: f8200a8 3dcd83c
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 16:26:12 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit f8200a89c7c85568c8b237677817a8c28963d2d4
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Fri Oct 27 16:26:03 2017 +0200
+
+    on repare les messages
+
+commit 3dcd83cfbbe3b8dc88f394587af6d6b62fa2246b
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 15:30:58 2017 +0200
+
+    indentation et tentative pour ameliorer la bdd de Fighter pour que ca passe dans le sereveur de romain
+
+commit 20f7206092eacf634acd120126e564d29718f242
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Fri Oct 27 00:53:37 2017 +0200
+
+    securisation message
+
+commit 3f03ecaca6daaac6abd49398695b1d41ca0adb3c
+Merge: 47f3d2e e4d5611
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 23:52:47 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 47f3d2ed3b3be31d30780d9d933aa6e54a45b2f1
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 23:52:37 2017 +0200
+
+    on ^peut communiquer avec tout le monde
+
+commit e4d561115c05239eb8fa298b26d9f1ee65511850
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 23:40:14 2017 +0200
+
+    bon je rechange les noms
+
+commit e96f4755bf3468b93ab57eefcd1f79f729481a30
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 23:32:43 2017 +0200
+
+    change de nom de classe
+
+commit 6569c23c1294719298fadabcd4ebe1e795fc6db2
+Merge: 30b123c 50ebe91
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Thu Oct 26 23:29:23 2017 +0200
+
+    Merge branch : Resolution de conflit
+
+commit ca3556754b13a737269dc5a5beb10a06d862d1ea
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 23:27:25 2017 +0200
+
+    du lourd sur la grille (fondassion)
+
+commit 30b123cbf024d8e4db6c3ae36f047baf819fdc16
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Thu Oct 26 23:07:51 2017 +0200
+
+    Restructuration [70%]
+
+commit 50ebe9121afb3ef957847765646973f6433c4dd2
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 22:25:22 2017 +0200
+
+    ajout des render de flash (plu joli) + forgot password (affichage erreurs et choisir son nouveau mdp)
+
+commit 37f177d88d73c2d7fe748fb93ba0bac763d4ce9d
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 22:00:54 2017 +0200
+
+    compte letemps off'
+
+commit b2616411743ea0f7d81a801f24e95fd4ab72fd82
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:58:31 2017 +0200
+
+    compte letemps off'
+
+commit ac7378ff27bf05da6b7eb4000814f27df481d75b
+Merge: c4c9d81 3b91beb
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:55:41 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit c4c9d81d9609a5f691d396e57755b2b2a422c340
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:52:56 2017 +0200
+
+    compte letemps off'
+
+commit 3b91beb286ad8eb07b889433126ba7afc478f118
+Merge: b1333f4 54f3613
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 21:51:39 2017 +0200
+
+    merge
+
+commit b1333f443083efe35a776506cb5e468878e7a80e
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 21:50:19 2017 +0200
+
+    faire un nouveau message dans une conversation
+
+commit 54f36136b24b2a42a74622d62455ee2691dd7ea5
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:49:09 2017 +0200
+
+    compte letemps off'
+
+commit 2925c6e2f895f58f9c9e2d2613ec1eed37380f89
+Merge: 4dfc804 3048fc3
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 21:28:59 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 4dfc8040444db57b58384230ef3a4bd0647f9956
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 21:28:09 2017 +0200
+
+    oups petite erreur
+
+commit 3048fc33a19f0724b65f0f4107194a35decc0dc4
+Merge: 9cf50a1 a717143
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:24:38 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 9cf50a1da1f253d414d685ac1ea3dc67882426b0
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:24:26 2017 +0200
+
+    info'
+
+commit a71714374650187e7077156cb99f53b69458d6cb
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 21:20:43 2017 +0200
+
+    Hmm
+
+commit 06c24196e37c23339df4b488ebffaa35c0f420a9
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 21:19:18 2017 +0200
+
+    un bo sol
+
+commit 4509b5c36047177eaa9e8e22a9c3ba17e564483f
+Merge: a7fcff6 5764789
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:06:47 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit a7fcff6f25e75f3878736f5972cb2777d56cfe2c
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 21:06:36 2017 +0200
+
+    detect messahe
+
+commit 576478903af9b151f2a3e595b7ee3d1284ed5f5f
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 20:38:09 2017 +0200
+
+    suppresion superflux
+
+commit b49233bcb37b06d3a6f321bff5c829816b3d2b05
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 20:37:05 2017 +0200
+
+    bon recuperage conv
+
+commit 90b0525622e5eead811e3cebb77790fa19e4f074
+Merge: 83d3d9c 0dc857d
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 20:27:06 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 83d3d9c9047ab8b91f7cb29242d95ba32c6c06a0
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Thu Oct 26 20:26:50 2017 +0200
+
+    debut messages
+
+commit 0dc857d6d5632fb4ead3cfd022800a807440a237
+Merge: 446e749 252089b
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 20:15:40 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 446e7494b3bf26e367b315752652960216731705
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 20:15:29 2017 +0200
+
+    pa ki march
+
+commit 252089b9c2d4d022d9dc1e2a4bf5b77b6ed9296e
+Author: Alexandre <bocketo@gmail.com>
+Date:   Thu Oct 26 19:41:09 2017 +0200
+
+    coucou
+
+commit 5bed84a8d25679389119b274833f5e8c0183fce2
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 18:27:40 2017 +0200
+
+    fot
+
+commit 1ce2c1998d41a8b23896abe399d9581a4d25e65f
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Thu Oct 26 18:26:38 2017 +0200
+
+    PA
+
+commit acf02c859e39b75ed97969a53c76da417b66e20f
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 22:50:59 2017 +0200
+
+    Préparation default
+
+commit e04c5b146a7eea3e67d511d28375fe9d8e50741d
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 20:31:30 2017 +0200
+
+    Nettoyage EventsTable
+
+commit c0c666d3b3ee3e81871b284931945cee4d25693f
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 20:06:44 2017 +0200
+
+    Correction espace journal
+
+commit 433ef2acc576a6d16cceb6a66afdea74bd966990
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 19:58:09 2017 +0200
+
+    Suppression de la fonction test
+
+commit 19cb9b8a5f646e92194ad814b053c11445ef5311
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 19:55:37 2017 +0200
+
+    Journal [99%]
+
+commit e510a6aa04deb2c6a6e7aac945fc1ac6da0c8e22
+Merge: 1f2a400 9339039
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 17:44:17 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 1f2a40013ffacec3338ecb188e89323e4f0f0aa0
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 17:44:06 2017 +0200
+
+    correction attaque
+
+commit 933903939cc1a7a669f420820d48414509399be8
+Author: thefab96 <locqueville.fabrice@gmail.com>
+Date:   Wed Oct 25 17:34:46 2017 +0200
+
+    normalement reparation du champs vide dans l'edition de name
+
+commit 6c8b465c76cf0a39910c91f44b274e0e588c4c94
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:54:42 2017 +0200
+
+    on met un poit virgule
+
+commit ea0285c1cae78c9e566924c45c3a0706073c9db0
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:41:19 2017 +0200
+
+    on met un poit virgule
+
+commit 24127069f1208f97bfd33dc54d0c9c6e65654ba6
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:37:42 2017 +0200
+
+    on ajoute les images
+
+commit f564eb8137ff7865d486ba23376d5f40a67d5c75
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:37:12 2017 +0200
+
+    hop on genere xy pour les nouv perso
+
+commit d3ce77db08bd4b1b4591112c64a4d0f9a7f1d1a9
+Merge: 491d58a e1ce8bc
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:22:04 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 491d58a765ae3c86f573b21b6e9a584a78939cd4
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 15:21:52 2017 +0200
+
+    hop on retourn le jeu
+
+commit e1ce8bc859a5cba9162c08fd0c6b74317cafbf0a
+Merge: 1086711 018d81b
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 15:04:40 2017 +0200
+
+    Merge branch 'master' of https://github.com/RomainMichau/webArena
+
+commit 1086711ab6c6cc03d69d22c1430283670d3e823c
+Author: Vincent Jacob <vincent.jacob@edu.ece.fr>
+Date:   Wed Oct 25 15:03:44 2017 +0200
+
+    Journal [50%]
+
+commit 018d81b9bd2e97a5b5897f010cd73853c0f7e000
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 14:25:14 2017 +0200
+
+    on ajoute les images
+
+commit b9af3d6dde11fc27ceac0d84302de4d1967b1829
+Author: RomainMichau <romain.michau@edu.ece.fr>
+Date:   Wed Oct 25 14:24:31 2017 +0200
+
+    on repare la page acceuil
+
 commit a1dc3bb38d555dcae77b2cfa44125a8cd07b8c5f
 Author: RomainMichau <romain.michau@edu.ece.fr>
 Date:   Wed Oct 25 13:51:29 2017 +0200
