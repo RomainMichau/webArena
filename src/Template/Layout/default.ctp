@@ -26,7 +26,6 @@
 
         <title> <?= $this->fetch('title') ?> </title>
         <?= $this->Html->meta('icon') ?>
-
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
     </head>
@@ -100,13 +99,13 @@
                         ?>
             </header>
 
-            <!-- CENTER BLOCK -->
-            <div class="grid-x" id="<?= $this->fetch('title') === 'Accueil' ? 'index-content' : 'center-block' ?>">
-
                 <!-- CASE IN GAME -->
                 <?php if(isset($in_game))                               
                         {
                 ?> 
+                <!-- CENTER BLOCK -->
+                <div class="grid-x" id="center-block">
+
                     <!-- NAVIGATION BETWEEN GAME PAGES -->
                     <nav class="medium-2 small-2 cell">
                         <ul class="vertical menu align-center icons icon-top">
@@ -122,23 +121,38 @@
                     <div class="medium-10 small-10 cell" id="page-content">
                         <?= $this->fetch('content') ?>
                     </div>  
+
+                </div>
                 
-                <!-- CASE NOT IN GAME -->
+                <!-- CASE NOT IN GAME (ONLY FORMS) -->
                 <?php
                         }
                     else                                                 
                         {
                 ?> 
-                    <!-- PAGE CONTENT -->
-                    <?= $this->Flash->render() ?>                    
-                    <div class="cell" id="page-content">
-                            <?= $this->fetch('content') ?>
-                    </div>  
+                <!-- CENTER BLOCK -->
+                <div id="<?= $this->fetch('title') === 'Accueil' ? 'index-content' : 'center-block' ?>">
 
+                    <!--IF NOT INDEX -->
+                    <?php if($this->fetch('title') !== 'Accueil'): ?>
+
+                    <!--PAGE TITLE -->
+                    <div class="grid-x align-center"> 
+                        <h2 class="cell small-4 text-center" id="form-title"><?= $this->fetch('title'); ?></h2>
+                    </div>
+                    <!-- PAGE CONTENT INSIDE A FORM BOX -->
+                    <?= $this->Flash->render() ?>   
+                    <div class="grid-x align-center"> 
+                        <div class="cell small-7" id="form-box">
+                            <?= $this->fetch('content') ?>
+                        </div>  
+                    </div>    
+                    <?php endif; ?>     
+                         
+                </div>
                 <?php
                         }
                 ?>
-                </div>
 
             <!-- FOOTER -->
             <footer>

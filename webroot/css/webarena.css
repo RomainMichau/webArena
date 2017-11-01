@@ -5,6 +5,10 @@ GENERAL
     width: 90%;
     margin: 0 auto;
 }
+
+.white {
+    color: rgba(255, 255, 255, 0.8);
+}
 /* *************************************************************************
 HEADER
 ************************************************************************* */
@@ -66,7 +70,7 @@ header i {
     padding-left: 10px;
 }
 /* *************************************************************************
-CENTER BLOC
+CENTER BLOCKS
 ************************************************************************* */
 #center-block {
     min-height: 100vh;
@@ -106,8 +110,29 @@ nav i {
     color: rgba(0, 0, 0, 0.9);
 }
 /* *************************************************************************
-CONTENU - PAGE ACCUEIL
+CONTENU - PAGES HORS JEU
 ************************************************************************* */
+
+#form-title {
+    color: #491c04; 
+    margin: 20px 0 10px 0;  
+}
+#form-box {
+    background-image: url("../img/layout/dirt.png");
+    border: 7px ridge #491c04;
+    height: 500px;
+}
+.first-form-row {
+    margin-top: 70px;
+}
+.form-button, .button.success {
+    margin-top: 50px;
+    color: #491c04;
+    border-color: #491c04;
+    background-color: #d8a668;
+    display: block;
+    overflow: hidden;
+}
 
 /* *************************************************************************
 FOOTER

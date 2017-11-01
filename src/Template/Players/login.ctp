@@ -2,20 +2,34 @@
     <?php $this->assign('title', $titredepage);?>
 
     <?= $this->Flash->render() ?>
-    <?= $this->Form->create() ?>
-    <form>
-        <fieldset class="fieldset">
-            <legend><?= __('Login Form') ?></legend>
-            <div class="grid-x">
-                <div class="medium-3 cell"><label class="text-right middle">Email</label></div>
-                <div class="medium-9 cell"><?= $this->Form->control('email', ['label' => false]) ?></div>
-                <div class="medium-3 cell"><label class="text-right middle">Mot de passe</label></div>
-                <div class="medium-9 cell"><?= $this->Form->control('password', ['label' => false]) ?></div>
+    <?= $this->Form->create() ?> 
+        <div class="grid-x align-center first-form-row">
+            <div class="cell small-7 text-center"> 
+                <label>Email
+                    <input type="email" name="email" id="email" placeholder="Adresse E-Mail" />
+                </label>
             </div>
-            <?= $this->Html->link('Forgot password', array('controller' => 'Players', 'action' => 'forgotPassword'));?>
-            <?= $this->Form->button(__('Login'), ['class' => 'button']); ?>
-            <?= $this->Form->end() ?>
-        </fieldset>
-    </form>
+        </div>
+        <div class="grid-x align-center">
+            <div class="cell small-7 text-center">
+                <label>Mot de passe
+                    <input type="password" name="password" id="password" placeholder="Mot de passe" />
+                </label>
+            </div>
+        </div>
+
+        <div class="grid-x align-center">
+            <?= $this->Form->button(__('Connexion'), ['class' => 'cell small-3 large success button form-button']); ?>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <?= $this->Html->link('Mot de passe oublié ?', array('controller' => 'Players', 'action' => 'forgotPassword'), ['class' => 'white']);?>
+        
+     <?= $this->Form->end() ?>
 </div>
+
+
+
 
