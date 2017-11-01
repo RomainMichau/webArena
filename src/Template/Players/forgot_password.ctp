@@ -2,19 +2,24 @@
     <?php $this->assign('title', $titredepage);?>
 
     <?= $this->Flash->render() ?>
-    <?= $this->Form->create() ?>
-    <form>
-        <fieldset class="fieldset">
-            <legend><?= __('Forgot Password') ?></legend>
-            <div class="grid-x">
-                <div class="medium-3 cell"><label class="text-right middle">Email</label></div>
-                <div class="medium-9 cell"><?= $this->Form->control('email', ['label' => false]) ?></div>
-                <div class="medium-3 cell"><label class="text-right middle">New Password</label></div>
-                <div class="medium-9 cell"><?= $this->Form->control('password', ['label' => false]) ?></div>
+    <?= $this->Form->create() ?> 
+        <div class="grid-x align-center first-form-row">
+            <div class="cell small-7 text-center"> 
+                <label>Email
+                    <input type="email" name="email" id="email" placeholder="Adresse E-Mail" />
+                </label>
             </div>
-            <?= $this->Form->button(__('Reset'), ['class' => 'button']); ?>
-            <?= $this->Form->end() ?>
-        </fieldset>
-    </form>
-</div>
+        </div>
+        <div class="grid-x align-center">
+            <div class="cell small-7 text-center">
+                <label>Nouveau mot de passe
+                    <input type="password" name="password" id="password" placeholder="Nouveau mot de passe" />
+                </label>
+            </div>
+        </div>
 
+        <div class="grid-x align-center">
+            <?= $this->Form->button(__('Confirmer'), ['class' => 'cell small-3 large success button form-button']); ?>
+        </div>
+     <?= $this->Form->end() ?>
+</div>

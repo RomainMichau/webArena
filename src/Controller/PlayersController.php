@@ -76,7 +76,7 @@ class PlayersController  extends AppController
     }  
     
     public function forgotPassword(){
-        $this->set('titredepage', 'MDP Oublié');
+        $this->set('titredepage', 'Récupération du MDP');
         $this->loadModel('Players');
         
         if ($this->request->is('post')){
