@@ -27,7 +27,6 @@ $(document).ready(function () {
              
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         
         });
