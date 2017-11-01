@@ -307,7 +307,7 @@ var sdblesse= document.querySelector('#sdblesse');
 
                 }
             },
-                alert(errorThrown);
+               error: function (jqXHR, textStatus, errorThrown) {
             }
         });
 

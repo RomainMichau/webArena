@@ -33,6 +33,7 @@ $(document).ready(function () {
     setInterval(
             function () {
                 alertmessage();
+                //    console.log("1");
             }, 5000);
   alertmessage();
 
