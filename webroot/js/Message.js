@@ -26,7 +26,6 @@ $(document).ready(function () {
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
             }
         });
     }
@@ -34,7 +33,6 @@ $(document).ready(function () {
     setInterval(
             function () {
                 alertmessage();
-                //    console.log("1");
             }, 5000);
   alertmessage();
 
