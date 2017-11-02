@@ -33,7 +33,7 @@ $this->assign('title', 'Conversation'); ?>
     <?= $this->Form->create('Messages')?>
     <div class="grid-x align-center first-form-row">
         <div class="cell small-7 text-left"> 
-            <?= $this->Form->input('nouveau message', array('label' => 'Nom')) ?>
+            <?= $this->Form->input('nouveau message', array('label' => 'Message')) ?>
         </div>
 
         <div class="cell small-7 text-right">
