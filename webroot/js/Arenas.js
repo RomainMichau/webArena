@@ -77,6 +77,8 @@ var sdblesse= document.querySelector('#sdblesse');
             success: function (response) {
 
                 if (response.success === 1) {
+                    sdpas.play();
+
                     //      alert("oki");
                     rx = response.x;
                     ry = response.y;
@@ -366,29 +368,27 @@ var sdblesse= document.querySelector('#sdblesse');
 
     $('#up').click(function () {
         if (a == 1) {
-sdpas.play();
 
             a = 0;
             move(3);
         }
     });
     $('#down').click(function () {
-        if (a == 1) {            sdpas.play();
+        if (a == 1) {           
 
             move(4);
             a = 0;
         }
     });
     $('#left').click(function () {
-        if (a == 1) {            sdpas.play();
-
+        if (a == 1) {            
             move(2);
             a = 0;
         }
     });
     $('#right').click(function () {
         if (b == 1) {
-            sdpas.play();
+            
             b = 0;
             move(1);
             a = 0;

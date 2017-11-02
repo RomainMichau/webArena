@@ -7,7 +7,7 @@ use Cake\ORM\TableRegistry;
 
 class FightersTable extends Table {
     ///  parametre  
-    private static $ACTIONTIME = 10;
+    private static $ACTIONTIME = 1;   //ne pas descendre en dessous de 1
     private static $MAXACTION = 3;
     private static $SKILL_H_INIT = 5;
     private static $SKILL_SI_INIT = 2;
