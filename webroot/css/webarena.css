@@ -265,9 +265,6 @@ table{
     transform: rotate(90deg) ;
     
 }
-.centered-text{
-    text-align: center;
-}
 .flip{
     transform: scaleX(-1);
 }
@@ -275,10 +272,6 @@ table{
     background-color: grey;
     min-width: 220px !important;
     
-}
-
-.main{
-    background-color: #d3d3d3;    
 }
 .sight-grid{
     margin: 5em 0 5em 0;
