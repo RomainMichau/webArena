@@ -6,6 +6,7 @@ $(document).ready(function () {
        
          link= link.replace(' ', '');
          link= link.replace('http://localhost', '');
+         link= link.replace(':8888','');
          link= link.replace('/arenas/sight', '');
 var sdcri = document.querySelector('#sdcri');
 var sdpas = document.querySelector('#sdpas');
