@@ -48,7 +48,7 @@ class MessagesController  extends AppController
               array_push($tab, $fighterfrom);
           }
         
-        $this->set('tab',$tab);
+        $this->set('tab', array_reverse($tab));
         
         
         
