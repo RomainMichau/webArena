@@ -18,7 +18,7 @@ $(document).ready(function () {
 // alert("oki");
           
              $.ajax({
-            url: '/webArena/arenas/messagelu/'+i,
+            url: ''+link+'/arenas/messagelu/'+i,
             type: 'GET',
             dataType: 'JSON',
 

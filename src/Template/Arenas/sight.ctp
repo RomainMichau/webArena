@@ -90,7 +90,7 @@
                                     }
                                 ?>
                         </td>
-                        <?php } ?>
+                        <?php }  ?>
                     </tr>
                 <?php } ?>
 
@@ -101,6 +101,8 @@
     </div>
 </div>
 
+<div class='linkb' id='<?=  $this->Url->build(
+        '',true); ?>' > </div>
 
 
 

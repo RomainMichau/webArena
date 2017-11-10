@@ -1,7 +1,12 @@
 $(document).foundation();
 $(document).ready(function () {
     var a, b;
-   
+   var link=$('.linkb')[0].id;
+        
+       
+         link= link.replace(' ', '');
+         link= link.replace('http://localhost', '');
+         link= link.replace('/arenas/sight', '');
 var sdcri = document.querySelector('#sdcri');
 var sdpas = document.querySelector('#sdpas');
 var sdfail= document.querySelector('#sdattack');
@@ -39,7 +44,7 @@ var sdblesse= document.querySelector('#sdblesse');
         return y;
     }
 
-
+    
     function cri() {
         var y = "";
         while (y == "") {
@@ -47,7 +52,7 @@ var sdblesse= document.querySelector('#sdblesse');
         }
         if (y != null) {
             $.ajax({
-                url: '/webArena/arenas/cri/' + y,
+                url: link+'/arenas/cri/' + y,
                 type: 'GET',
                 dataType: 'JSON',
 
@@ -68,9 +73,10 @@ var sdblesse= document.querySelector('#sdblesse');
         var b, a, i, c;
         var rx, rv, ry;
         var rnx, rny;
-
+     
+          console.log(link);
         $.ajax({
-            url: '/webArena/arenas/moveFighter/' + dir,
+            url:  link +'/arenas/moveFighter/' + dir,
             type: 'GET',
             dataType: 'JSON',
 
@@ -96,8 +102,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
 
                             vx1 = rnx - i;   ///PARTIE CASE QUI disparaisse
                             vx2 = vx1;
@@ -105,8 +111,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
 
 
@@ -120,8 +126,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
 
                             vx1 = rx - i;   ///PARTIE CASE QUI disparaisse
                             vx2 = vx1;
@@ -129,8 +135,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vy2 = ry + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
                     if (dir === 3)  ///UP
                         for (i = 1; i <= rv + 1; i++) {
@@ -140,8 +146,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
 
                             vy1 = ry - i;   ///PARTIE CASE QUI apparaisse
                             vy2 = vy1;
@@ -149,8 +155,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
                     if (dir === 4)   ///DOWN
                         for (i = 1; i <= rv + 1; i++) {
@@ -160,8 +166,8 @@ var sdblesse= document.querySelector('#sdblesse');
                             vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI DISPARAISSE
 
                             vy1 = rny - i;   ///PARTIE CASE QUI apparaisse
                             vy2 = vy1;
@@ -169,13 +175,13 @@ var sdblesse= document.querySelector('#sdblesse');
                             vx2 = rx + rv - i + 1;
                             coor1 = tocoor(vx1, vy1);
                             coor2 = tocoor(vx2, vy2);
-                            $('#cid' + coor1).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
-                            $('#cid' + coor2).html(' <img src="/webArena/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
+                            $('#cid' + coor1).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> ');
+                            $('#cid' + coor2).html(' <img src="'+link+'/img/case_vide_i.png" alt="Not found" width="42" height="35"> '); //FIN CASE QUI APPARAISSE
                         }
 
                     for (i = 0; i < response.tab.length; i++) {
                         coor1 = tocoor(response.tab[i][0], response.tab[i][1]);
-                        $('#cid' + coor1).html(' <img src="/webArena/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
+                        $('#cid' + coor1).html(' <img src="'+link+'/img/' + response.tab[i][2] + '.png" alt="Not found" width="42" height="35"> ');
 
                     }
 
@@ -191,7 +197,7 @@ var sdblesse= document.querySelector('#sdblesse');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                // alert(errorThrown);
+                 alert(errorThrown);
             }
         });
 
@@ -202,7 +208,7 @@ var sdblesse= document.querySelector('#sdblesse');
         var save;
         var a;
         $.ajax({
-            url: '/webArena/arenas/attack/' + dir,
+            url: link+'/arenas/attack/' + dir,
             type: 'GET',
             dataType: 'JSON',
 
@@ -218,7 +224,7 @@ var sdblesse= document.querySelector('#sdblesse');
 
                         $('#info').html('l attaque est un succes, vie restante de ' + response.name + ':' + response.health);
                         save = $('#' + a).html();
-                        $('#' + a).html(' <img src="/webArena/img/attack.gif" alt="Not found" width="42" height="35"> ');
+                        $('#' + a).html(' <img src="'+link+'/img/attack.gif" alt="Not found" width="42" height="35"> ');
 
 
                         setTimeout(function () {
@@ -226,8 +232,8 @@ var sdblesse= document.querySelector('#sdblesse');
                         }, 900);
                     } else if (response.death === 1) {
                         $('#info').html('l attaque est un succes, et tue' + response.name);
-                        save = ' <img src="/webArena/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
-                        $('#' + a).html(' <img src="/webArena/img/mort.gif" alt="Not found" width="42" height="35"> ');
+                        save = ' <img src="'+link+'/img/case_vide_v.png" alt="Not found" width="42" height="35"> ';
+                        $('#' + a).html(' <img src="'+link+'/img/mort.gif" alt="Not found" width="42" height="35"> ');
                         $('#canvas'+response.idennemy).html("");
 
 
@@ -242,9 +248,9 @@ var sdblesse= document.querySelector('#sdblesse');
 
                 } else if (response.ennemy === 1) {
                         sdfail.play();
-                    $('#info').html(response.name + ' esquive le coup, il est CHOOO');
+                    $('#info').html(response.name + ' esquive le coup');
                     save = $('#' + a).html();
-                    $('#' + a).html(' <img src="/webArena/img/stop.jpg" alt="Not found" width="42" height="35"> ');
+                    $('#' + a).html(' <img src="'+link+'/img/stop.jpg" alt="Not found" width="42" height="35"> ');
                     setTimeout(function () {
                         $('#' + a).html(save);
 
@@ -271,7 +277,7 @@ var sdblesse= document.querySelector('#sdblesse');
 
         //    $x = floor($coord / 10) + 1;
         $.ajax({
-            url: '/webArena/arenas/detect/' + coord,
+            url: ''+link+'/arenas/detect/' + coord,
             type: 'GET',
             dataType: 'JSON',
 
@@ -294,7 +300,7 @@ var sdblesse= document.querySelector('#sdblesse');
     function supsst() {
 
         $.ajax({
-            url: '/webArena/arenas/skillStrengthUp/',
+            url: ''+link+'/arenas/skillStrengthUp/',
             type: 'GET',
             dataType: 'JSON',
 
@@ -317,7 +323,7 @@ var sdblesse= document.querySelector('#sdblesse');
     function supssi() {
 
         $.ajax({
-            url: '/webArena/arenas/skillSightUp/',
+            url: ''+link+'/arenas/skillSightUp/',
             type: 'GET',
             dataType: 'JSON',
 
@@ -342,7 +348,7 @@ var sdblesse= document.querySelector('#sdblesse');
     function supsh() {
 
         $.ajax({
-            url: '/webArena/arenas/skillHealthUp/',
+            url: ''+link+'/arenas/skillHealthUp/',
             type: 'GET',
             dataType: 'JSON',
 

@@ -5,10 +5,16 @@
  */
 
 $(document).ready(function () {
+       var link=$('.linkb')[0].id;
+        
+       
+         link= link.replace(' ', '');
+         link= link.replace('http://localhost', '');
+         link= link.replace('/arenas/sight', '');
     var color = 'rgb(255, 0, 0)';
     function alertmessage() {
         $.ajax({
-            url: '/webArena/arenas/alertmessage/',
+            url: ''+link+'/arenas/alertmessage/',
             type: 'GET',
             dataType: 'JSON',
 
